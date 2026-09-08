@@ -1,0 +1,323 @@
+/* This file is loaded after the imported template CSS. Keep public marketplace
+   overrides here so the legacy template cannot override the MarketNest surface. */
+:root {
+  --marketnest-ink: #18212f;
+  --marketnest-muted: #6d7786;
+  --marketnest-line: #e6e9ee;
+  --marketnest-soft: #f6f7f9;
+  --marketnest-accent: #d95f39;
+  --marketnest-accent-dark: #b94727;
+  --marketnest-teal: #0f7c78;
+}
+
+body {
+  background: #fff !important;
+  color: var(--marketnest-ink) !important;
+  font-family: var(--font-quicksand), "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.menu-area,
+.top-menu-area,
+.mainmenu {
+  background: #fff !important;
+}
+
+.menu-area {
+  border-bottom: 1px solid var(--marketnest-line) !important;
+  box-shadow: 0 2px 12px rgba(24, 33, 47, 0.04) !important;
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+.top-menu-area {
+  padding: 20px 0 17px !important;
+}
+
+.marketnest-wordmark {
+  color: var(--marketnest-ink) !important;
+  font-size: 29px !important;
+  letter-spacing: -0.055em !important;
+}
+
+.marketnest-tagline {
+  color: var(--marketnest-muted) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.17em !important;
+}
+
+.mainmenu {
+  border-top: 1px solid #f0f1f3 !important;
+  padding: 11px 0 0 !important;
+}
+
+.mainmenu .navbar-header,
+.mainmenu__search {
+  display: block !important;
+  float: none !important;
+  margin: 0 0 11px !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.mainmenu__search .searc-wrap {
+  margin: 0 auto !important;
+  max-width: 680px !important;
+  position: relative !important;
+}
+
+.mainmenu__search .searc-wrap input {
+  background: var(--marketnest-soft) !important;
+  border: 1px solid transparent !important;
+  border-radius: 5px !important;
+  color: var(--marketnest-ink) !important;
+  height: 44px !important;
+  padding: 0 52px 0 18px !important;
+  width: 100% !important;
+}
+
+.mainmenu__search .search-wrap__btn {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--marketnest-accent) !important;
+  height: 44px !important;
+  right: 10px !important;
+  top: 0 !important;
+}
+
+.marketnest-nav {
+  border: 0 !important;
+  clear: both !important;
+  min-height: 42px !important;
+  padding: 0 !important;
+}
+
+.marketnest-nav .navbar-nav {
+  align-items: center !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.marketnest-nav .nav-link {
+  color: var(--marketnest-muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 10px 13px 14px !important;
+  white-space: nowrap !important;
+}
+
+.marketnest-nav .nav-link:hover,
+.marketnest-nav .nav-item.active .nav-link {
+  color: var(--marketnest-accent) !important;
+}
+
+.marketnest-hero {
+  background: #f8f5f1 !important;
+  height: auto !important;
+  min-height: 570px !important;
+  overflow: hidden !important;
+  padding: 84px 0 46px !important;
+  position: relative !important;
+}
+
+.marketnest-hero::before {
+  background: radial-gradient(circle at 86% 25%, rgba(216, 95, 57, 0.13), transparent 32%) !important;
+  content: "" !important;
+  inset: 0 !important;
+  opacity: 1 !important;
+  position: absolute !important;
+}
+
+.marketnest-hero .bg_image_holder {
+  display: none !important;
+}
+
+.marketnest-hero__layout {
+  align-items: center !important;
+  display: grid !important;
+  gap: 70px !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(350px, 0.92fr) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.marketnest-hero h1 {
+  color: var(--marketnest-ink) !important;
+  font-size: clamp(38px, 4.4vw, 64px) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.055em !important;
+  line-height: 1.05 !important;
+  text-shadow: none !important;
+}
+
+.marketnest-hero__copy > p {
+  color: var(--marketnest-muted) !important;
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+}
+
+.marketnest-eyebrow {
+  color: var(--marketnest-accent) !important;
+}
+
+.marketnest-search-panel {
+  align-items: center !important;
+  background: #fff !important;
+  border: 1px solid #e7e1dc !important;
+  border-radius: 6px !important;
+  box-shadow: 0 12px 32px rgba(96, 62, 42, 0.08) !important;
+  display: flex !important;
+  gap: 28px !important;
+  margin: 55px auto 0 !important;
+  max-width: 1060px !important;
+  padding: 16px 18px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.marketnest-search-panel__label {
+  color: var(--marketnest-ink) !important;
+}
+
+.marketnest-search-panel__hint {
+  color: var(--marketnest-muted) !important;
+}
+
+.marketnest-search-field {
+  background: var(--marketnest-soft) !important;
+  border: 1px solid transparent !important;
+}
+
+.marketnest-search-field input {
+  background: transparent !important;
+  color: var(--marketnest-ink) !important;
+  height: 43px !important;
+}
+
+.marketnest-search-panel select {
+  background: var(--marketnest-soft) !important;
+  border: 0 !important;
+  color: var(--marketnest-muted) !important;
+  height: 43px !important;
+}
+
+.marketnest-button--primary {
+  background: var(--marketnest-accent) !important;
+  color: #fff !important;
+}
+
+.marketnest-button--quiet {
+  border-color: #d9cec5 !important;
+  color: var(--marketnest-ink) !important;
+}
+
+.marketnest-categories,
+.featured-products,
+.products {
+  background: #fff !important;
+}
+
+.marketnest-category-grid {
+  display: grid !important;
+  gap: 12px !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.marketnest-category-card {
+  background: #fff !important;
+  border: 1px solid var(--marketnest-line) !important;
+  border-radius: 5px !important;
+  min-height: 132px !important;
+  padding: 20px !important;
+}
+
+.marketnest-category-card .lnr {
+  color: var(--marketnest-accent) !important;
+}
+
+.marketnest-category-card > span:not(.lnr) {
+  color: var(--marketnest-ink) !important;
+}
+
+.marketnest-category-card small {
+  color: var(--marketnest-muted) !important;
+}
+
+.product.product--card {
+  background: #fff !important;
+  border: 1px solid var(--marketnest-line) !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+}
+
+.product__thumbnail {
+  background: #ece8e4 !important;
+  height: 220px !important;
+}
+
+.product .product_title h4 {
+  color: var(--marketnest-ink) !important;
+}
+
+.price_love > span {
+  color: var(--marketnest-accent) !important;
+}
+
+.proposal--left {
+  background: var(--marketnest-teal) !important;
+}
+
+.proposal--right {
+  background: var(--marketnest-accent) !important;
+}
+
+@media (max-width: 991px) {
+  .marketnest-hero__layout {
+    gap: 35px !important;
+    grid-template-columns: 1fr 0.85fr !important;
+  }
+
+  .marketnest-category-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .marketnest-hero {
+    min-height: 0 !important;
+    padding: 57px 0 26px !important;
+  }
+
+  .marketnest-hero__layout {
+    display: block !important;
+  }
+
+  .marketnest-hero__art {
+    margin: 22px 0 0 !important;
+  }
+
+  .marketnest-search-panel {
+    display: block !important;
+    margin-top: 26px !important;
+  }
+
+  .marketnest-search-panel form {
+    flex-wrap: wrap !important;
+  }
+
+  .marketnest-search-field {
+    flex-basis: 100% !important;
+  }
+
+  .marketnest-search-panel select,
+  .marketnest-search-panel form .marketnest-button {
+    flex: 1 !important;
+    max-width: none !important;
+  }
+
+  .marketnest-category-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

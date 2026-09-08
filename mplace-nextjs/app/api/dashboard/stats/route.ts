@@ -255,9 +255,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Calculate chart data (last 30 days) - simplified for performance
-    // For now, return sample data. In production, you'd want to use a more efficient approach
-    // like grouping by date in a single query or using a time-series database
+    // Calculate chart data (last 30 days) from completed sales.
     const startDate = new Date(now)
     startDate.setDate(startDate.getDate() - 30)
 
@@ -290,14 +288,15 @@ export async function GET(request: NextRequest) {
       salesByDay.set(day, (salesByDay.get(day) || 0) + 1)
     })
 
-    // Generate daily data (sample 6 data points for the chart)
     const dailyData = []
-    const sampleDays = [5, 10, 15, 20, 25, 30]
-    for (const day of sampleDays) {
+    for (let offset = 29; offset >= 0; offset -= 1) {
+      const date = new Date(now)
+      date.setDate(date.getDate() - offset)
+      const day = date.getDate()
       dailyData.push({
         day,
-        views: Math.floor(Math.random() * 20) + 5, // Sample views data
-        sales: salesByDay.get(day) || Math.floor(Math.random() * 10) + 5, // Use real sales if available
+        views: 0,
+        sales: salesByDay.get(day) || 0,
       })
     }
 

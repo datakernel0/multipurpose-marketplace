@@ -70,77 +70,6 @@ interface Product {
   isFavorited?: boolean;
 }
 
-// Dummy product data for fallback
-function getDummyProduct(slug: string): Product {
-  return {
-    id: "dummy-1",
-    title: "Beborn - Multipurpose WordPress Landing Page",
-    slug: slug || "beborn-multipurpose-wordpress-landing-page",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam aliquet congue justo ut scelerisque. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue justo ut scelerisque.",
-    livePreviewUrl: null,
-    price: "$20 - $60",
-    priceMin: 20,
-    priceMax: 60,
-    category: {
-      name: "Corporate & Business",
-      slug: "corporate-business",
-      parent: {
-        name: "Wordpress",
-        slug: "wordpress",
-      },
-    },
-    seller: {
-      id: "dummy-seller",
-      name: "BackTheme",
-      username: "backtheme",
-      avatar: "/images/author-avatar.jpg",
-      signedUp: "08 April 2016",
-      facebookUrl: null,
-      twitterUrl: null,
-      dribbbleUrl: null,
-    },
-    images: Array.from({ length: 10 }, (_, i) => ({
-      id: i + 1,
-      url: "/images/itprv.jpg",
-      thumbnail: `/images/thumb${(i % 5) + 1}.jpg`,
-    })),
-    metadata: {
-      totalSales: 426,
-      favorites: 240,
-      comments: 35,
-      reviews: 26,
-      rating: 4.5,
-    },
-    productInfo: {
-      released: "16 June 2015",
-      updated: "28 July 2016",
-      version: "1.2",
-      layout: "Responsive",
-      retinaReady: "No",
-      filesIncluded: "Html, CSS, JavaScript",
-      browser: "IE10, IE11, Firefox, Safari, Opera, Chrome5",
-      bootstrap: "Bootstrap 4",
-      tags: [
-        "business",
-        "template",
-        "onepage",
-        "creative",
-        "responsive",
-        "corporate",
-        "Bootstrap3",
-        "html5",
-      ],
-    },
-    pricingOptions: [
-      { id: "opt1", label: "Single Site License", price: 20 },
-      { id: "opt2", label: "2 Sites License", price: 40 },
-      { id: "opt3", label: "Multi Site License", price: 60 },
-    ],
-    isFavorited: false,
-  };
-}
-
 function SingleProductPageContent() {
   const params = useParams();
   const slug = (params?.id as string) || "";
@@ -164,9 +93,8 @@ function SingleProductPageContent() {
             .json()
             .catch(() => ({ error: "Product not found" }));
 
-          // Use dummy data on error instead of throwing
-          setProduct(getDummyProduct(slug));
           setError(errorData.error || "Product not found");
+          setProduct(null);
           setLoading(false);
           return;
         }
@@ -303,8 +231,7 @@ function SingleProductPageContent() {
         setError(""); // Clear any previous errors
       } catch (error: any) {
         setError(error.message || "Failed to load product");
-        // Use dummy data on error
-        setProduct(getDummyProduct(slug));
+        setProduct(null);
       } finally {
         setLoading(false);
       }
@@ -313,18 +240,35 @@ function SingleProductPageContent() {
     if (slug) {
       fetchProduct();
     } else {
-      setProduct(getDummyProduct(""));
+      setError("Product not found");
+      setProduct(null);
       setLoading(false);
     }
   }, [slug]);
 
-  if (loading || !product) {
+  if (loading) {
     return (
       <div className="preload home3">
         <Preloader />
         <Header />
         <div className="text-center" style={{ padding: "100px 0" }}>
-          <p>Loading product...</p>
+          <p>Loading product…</p>
+        </div>
+        <Footer />
+        <ScrollToTop />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="preload home3">
+        <Preloader />
+        <Header />
+        <div className="marketnest-empty-state container" style={{ margin: "70px auto" }}>
+          <h3>Product not found.</h3>
+          <p>This product may have been removed or is not available yet.</p>
+          <a href="/all-products" className="marketnest-button marketnest-button--primary">Browse Products</a>
         </div>
         <Footer />
         <ScrollToTop />
@@ -336,25 +280,7 @@ function SingleProductPageContent() {
     <div className="preload home3">
       <Preloader />
       <Header />
-      {error && (
-        <div
-          className="container"
-          style={{ marginTop: "20px", marginBottom: "20px" }}
-        >
-          <div
-            className="alert alert-warning"
-            style={{
-              padding: "15px",
-              backgroundColor: "#fff3cd",
-              color: "#856404",
-              borderRadius: "4px",
-            }}
-          >
-            <strong>Note:</strong> Product not found in database. Showing sample
-            data.
-          </div>
-        </div>
-      )}
+      {error ? <div className="container"><div className="alert alert-warning">{error}</div></div> : null}
       <SingleProductBreadcrumb product={product} />
       <SingleProductContent product={product} />
       <MoreProductsSection sellerId={product.seller.id} />

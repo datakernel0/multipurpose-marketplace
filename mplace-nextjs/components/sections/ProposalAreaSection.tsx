@@ -29,7 +29,7 @@ export default function ProposalAreaSection() {
                     Share your templates, code, graphics, and resources with people looking for their next digital tool.
                   </p>
                 </div>
-                <Link href="#" className="btn--round btn btn--lg btn--white">
+                <Link href="/dashboard/upload" className="btn--round btn btn--lg btn--white">
                   Become a Seller
                 </Link>
               </div>
@@ -57,7 +57,7 @@ export default function ProposalAreaSection() {
                     Browse a focused collection of digital products from independent creators.
                   </p>
                 </div>
-                <Link href="#" className="btn--round btn btn--lg btn--white">
+                <Link href="/all-products" className="btn--round btn btn--lg btn--white">
                   Browse Products
                 </Link>
               </div>

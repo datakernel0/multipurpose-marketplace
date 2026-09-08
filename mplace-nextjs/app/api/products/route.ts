@@ -75,6 +75,7 @@ export async function GET(request: Request) {
     const category = searchParams.get("category")
     const search = searchParams.get("search") || searchParams.get("q")
     const featured = searchParams.get("featured")
+    const sellerId = searchParams.get("sellerId")
     const minPrice = searchParams.get("minPrice")
     const maxPrice = searchParams.get("maxPrice")
     const sortBy = searchParams.get("sortBy") || "newest" // newest, popular, price-low, price-high, rating
@@ -241,6 +242,10 @@ export async function GET(request: Request) {
 
     if (featured === "true") {
       where.featured = true
+    }
+
+    if (sellerId) {
+      where.sellerId = sellerId
     }
 
     if (search) {

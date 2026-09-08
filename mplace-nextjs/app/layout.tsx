@@ -40,6 +40,7 @@ export default function RootLayout({
         <link rel="stylesheet" href={withBasePath("/css/slick.css")} />
         <link rel="stylesheet" href={withBasePath("/css/trumbowyg.min.css")} />
         <link rel="stylesheet" href={withBasePath("/css/style.css")} />
+        <link rel="stylesheet" href={withBasePath("/css/marketnest-overrides.css")} />
       </head>
       <body className={`${quicksand.variable} preload`}>
         <ErrorBoundaryWrapper>

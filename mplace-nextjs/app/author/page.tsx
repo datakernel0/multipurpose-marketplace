@@ -105,167 +105,13 @@ function AuthorPageInner() {
     [author, isFollowing, session?.user?.id]
   );
 
-  // Dummy data for fallback
-  const getDummyData = () => {
-    const dummyAuthor: Author = {
-      id: "dummy-1",
-      name: "BackTheme",
-      username: "backtheme",
-      avatar: "/images/author-avatar.jpg",
-      signedUp: "08 April 2016",
-      totalItems: 4369,
-      totalSales: 36957,
-      totalRatings: 4.5,
-      ratingCount: 26,
-      coverImage: "/images/authcvr.jpg",
-      about:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Prae sent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra.",
-      badges: [
-        {
-          icon: "/images/svg/author_rank_diamond.svg",
-          title: "Diamnond Author",
-        },
-        {
-          icon: "/images/svg/author_level_3.svg",
-          title: "Has sold more than $10k",
-        },
-        {
-          icon: "/images/svg/affiliate_level_1.svg",
-          title: "Referred 10+ members",
-        },
-        {
-          icon: "/images/svg/collection_level_1.svg",
-          title: "Has Collected 2+ Items",
-        },
-        { icon: "/images/svg/exclusive_author.svg", title: "Exclusive Author" },
-        {
-          icon: "/images/svg/featured_author.svg",
-          title: "Weekly Featured Author",
-        },
-        { icon: "/images/svg/members_years.svg", title: "Member for 2 Year" },
-        {
-          icon: "/images/svg/recommended.svg",
-          title: "The seller is recommended by authority",
-        },
-        { icon: "/images/svg/contest_winner.svg", title: "Won a contest" },
-        {
-          icon: "/images/svg/copyright.svg",
-          title: "Helped to resolve copyright issues",
-        },
-      ],
-      followers: 67,
-      following: 39,
-      website: null,
-      facebookUrl: null,
-      twitterUrl: null,
-      dribbbleUrl: null,
-    };
-
-    const dummyProducts: Product[] = [
-      {
-        id: "1",
-        slug: "yannan-na-nakka-muka",
-        title: "Yannan Na nakka muka",
-        description:
-          "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-        image: "/images/p4.jpg",
-        price: 10,
-        salePrice: null,
-        livePreviewUrl: null,
-        author: {
-          name: "BackTheme",
-          avatar: "/images/auth3.jpg",
-          username: "backtheme",
-        },
-        category: {
-          name: "Plugin",
-          icon: "/images/cathtm.png",
-        },
-        rating: 4.5,
-        favorites: 48,
-        sales: 50,
-      },
-      {
-        id: "2",
-        slug: "mccarther-coffee-shop",
-        title: "Mccarther Coffee Shop",
-        description:
-          "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-        image: "/images/p2.jpg",
-        price: 10,
-        salePrice: null,
-        livePreviewUrl: null,
-        author: {
-          name: "BackTheme",
-          avatar: "/images/auth2.jpg",
-          username: "backtheme",
-        },
-        category: {
-          name: "wordpress",
-          icon: "/images/catword.png",
-        },
-        rating: 4.5,
-        favorites: 48,
-        sales: 50,
-      },
-      {
-        id: "3",
-        slug: "mccarther-coffee-shop-2",
-        title: "Mccarther Coffee Shop",
-        description:
-          "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-        image: "/images/p2.jpg",
-        price: 10,
-        salePrice: 8,
-        author: {
-          name: "BackTheme",
-          avatar: "/images/auth2.jpg",
-          username: "backtheme",
-        },
-        category: {
-          name: "wordpress",
-          icon: "/images/catword.png",
-        },
-        rating: 4.5,
-        favorites: 48,
-        sales: 50,
-      },
-      {
-        id: "4",
-        slug: "the-of-the-century",
-        title: "The of the century",
-        description:
-          "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-        image: "/images/p6.jpg",
-        price: 10,
-        salePrice: null,
-        livePreviewUrl: null,
-        author: {
-          name: "BackTheme",
-          avatar: "/images/auth.jpg",
-          username: "backtheme",
-        },
-        category: {
-          name: "PSD",
-          icon: "/images/catph.png",
-        },
-        rating: 4.5,
-        favorites: 48,
-        sales: 50,
-      },
-    ];
-
-    return { author: dummyAuthor, products: dummyProducts };
-  };
-
   useEffect(() => {
     const fetchAuthorData = async () => {
       try {
         if (!username || username === "default") {
-          // Use dummy data if no username provided
-          const dummyData = getDummyData();
-          setAuthor(dummyData.author);
-          setProducts(dummyData.products);
+          setError("Choose a creator profile to view.");
+          setAuthor(null);
+          setProducts([]);
           setLoading(false);
           return;
         }
@@ -275,22 +121,17 @@ function AuthorPageInner() {
         );
 
         if (!response.ok) {
-          // If author not found, use dummy data
-          const dummyData = getDummyData();
-          setAuthor(dummyData.author);
-          setProducts(dummyData.products);
-          setLoading(false);
-          return;
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.error || "Creator profile not found.");
         }
 
         const data = await response.json();
         setAuthor(data.author);
         setProducts(data.products);
       } catch (error: any) {
-        // On error, use dummy data
-        const dummyData = getDummyData();
-        setAuthor(dummyData.author);
-        setProducts(dummyData.products);
+        setError(error.message || "Creator profile is unavailable right now.");
+        setAuthor(null);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
@@ -497,24 +338,17 @@ function AuthorPageInner() {
     );
   }
 
-  // Always show content, even if loading or no author found
-  // (dummy data will be used as fallback)
-  // If author is still null after loading, use dummy data
-  if (!loading && !author) {
-    const dummyData = getDummyData();
-    setAuthor(dummyData.author);
-    setProducts(dummyData.products);
-    return null; // Return null to trigger re-render with dummy data
-  }
-
-  // If still loading, show loading state
-  if (loading || !author) {
+  if (!author) {
     return (
       <div className="preload author-page">
         <Preloader />
         <Header />
-        <div className="text-center" style={{ padding: "100px 0" }}>
-          <p>Loading author profile...</p>
+        <div className="marketnest-empty-state container" style={{ margin: "70px auto" }}>
+          <h3>Creator profile unavailable.</h3>
+          <p>{error || "This creator profile could not be found."}</p>
+          <Link href="/all-products" className="marketnest-button marketnest-button--primary">
+            Browse Products
+          </Link>
         </div>
         <Footer />
         <ScrollToTop />

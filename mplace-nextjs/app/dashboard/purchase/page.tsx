@@ -53,80 +53,6 @@ export default function DashboardPurchasePage() {
     hasPreviousPage: false,
   });
 
-  // Dummy data for fallback
-  const getDummyData = (): PurchaseItem[] => [
-    {
-      id: "1",
-      title: "Finance and Consulting Business Theme",
-      description:
-        "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
-      image: "/images/pur1.jpg",
-      date: "26 Jun 2016",
-      license: "Regular",
-      author: "BackTheme",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: "$59",
-      rating: null,
-      isRated: false,
-    },
-    {
-      id: "2",
-      title: "Visibility Manager Subscriptions",
-      description:
-        "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
-      image: "/images/pur2.jpg",
-      date: "26 Jun 2016",
-      license: "Regular",
-      author: "Taklatheme",
-      category: { name: "HTML5", icon: "/images/cathtm.png" },
-      price: "$39",
-      rating: 5,
-      isRated: true,
-    },
-    {
-      id: "3",
-      title: "Product Enquiry Extension",
-      description:
-        "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
-      image: "/images/pur3.jpg",
-      date: "23 oct 2016",
-      license: "Regular",
-      author: "Themexylum",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: "$59",
-      rating: null,
-      isRated: false,
-    },
-    {
-      id: "4",
-      title: "Appspress Multipurpose Applanding page",
-      description:
-        "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
-      image: "/images/pur4.jpg",
-      date: "14 Feb 2016",
-      license: "Extended",
-      author: "liontech",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: "$59",
-      rating: null,
-      isRated: false,
-    },
-    {
-      id: "5",
-      title: "Rida - Portfolio / Resume wordpress theme",
-      description:
-        "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
-      image: "/images/pur5.jpg",
-      date: "30 Jul 2016",
-      license: "Regular",
-      author: "Foxilac",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: "$59",
-      rating: 5,
-      isRated: true,
-    },
-  ];
-
   useEffect(() => {
     const fetchPurchases = async () => {
       try {
@@ -157,16 +83,11 @@ export default function DashboardPurchasePage() {
               }
             );
           } else {
-            // If API fails, use dummy data
-            const dummyData = getDummyData();
-            setPurchases(dummyData);
-            setTotalPurchases(dummyData.length);
+            throw new Error("Purchases are unavailable right now.");
           }
         } else {
-          // If not logged in, use dummy data
-          const dummyData = getDummyData();
-          setPurchases(dummyData);
-          setTotalPurchases(dummyData.length);
+          setPurchases([]);
+          setTotalPurchases(0);
         }
       } catch (error: any) {
         setError(error?.message || "Failed to load purchases.");

@@ -70,26 +70,6 @@ export default function DashboardManageItemPage() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [error, setError] = useState<string>("")
 
-  // Keep unavailable data honest until the API returns real products.
-  const dummyProducts: Product[] = [
-    {
-      id: "1",
-      slug: "digital-product-starter-kit",
-      title: "Digital Product Starter Kit",
-      description: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-      image: "/images/p1.jpg",
-      downloadUrl: null, // Added downloadUrl
-      category: { name: "Plugin", icon: "/images/cathtm.png" },
-      price: 10,
-      salePrice: null,
-      status: "PUBLISHED",
-      rating: 4.5,
-      favorites: 90,
-      sales: 16,
-      views: 120,
-    },
-  ]
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -116,14 +96,11 @@ export default function DashboardManageItemPage() {
               hasPreviousPage: false,
             })
           } else {
-            // If API fails, use dummy data
-            setProducts(dummyProducts)
-            setTotalProducts(dummyProducts.length)
+            throw new Error("Your products are unavailable right now.")
           }
         } else {
-          // If not logged in, use dummy data
-          setProducts(dummyProducts)
-          setTotalProducts(dummyProducts.length)
+          setProducts([])
+          setTotalProducts(0)
         }
       } catch (error: any) {
         setError(error?.message || "Failed to load products.")

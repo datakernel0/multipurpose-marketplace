@@ -1,1 +1,2 @@
 - [Preview preloader behavior](preview-preloader.md) — proxied previews can miss window.load, so global loading overlays must not wait on that event.
+- [Legacy stylesheet cascade](legacy-stylesheet-cascade.md) — imported template CSS loads after app globals, so public-surface overrides need a later-loaded stylesheet.

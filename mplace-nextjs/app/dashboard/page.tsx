@@ -78,76 +78,6 @@ export default function DashboardPage() {
   const singleItemVisitRef = useRef<ChartJS<"bar">>(null)
   const revenueRef = useRef<ChartJS<"line">>(null)
 
-  // Dummy data
-  const dummyStats: DashboardStats = {
-    totalItems: 4369,
-    monthlySales: 478,
-    monthlySalesAmount: 273.0,
-    yearlySales: 2249,
-    yearlySalesAmount: 2249.0,
-    lifetimeSales: 5583,
-    lifetimeSalesAmount: 5583.0,
-    monthlyViews: 1878,
-    monthlyEarnings: 2478.0,
-    totalSalesThisMonth: 478,
-    totalEarningsThisMonth: 2478.0,
-    totalViewsThisMonth: 1878,
-  }
-
-  const dummyRecentSales: RecentSale[] = [
-    {
-      id: "1",
-      title: "Finance and Consulting Business Theme",
-      slug: "finance-consulting-theme",
-      image: "/images/prodthumb.png",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: 34.25,
-      date: new Date().toISOString(),
-    },
-    {
-      id: "2",
-      title: "Best Free Responsive ReactJS Admin Themes",
-      slug: "reactjs-admin-themes",
-      image: "/images/prodthumb2.jpg",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: 34.25,
-      date: new Date().toISOString(),
-    },
-    {
-      id: "3",
-      title: "Best YouTube Channels For UI/UX Designers",
-      slug: "youtube-channels-ui-ux",
-      image: "/images/prodthumb3.jpg",
-      category: { name: "Wordpress", icon: "/images/catword.png" },
-      price: 34.25,
-      date: new Date().toISOString(),
-    },
-  ]
-
-  const dummyRecentBuyers: RecentBuyer[] = [
-    {
-      id: "1",
-      name: "James Anderson",
-      image: "/images/buyr1.jpg",
-      country: "United States",
-      totalSpent: 29,
-    },
-    {
-      id: "2",
-      name: "Tarashi Hamada",
-      image: "/images/buyr2.png",
-      country: "Japan",
-      totalSpent: 26,
-    },
-    {
-      id: "3",
-      name: "Shah Hossain",
-      image: "/images/buyr3.jpg",
-      country: "Biplobland",
-      totalSpent: 19,
-    },
-  ]
-
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
@@ -160,24 +90,13 @@ export default function DashboardPage() {
             setRecentBuyers(data.recentBuyers || [])
             setDailyData(data.charts?.dailyData || [])
           } else {
-            // If API fails, use dummy data
-            setStats(dummyStats)
-            setRecentSales(dummyRecentSales)
-            setRecentBuyers(dummyRecentBuyers)
+            throw new Error("Dashboard data is unavailable right now.")
           }
         } else {
-          // If not logged in, use dummy data
-          setStats(dummyStats)
-          setRecentSales(dummyRecentSales)
-          setRecentBuyers(dummyRecentBuyers)
-          setDailyData([
-            { day: 5, views: 5, sales: 10 },
-            { day: 10, views: 17, sales: 12 },
-            { day: 15, views: 13, sales: 17 },
-            { day: 20, views: 23, sales: 19 },
-            { day: 25, views: 18, sales: 15 },
-            { day: 30, views: 16, sales: 9 },
-          ])
+          setStats(null)
+          setRecentSales([])
+          setRecentBuyers([])
+          setDailyData([])
         }
       } catch (error) {
         setError("Failed to load dashboard data.")
@@ -196,7 +115,7 @@ export default function DashboardPage() {
   const salesViewsData = {
     labels: dailyData.length > 0 
       ? dailyData.map((d) => d.day)
-      : [5, 10, 15, 20, 25, 30],
+      : [],
     datasets: [
       {
         label: "Daily Views",
@@ -204,7 +123,7 @@ export default function DashboardPage() {
         borderColor: "#7347c1",
         data: dailyData.length > 0
           ? dailyData.map((d) => d.views)
-          : [5, 17, 13, 23, 18, 16],
+          : [],
         pointBackgroundColor: "#7347c1",
         pointBorderColor: "#fff",
         fill: true,
@@ -215,7 +134,7 @@ export default function DashboardPage() {
         borderColor: "#0674ec",
         data: dailyData.length > 0
           ? dailyData.map((d) => d.sales)
-          : [10, 12, 17, 19, 15, 9],
+          : [],
         pointBackgroundColor: "#0674ec",
         pointBorderColor: "#fff",
         fill: true,
@@ -245,11 +164,11 @@ export default function DashboardPage() {
 
   // Pie Chart Data
   const pieChartData = {
-    labels: ["Direct", "Social", "Referrals", "Search"],
+    labels: [],
     datasets: [
       {
-        data: [45, 25, 20, 10],
-        backgroundColor: ["#7347c1", "#0674ec", "#62d03a", "#ffc000"],
+        data: [],
+        backgroundColor: [],
         borderWidth: 0,
       },
     ],
@@ -267,10 +186,10 @@ export default function DashboardPage() {
 
   // Single Item Visitors Bar Chart
   const singleItemVisitData = {
-    labels: [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+    labels: [],
     datasets: [
       {
-        data: [15, 14, 23, 48, 55, 25, 82, 33, 55, 41],
+        data: [],
         backgroundColor: "#0674ec",
       },
     ],
@@ -299,11 +218,11 @@ export default function DashboardPage() {
 
   // Revenue Line Chart
   const revenueData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: [],
     datasets: [
       {
         label: "2015",
-        data: [3, 2.9, 2.7, 3.5, 4, 3.8, 3.7, 3.5, 4, 4.5, 4.3, 4.2],
+        data: [],
         fill: false,
         borderColor: "#7347c1",
         tension: 0,
@@ -313,7 +232,7 @@ export default function DashboardPage() {
       },
       {
         label: "2016",
-        data: [4, 3.9, 3.7, 4.5, 5, 5.8, 5.1, 4.5, 5.7, 7, 6.25, 5.9],
+        data: [],
         fill: false,
         borderColor: "#0674ec",
         tension: 0,
@@ -323,7 +242,7 @@ export default function DashboardPage() {
       },
       {
         label: "2019",
-        data: [5, 5.5, 5.9, 5.5, 5, 4.8, 5.8, 6.5, 6.1, 5.8, 6.7, 7.2],
+        data: [],
         fill: false,
         borderColor: "#62d03a",
         tension: 0,

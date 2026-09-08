@@ -6,12 +6,15 @@ import { useSession } from "next-auth/react"
 import { useState } from "react"
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/all-products", label: "Browse Products" },
-  { href: "/category-grid", label: "Categories" },
-  { href: "/dashboard/upload", label: "Become a Seller" },
-  { href: "/favourites", label: "Favorites" },
-  { href: "/cart", label: "Cart" },
+  { href: "/category-grid", label: "All Categories" },
+  { href: "/all-products?category=templates", label: "Templates" },
+  { href: "/all-products?category=source-code", label: "Source Code" },
+  { href: "/all-products?category=ui-kits", label: "UI Kits" },
+  { href: "/all-products?category=graphics", label: "Graphics" },
+  { href: "/all-products?category=themes", label: "Themes" },
+  { href: "/all-products?category=plugins", label: "Plugins" },
+  { href: "/all-products?category=ebooks", label: "Ebooks" },
+  { href: "/all-products?category=ai-resources", label: "AI Resources" },
 ]
 
 export default function MarketplaceNav() {
@@ -51,15 +54,6 @@ export default function MarketplaceNav() {
               </Link>
             </li>
           ))}
-          <li className={`nav-item ${isActive(session ? "/dashboard" : "/login") ? "active" : ""}`}>
-            <Link
-              className="nav-link"
-              href={session ? "/dashboard" : "/login"}
-              onClick={closeMenu}
-            >
-              {session ? "Account" : "Login"}
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

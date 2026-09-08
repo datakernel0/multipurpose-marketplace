@@ -21,6 +21,7 @@ interface ApiProduct {
     slug: string | null;
   } | null;
   rating?: number;
+  avgRating?: number;
   favoriteCount?: number;
   downloads?: number;
   description?: string | null;
@@ -353,13 +354,13 @@ async function fetchProducts(
         title: product.title,
         description: product.description || "",
         image: previewImage,
-        author: product.seller?.name || "Unknown Seller",
+        author: product.seller?.name || "Seller details unavailable",
         authorImg: authorImage,
         category: product.category?.name || "Marketplace Item",
         priceLabel,
         favorites: product.favoriteCount ?? 0,
         sales: product.downloads ?? 0,
-        rating: product.rating ?? 0,
+        rating: product.avgRating ?? product.rating ?? 0,
         livePreviewUrl: product.livePreviewUrl,
       };
     });

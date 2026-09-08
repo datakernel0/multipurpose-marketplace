@@ -31,6 +31,7 @@ interface ApiProduct {
   favoriteCount?: number;
   downloads?: number;
   rating?: number | null;
+  avgRating?: number | null;
 }
 
 interface FeaturedCard {
@@ -124,8 +125,9 @@ export default function FeaturedProductsSection() {
             : [];
           const tags = rawTags.slice(0, 6);
           const rating =
-            typeof product.rating === "number" && !Number.isNaN(product.rating)
-              ? product.rating
+            typeof (product.avgRating ?? product.rating) === "number" &&
+            !Number.isNaN(Number(product.avgRating ?? product.rating))
+              ? Number(product.avgRating ?? product.rating)
               : 0;
 
           return {
@@ -134,7 +136,7 @@ export default function FeaturedProductsSection() {
             title: product.title,
             description: product.description || "",
             image: previewImage,
-            author: product.seller?.name || "Unknown Seller",
+            author: product.seller?.name || "Seller details unavailable",
             authorImg: authorImage,
             category: product.category?.name || "Marketplace Item",
             priceLabel,

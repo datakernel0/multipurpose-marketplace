@@ -1,0 +1,207 @@
+Continue development of the existing MarketNest marketplace imported from GitHub.
+
+IMPORTANT:
+Previous cleanup and rebranding work is already committed.
+Do NOT restart the project.
+Do NOT restore removed MartPlace demo features.
+Do NOT modify payment, commission, withdrawal, or financial backend logic yet.
+
+This phase has TWO goals:
+
+A) Remove remaining legacy/demo content.
+B) Redesign the PUBLIC marketplace UI because the current custom blue/SaaS-style design is NOT approved.
+
+==================================================
+PART A — REMOVE REMAINING DEMO CONTENT
+==================================================
+
+Audit all retained marketplace pages for remaining:
+
+- hardcoded demo products
+- fake sellers/authors
+- fake purchases
+- fake orders
+- fake downloads
+- fake earnings
+- fake balances
+- fake ratings/reviews
+- fake followers
+- random charts/statistics
+- fake transactions
+- legacy MartPlace demo content
+
+Remove these fallbacks.
+
+Use real API/database data where available.
+
+When real data does not exist, use honest empty states such as:
+
+"No products available yet."
+"No purchases yet."
+"No sales yet."
+"No reviews yet."
+"No withdrawals yet."
+
+Never replace demo content with new fake content.
+
+==================================================
+PART B — PUBLIC MARKETPLACE UI REDESIGN
+==================================================
+
+The current blue/custom SaaS-like MarketNest UI is NOT the desired design.
+
+Redesign the PUBLIC marketplace to look like a polished,
+professional DIGITAL PRODUCT MARKETPLACE.
+
+IMPORTANT DESIGN DIRECTION:
+
+Use the original MartPlace marketplace aesthetic and structure
+as the primary design reference where useful.
+
+The desired visual direction is:
+
+- light marketplace interface
+- predominantly white/light backgrounds
+- clean professional header
+- strong marketplace search
+- compact navigation
+- marketplace category browsing
+- spacious but information-dense product grid
+- professional ecommerce product cards
+- subtle borders and shadows
+- restrained accent colors
+- rounded elements only where appropriate
+- clear typography hierarchy
+- desktop marketplace feel
+- fully responsive mobile version
+
+DO NOT make it look like:
+- a generic SaaS landing page
+- a blue corporate dashboard
+- an AI startup website
+- a huge-gradient landing page
+- an overly minimal portfolio
+- a crypto marketplace
+
+The marketplace/products must be the visual focus.
+
+==================================================
+1. BRAND
+==================================================
+
+Keep the current temporary brand:
+
+MarketNest
+
+Tagline:
+Discover. Sell. Grow.
+
+Do not bring visible "MartPlace" branding back.
+
+However, the original MartPlace template's marketplace layout,
+spacing, ecommerce structure, and component styling can be used
+as the visual foundation.
+
+==================================================
+2. TOP HEADER
+==================================================
+
+Build a professional marketplace header.
+
+Desktop structure should approximately be:
+
+LEFT:
+MarketNest logo/wordmark
+
+CENTER:
+Large product search field
+
+RIGHT:
+Favorites
+Cart
+Sell / Become a Seller
+Account / Sign In
+
+Search should be visually important.
+
+Avoid a huge blue navigation bar.
+
+Use a primarily light/white header with subtle separators.
+
+==================================================
+3. CATEGORY / SECONDARY NAVIGATION
+==================================================
+
+Below the main header, create a compact marketplace navigation bar.
+
+Include:
+
+All Categories
+Templates
+Source Code
+UI Kits
+Graphics
+Themes
+Plugins
+Ebooks
+AI Resources
+
+Additional useful navigation may include:
+
+New Products
+Popular Products
+Best Sellers
+
+Do not overcrowd it.
+
+Mobile should use an appropriate menu/drawer.
+
+==================================================
+4. HOMEPAGE HERO
+==================================================
+
+Do NOT create a huge generic SaaS hero.
+
+Create a marketplace-oriented hero that integrates naturally
+with the product browsing experience.
+
+Use:
+
+Heading:
+"Discover Digital Products Built to Help You Create More"
+
+Description:
+"Explore templates, source code, graphics, tools and digital resources from independent creators."
+
+Primary CTA:
+Browse Products
+
+Secondary CTA:
+Start Selling
+
+The hero can use a tasteful marketplace-style illustration,
+product previews, category visual, or restrained graphic area.
+
+Avoid large blue gradients covering most of the screen.
+
+==================================================
+5. CATEGORY SECTION
+==================================================
+
+Create visually strong category cards for:
+
+Templates
+Source Code
+UI Kits
+Graphics
+Themes
+Plugins
+Ebooks
+Excel Templates
+Power BI Templates
+AI Resources
+Audio
+Video
+
+Category cards should feel like ecommerce discovery elements,
+not SaaS feature ca...
