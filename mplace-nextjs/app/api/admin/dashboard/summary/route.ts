@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth"
 import { Prisma } from "@prisma/client"
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { ensureAdmin } from "@/lib/adminAuth"
+import { AdminAuthorizationError, ensureAdmin } from "@/lib/adminAuth"
 import { prisma } from "@/lib/prisma"
 
 const DAY_IN_MS = 24 * 60 * 60 * 1000
@@ -197,6 +197,11 @@ export async function GET() {
     generatedAt: now.toISOString(),
   })
   } catch (error: any) {
+    if (error instanceof AdminAuthorizationError) {
+      const status = error.message === "Authentication required" ? 401 : 403
+      return NextResponse.json({ error: error.message }, { status })
+    }
+
     console.error("Error in /api/admin/dashboard/summary:", error)
     return NextResponse.json(
       { error: error?.message || "Failed to fetch dashboard summary" },
