@@ -28,9 +28,9 @@ const ACTION_COPY = {
   APPROVED: {
     title: "Product Approved",
     message: (productTitle: string) => `Your product "${productTitle}" has been approved and published.`,
-    emailSubject: (productTitle: string) => `🎉 ${productTitle} is now live on MartPlace`,
+    emailSubject: (productTitle: string) => `🎉 ${productTitle} is now live on MarketNest`,
     emailBody: (productTitle: string, productUrl: string) =>
-      `Hi there,<br><br>Your product <strong>${productTitle}</strong> has been approved and is now live on MartPlace.<br><br>` +
+      `Hi there,<br><br>Your product <strong>${productTitle}</strong> has been approved and is now live on MarketNest.<br><br>` +
       `View it here: <a href="${productUrl}">${productUrl}</a><br><br>` +
       `Thanks for keeping the marketplace awesome!`,
   },

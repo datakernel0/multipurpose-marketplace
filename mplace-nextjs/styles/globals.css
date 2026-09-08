@@ -3718,3 +3718,87 @@ a.link {
 .megamnu_module .menu_items .menu_column li a.active {
   color: #0674ec;
 }
+
+/* MarketNest Phase 2 identity and honest empty states */
+.marketnest-wordmark {
+  display: block;
+  color: #0674ec;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.marketnest-tagline {
+  display: block;
+  margin-top: 5px;
+  color: #777;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.marketnest-footer-brand {
+  padding-bottom: 12px;
+}
+
+.marketnest-footer-brand .marketnest-wordmark {
+  color: #fff;
+}
+
+.marketnest-footer-brand .marketnest-tagline {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.marketnest-nav .navbar-nav {
+  align-items: center;
+  gap: 4px;
+}
+
+.marketnest-nav .nav-link {
+  text-transform: none;
+}
+
+.marketnest-category-card {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.marketnest-category-card:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.marketnest-category-card .feature__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketnest-category-card .feature__img .lnr {
+  color: #0674ec;
+  font-size: 48px;
+}
+
+.marketnest-empty-state {
+  width: 100%;
+  margin: 0 auto;
+  padding: 42px 24px;
+  border: 1px dashed #dfe3e8;
+  border-radius: 4px;
+  background: #fff;
+  text-align: center;
+}
+
+.marketnest-empty-state h3 {
+  margin-bottom: 8px;
+}
+
+.marketnest-empty-state p {
+  margin-bottom: 0;
+  color: #777;
+}

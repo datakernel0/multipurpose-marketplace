@@ -109,7 +109,7 @@ export default function AdminLayoutWrapper({ children, user }: AdminLayoutWrappe
                   <FeatherIcon icon={collapsed ? "menu" : "x"} size={20} />
                 </Button>
                 <Link href={withBasePath("/admin")} className="striking-logo">
-                  <span>MartPlace</span>
+                  <span>MarketNest</span>
                 </Link>
               </Col>
 
@@ -159,7 +159,7 @@ export default function AdminLayoutWrapper({ children, user }: AdminLayoutWrappe
               <Footer className="admin-footer" style={footerStyle}>
                 <Row>
                   <Col md={12} xs={24}>
-                    <span className="admin-footer__copyright">2024 © MartPlace</span>
+                    <span className="admin-footer__copyright">{new Date().getFullYear()} © MarketNest</span>
                   </Col>
                   <Col md={12} xs={24}>
                     <div className="admin-footer__links">

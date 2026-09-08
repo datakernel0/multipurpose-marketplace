@@ -25,102 +25,7 @@ export default function DashboardStatementPage() {
   const [toDate, setToDate] = useState("");
   const [transactionType, setTransactionType] = useState("all");
 
-  const transactions: StatementTransaction[] = [
-    {
-      date: "09 Jul 2019",
-      orderId: "MP810094",
-      author: "BackTheme",
-      detail: "Visibility Manager Subscriptions",
-      type: "sale",
-      price: "$49",
-      earning: "$24.50",
-    },
-    {
-      date: "03 Jul 2019",
-      orderId: "MP810094",
-      author: "Markober",
-      detail: "Martplace Coffee Shop",
-      type: "purchase",
-      price: "$30",
-      earning: "-$30",
-      isSubtract: true,
-    },
-    {
-      date: "09 Jul 2019",
-      orderId: "MP810094",
-      author: "Themexylum",
-      detail: "MartPlace Extension Bundle",
-      type: "sale",
-      price: "$49",
-      earning: "$24.50",
-    },
-    {
-      date: "05 Apr 2019",
-      orderId: "MP810094",
-      author: "BackTheme",
-      detail: "Stack - Responsive Bootstrap 4 Admin Template",
-      type: "sale",
-      price: "$20",
-      earning: "$10",
-    },
-    {
-      date: "25 Dec 2016",
-      orderId: "MP810394",
-      author: "Via Payoneer",
-      detail: "",
-      type: "credited",
-      price: "$49",
-      earning: "$24.50",
-    },
-    {
-      date: "09 Jul 2019",
-      orderId: "MP810094",
-      author: "Via Paypal",
-      detail: "",
-      type: "withdraw",
-      price: "$350",
-      earning: "-$350",
-      isSubtract: true,
-    },
-    {
-      date: "0 Feb 2019",
-      orderId: "MP810094",
-      author: "Artcorner",
-      detail: "Rida - Applanding Onepage",
-      type: "purchase",
-      price: "$30",
-      earning: "-$30",
-      isSubtract: true,
-    },
-    {
-      date: "26 May 2016",
-      orderId: "MP81024",
-      author: "Awesomaiya",
-      detail: "Table Generator extension bundle",
-      type: "sale",
-      price: "$49",
-      earning: "$24.50",
-    },
-    {
-      date: "26 Aug 2019",
-      orderId: "MP810654",
-      author: "Codepoets",
-      detail: "Kamla One page portfolio",
-      type: "sale",
-      price: "$49",
-      earning: "$24.50",
-    },
-    {
-      date: "09 Jul 2019",
-      orderId: "MP810094",
-      author: "Designing",
-      detail: "Ajaxified karma loader",
-      type: "purchase",
-      price: "$29",
-      earning: "-$29",
-      isSubtract: true,
-    },
-  ];
+  const transactions: StatementTransaction[] = [];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -236,7 +141,7 @@ export default function DashboardStatementPage() {
                   <div className="info_wrap">
                     <span className="lnr lnr-tag icon mcolorbg1"></span>
                     <div className="info">
-                      <p>$4,563</p>
+                        <p>—</p>
                       <span>Total Sales</span>
                     </div>
                   </div>
@@ -248,7 +153,7 @@ export default function DashboardStatementPage() {
                   <div className="info_wrap">
                     <span className="lnr lnr-cart icon mcolorbg2"></span>
                     <div className="info">
-                      <p>$340</p>
+                        <p>—</p>
                       <span>Total Purchases</span>
                     </div>
                   </div>
@@ -260,7 +165,7 @@ export default function DashboardStatementPage() {
                   <div className="info_wrap">
                     <span className="lnr lnr-dice icon mcolorbg3"></span>
                     <div className="info">
-                      <p>$680</p>
+                        <p>—</p>
                       <span>Total Credited</span>
                     </div>
                   </div>
@@ -272,7 +177,7 @@ export default function DashboardStatementPage() {
                   <div className="info_wrap">
                     <span className="lnr lnr-briefcase icon mcolorbg4"></span>
                     <div className="info">
-                      <p>$3,690</p>
+                        <p>—</p>
                       <span>Total Withdraw</span>
                     </div>
                   </div>
@@ -298,7 +203,13 @@ export default function DashboardStatementPage() {
                     </thead>
 
                     <tbody>
-                      {transactions.map((transaction, index) => (
+                      {transactions.length === 0 ? (
+                        <tr>
+                          <td colSpan={8} className="text-center">
+                            No transactions yet.
+                          </td>
+                        </tr>
+                      ) : transactions.map((transaction, index) => (
                         <tr key={index}>
                           <td>{transaction.date}</td>
                           <td>{transaction.orderId}</td>

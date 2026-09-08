@@ -54,76 +54,51 @@ export default function Footer() {
           <div className="row">
             <div className="col-lg-3 col-md-6">
               <div className="info-footer">
-                <div className="info__logo">
-                  <img
-                    src={withBasePath("/images/flogo.png")}
-                    alt="footer logo"
-                  />
+                <div className="info__logo marketnest-footer-brand">
+                  <span className="marketnest-wordmark">MarketNest</span>
+                  <span className="marketnest-tagline">Discover. Sell. Grow.</span>
                 </div>
                 <p className="info--text">
-                  Nunc placerat mi id nisi interdum they mollis. Praesent
-                  pharetra, justo ut scel erisque the mattis, leo quam.
+                  A focused marketplace for digital products from independent creators.
                 </p>
-                <ul className="info-contact">
-                  <li>
-                    <span className="lnr lnr-phone info-icon"></span>
-                    <span className="info">Phone: +6789-875-2235</span>
-                  </li>
-                  <li>
-                    <span className="lnr lnr-envelope info-icon"></span>
-                    <span className="info">support@backtheme.com</span>
-                  </li>
-                  <li>
-                    <span className="lnr lnr-map-marker info-icon"></span>
-                    <span className="info">
-                      202 New Hampshire Avenue Northwest #100, New York-2573
-                    </span>
-                  </li>
-                </ul>
               </div>
             </div>
 
             <div className="col-lg-5 col-md-6">
               <div className="footer-menu">
-                <h4 className="footer-widget-title text--white">Our Company</h4>
+                <h4 className="footer-widget-title text--white">Marketplace</h4>
                 <ul>
                   <li>
-                    <Link href="/how-it-works">How to Join Us</Link>
+                    <Link href="/all-products">Browse Products</Link>
                   </li>
                   <li>
-                    <Link href="/how-it-works">How It Work</Link>
+                    <Link href="/category-grid">Categories</Link>
                   </li>
                   <li>
-                    <Link href="/all-products">Buying and Selling</Link>
+                    <Link href="/dashboard/upload">Become a Seller</Link>
                   </li>
                   <li>
-                    <Link href="/term-condition">Copyright Notice</Link>
-                  </li>
-                  <li>
-                    <Link href="/term-condition">Refund Policy</Link>
+                    <Link href="/favourites">Favorites</Link>
                   </li>
                 </ul>
               </div>
 
               <div className="footer-menu">
                 <h4 className="footer-widget-title text--white">
-                  Help and FAQs
+                  Support
                 </h4>
                 <ul>
                   <li>
-                    <Link href="/how-it-works">How to Join Us</Link>
+                    <Link href="/contact">Contact / Support</Link>
                   </li>
                   <li>
-                    <Link href="/how-it-works">How It Work</Link>
+                    <Link href="/faq">FAQ</Link>
                   </li>
                   <li>
-                    <Link href="/all-products">Buying and Selling</Link>
+                    <Link href="/term-condition">Terms</Link>
                   </li>
                   <li>
-                    <Link href="/term-condition">Copyright Notice</Link>
-                  </li>
-                  <li>
-                    <Link href="/term-condition">Refund Policy</Link>
+                    <Link href="/login">Login</Link>
                   </li>
                 </ul>
               </div>
@@ -133,8 +108,7 @@ export default function Footer() {
               <div className="newsletter">
                 <h4 className="footer-widget-title text--white">Newsletter</h4>
                 <p>
-                  Subscribe to get the latest news, update and offer
-                  information. Don't worry, we won't send spam!
+                  Get occasional updates about new digital products and creator resources.
                 </p>
                 <div className="newsletter__form">
                   <form onSubmit={handleSubmit}>
@@ -222,10 +196,8 @@ export default function Footer() {
             <div className="col-md-12">
               <div className="copyright-text">
                 <p>
-                  &copy; {new Date().getFullYear()}
-                  <Link href="/"> MartPlace</Link>. All rights reserved. Created
-                  by
-                  <Link href="#"> BackTheme</Link>
+                   &copy; {new Date().getFullYear()} <Link href="/">MarketNest</Link>.
+                   All rights reserved.
                 </p>
               </div>
 

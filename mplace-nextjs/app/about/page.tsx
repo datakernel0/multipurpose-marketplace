@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="row">
             <div className="col-md-12">
               <div className="about_hero_contents">
-                <h1>Welcome to MartPlace!</h1>
+                <h1>Welcome to MarketNest!</h1>
                 <p>
                   We Help Marketers
                   <span>Build Products</span>
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 <div className="content_area">
                   <h1 className="content_area--title">
                     About
-                    <span className="highlight">MartPlace</span>
+                    <span className="highlight">MarketNest</span>
                   </h1>
                   <p>
                     Nunc placerat mi id nisi interdum mollis. Praesent pharetra justo ut sceler isque the mattis, leo quam aliquet
@@ -127,7 +127,7 @@ export default function AboutPage() {
               <div className="col-lg-5 col-md-6 offset-md-6 offset-lg-7">
                 <div className="content_area2">
                   <h1 className="content_area2--title">
-                    MartPlace
+                    MarketNest
                     <span className="highlight">Mission</span>
                   </h1>
                   <p>
@@ -155,7 +155,7 @@ export default function AboutPage() {
             <div className="col-md-12">
               <div className="section-title">
                 <h1>
-                  MartPlace Milestone
+                  MarketNest Milestone
                   <span className="highlighted"> Achievements</span>
                 </h1>
                 <p>
@@ -169,7 +169,7 @@ export default function AboutPage() {
             <div className="col-md-12">
               <ul className="timeline">
                 {[
-                  { period: "February 2009", title: "MartPlace was Launched", desc: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet." },
+                  { period: "Phase 2", title: "MarketNest is taking shape", desc: "A focused digital-products marketplace for independent creators and the people who use their work." },
                   { period: "February 2010", title: "Launched Premium Version", desc: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet." },
                   { period: "July 2012", title: "3 Million Downloads Reached", desc: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet." },
                   { period: "November 2015", title: "50,000+ Community Members", desc: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet." },
@@ -232,7 +232,7 @@ export default function AboutPage() {
               <div className="section-title">
                 <h1>
                   The Team at
-                  <span className="highlighted">MartPlace</span>
+                  <span className="highlighted">MarketNest</span>
                 </h1>
                 <p>
                   Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid est laborum

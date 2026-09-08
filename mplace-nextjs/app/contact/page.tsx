@@ -99,10 +99,10 @@ export default function ContactPage() {
                 <div className="col-lg-4 col-md-6">
                   <div className="contact_tile">
                     <span className="tiles__icon lnr lnr-map-marker"></span>
-                    <h4 className="tiles__title">Office Address</h4>
+                    <h4 className="tiles__title">Marketplace support</h4>
                     <div className="tiles__content">
                       <p>
-                        202 New Hampshire Avenue , Northwest #100, New York-2573
+                        Use the contact form below and our support team will review your message.
                       </p>
                     </div>
                   </div>
@@ -111,10 +111,10 @@ export default function ContactPage() {
                 <div className="col-lg-4 col-md-6">
                   <div className="contact_tile">
                     <span className="tiles__icon lnr lnr-phone"></span>
-                    <h4 className="tiles__title">Phone Number</h4>
+                    <h4 className="tiles__title">Seller support</h4>
                     <div className="tiles__content">
-                      <p>1-800-643-4500</p>
-                      <p>1-800-643-4500</p>
+                      <p>Questions about publishing a digital product?</p>
+                      <p>Send the details through the form below.</p>
                     </div>
                   </div>
                 </div>
@@ -122,10 +122,10 @@ export default function ContactPage() {
                 <div className="col-lg-4 col-md-6">
                   <div className="contact_tile">
                     <span className="tiles__icon lnr lnr-inbox"></span>
-                    <h4 className="tiles__title">Email Address</h4>
+                    <h4 className="tiles__title">Buyer support</h4>
                     <div className="tiles__content">
-                      <p>support@backtheme.com</p>
-                      <p>support@backtheme.com</p>
+                      <p>Need help with a product or account?</p>
+                      <p>Include the relevant details in your message.</p>
                     </div>
                   </div>
                 </div>

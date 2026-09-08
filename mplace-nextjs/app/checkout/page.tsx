@@ -175,7 +175,7 @@ function CheckoutPageInner() {
         const data = await response.json().catch(() => ({}))
 
         if (!response.ok) {
-          throw new Error(data?.error || "Failed to load MartPlace credits")
+          throw new Error(data?.error || "Failed to load MarketNest credits")
         }
 
         setCreditBalance(Number(data.balance || 0))
@@ -270,12 +270,12 @@ function CheckoutPageInner() {
     }
 
     if (paymentMethod !== "martplace") {
-      setOrderError("Only MartPlace credit is supported at the moment. Please select MartPlace credit to continue.")
+      setOrderError("Only MarketNest credit is supported at the moment. Please select MarketNest credit to continue.")
       return
     }
 
     if (insufficientCredits) {
-      setOrderError("Your MartPlace credit balance is not enough to cover this purchase. Please add more credits.")
+      setOrderError("Your MarketNest credit balance is not enough to cover this purchase. Please add more credits.")
       return
     }
 
@@ -656,7 +656,7 @@ function CheckoutPageInner() {
                             onChange={() => setPaymentMethod("martplace")}
                           />
                           <label htmlFor="opt3">
-                            <span className="circle"></span>MartPlace Credit
+                            <span className="circle"></span>MarketNest Credit
                           </label>
                         </div>
                         <p>
@@ -740,7 +740,7 @@ function CheckoutPageInner() {
                             </div>
 
                             <p className="text-warning" style={{ marginBottom: 12 }}>
-                              Card processing is not yet enabled. Please use MartPlace credit to complete your order.
+                              Card processing is not yet enabled. Please use MarketNest credit to complete your order.
                             </p>
                             <button type="submit" className="btn btn--round btn--default" disabled>
                               Confirm Order
@@ -752,7 +752,7 @@ function CheckoutPageInner() {
 
                     {paymentMethod === "paypal" && (
                       <div className="payment_info modules__content">
-                        <p>PayPal checkout will be available soon. Please switch to MartPlace credit for now.</p>
+                        <p>PayPal checkout will be available soon. Please switch to MarketNest credit for now.</p>
                         <button type="submit" className="btn btn--round btn--default" disabled>
                           Confirm with PayPal
                         </button>

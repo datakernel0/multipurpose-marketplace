@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useCallback, useMemo, Suspense } from "rea
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { getApiUrl, withBasePath } from "@/utils/paths"
 import { getSocket } from "@/lib/socketClient"
+import MarketplaceNav from "@/components/MarketplaceNav"
 
 // Inner component that uses useSearchParams - must be wrapped in Suspense
 function HeaderContent() {
@@ -673,7 +674,8 @@ function HeaderContent() {
             <div className="col-lg-3 col-md-3 col-6 v_middle">
               <div className="logo">
                 <Link href="/">
-                  <img src={withBasePath("/images/logo.png")} alt="logo image" className="img-fluid" />
+                  <span className="marketnest-wordmark">MarketNest</span>
+                  <span className="marketnest-tagline">Discover. Sell. Grow.</span>
                 </Link>
               </div>
             </div>
@@ -1242,7 +1244,8 @@ function HeaderContent() {
                 </div>
               </div>
 
-              <nav className="navbar navbar-expand-md navbar-light mainmenu__menu">
+              <MarketplaceNav />
+              {false && <nav className="navbar navbar-expand-md navbar-light mainmenu__menu">
                 <button
                   className="navbar-toggler"
                   type="button"
@@ -1632,7 +1635,7 @@ function HeaderContent() {
                     </li>
                   </ul>
                 </div>
-              </nav>
+              </nav>}
             </div>
           </div>
         </div>

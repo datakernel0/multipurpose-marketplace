@@ -5,54 +5,54 @@ export default function WhyChooseSection() {
       count: "01",
       icon: "lnr-license",
       iconColor: "pcolor",
-      title: "One Time Payment",
+      title: "Digital-first catalog",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Find templates, source code, UI kits, graphics, and other resources built for digital work.",
     },
     {
       id: 2,
       count: "02",
       icon: "lnr-magic-wand",
       iconColor: "scolor",
-      title: "Quality Products",
+      title: "Built for creators",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Independent creators can publish their work and build a storefront around what they make best.",
     },
     {
       id: 3,
       count: "03",
       icon: "lnr-lock",
       iconColor: "mcolor1",
-      title: "100% Secure Paymentt",
+      title: "Clear product details",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Browse previews, categories, seller details, ratings, and pricing before choosing a product.",
     },
     {
       id: 4,
       count: "04",
       icon: "lnr-chart-bars",
       iconColor: "mcolor2",
-      title: "Well Organized Code",
+      title: "Simple discovery",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Use search and focused categories to get to the right digital resource faster.",
     },
     {
       id: 5,
       count: "05",
       icon: "lnr-leaf",
       iconColor: "mcolor3",
-      title: "Life Time Free Update",
+      title: "Made to move with you",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Keep your purchases, favorites, and seller tools together in one marketplace account.",
     },
     {
       id: 6,
       count: "06",
       icon: "lnr-phone",
       iconColor: "mcolor4",
-      title: "Fast and Friendly Support",
+      title: "Support when needed",
       description:
-        "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+        "Use the support tools when you need help with an account or marketplace experience.",
     },
   ]
 
@@ -63,11 +63,10 @@ export default function WhyChooseSection() {
           <div className="col-md-12">
             <div className="section-title">
               <h1>
-                Why Choose <span className="highlighted">MartPlace</span>
+                Why creators choose <span className="highlighted">MarketNest</span>
               </h1>
               <p>
-                Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid est laborum
-                dolo rumes fugats untras.
+                A focused home for digital products, with practical tools for both buyers and independent sellers.
               </p>
             </div>
           </div>

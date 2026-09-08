@@ -103,7 +103,7 @@ export default function FAQPage() {
                   <div className="collapsible-content">
                     <ul className="card-content">
                       {[
-                        "How can I update a theme that is live on MartPlace?",
+                        "How can I update a digital product that is live on MarketNest?",
                         "How to write the changelog for theme updates?",
                         "Why my item has been rejected?",
                         "I've submitted an item, how much time will require to be live on?",
@@ -130,7 +130,7 @@ export default function FAQPage() {
                   <div className="collapsible-content">
                     <ul className="card-content">
                       {[
-                        "How can I update a theme that is live on MartPlace?",
+                        "How can I update a digital product that is live on MarketNest?",
                         "How to write the changelog for theme updates?",
                         "Why my item has been rejected?",
                         "I've submitted an item, how much time will require to be live on?",

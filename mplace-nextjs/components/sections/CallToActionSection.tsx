@@ -18,10 +18,10 @@ export default function CallToActionSection() {
         <div className="row">
           <div className="col-md-12">
             <div className="call-to-wrap">
-              <h1 className="text--white">Ready to Join Our Marketplace!</h1>
-              <h4 className="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-              <Link href="#" className="btn btn--lg btn--round btn--white callto-action-btn">
-                Join Us Today
+              <h1 className="text--white">Build your next project with MarketNest</h1>
+              <h4 className="text--white">Discover. Sell. Grow.</h4>
+              <Link href="/all-products" className="btn btn--lg btn--round btn--white callto-action-btn">
+                Browse Products
               </Link>
             </div>
           </div>

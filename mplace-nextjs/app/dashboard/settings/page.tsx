@@ -394,7 +394,7 @@ export default function DashboardSettingsPage() {
                               onChange={handleInputChange}
                             />
                             <p>
-                              Your MartPlace URL: https://martplace.com/{" "}
+                              Your MarketNest profile URL{" "}
                               <span>{formData.username || "username"}</span>
                             </p>
                           </div>
@@ -1114,7 +1114,7 @@ export default function DashboardSettingsPage() {
                             <label htmlFor="opt8">
                               <span className="shadow_checkbox"></span>
                               <span className="radio_title">
-                                MartPlace Newsletter
+                                MarketNest Newsletter
                               </span>
                               <span className="desc">
                                 Get update about latest news, update and more.

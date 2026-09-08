@@ -8,8 +8,6 @@ import FeaturedProductsSection from "@/components/sections/FeaturedProductsSecti
 import ProductsSection from "@/components/sections/ProductsSection"
 import WhyChooseSection from "@/components/sections/WhyChooseSection"
 import ProposalAreaSection from "@/components/sections/ProposalAreaSection"
-import SpecialFeatureAreaSection from "@/components/sections/SpecialFeatureAreaSection"
-import CallToActionSection from "@/components/sections/CallToActionSection"
 
 export default function Home({
   searchParams,
@@ -26,8 +24,6 @@ export default function Home({
       <ProductsSection searchParams={searchParams} />
       <WhyChooseSection />
       <ProposalAreaSection />
-      <SpecialFeatureAreaSection />
-      <CallToActionSection />
       <Footer />
       <ScrollToTop />
     </div>

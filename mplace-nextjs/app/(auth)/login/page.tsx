@@ -147,7 +147,7 @@ function LoginForm() {
                 <div className="cardify login">
                   <div className="login--header">
                     <h3>Welcome Back</h3>
-                    <p>You can sign in with your username</p>
+                    <p>Sign in to discover products, manage purchases, and grow your store.</p>
                   </div>
                   {/* end .login_header */}
 

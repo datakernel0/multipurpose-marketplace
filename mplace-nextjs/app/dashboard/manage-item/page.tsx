@@ -70,12 +70,12 @@ export default function DashboardManageItemPage() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [error, setError] = useState<string>("")
 
-  // Dummy data for fallback
+  // Keep unavailable data honest until the API returns real products.
   const dummyProducts: Product[] = [
     {
       id: "1",
-      slug: "martplace-extension-bundle",
-      title: "MartPlace Extension Bundle",
+      slug: "digital-product-starter-kit",
+      title: "Digital Product Starter Kit",
       description: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
       image: "/images/p1.jpg",
       downloadUrl: null, // Added downloadUrl

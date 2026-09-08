@@ -1,0 +1,1 @@
+- [Preview preloader behavior](preview-preloader.md) — proxied previews can miss window.load, so global loading overlays must not wait on that event.

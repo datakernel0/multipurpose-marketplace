@@ -24,14 +24,13 @@ export default function ProposalAreaSection() {
                   <img src={withBasePath("/images/buy.png")} alt="Buy icon" />
                 </div>
                 <div className="proposal__content">
-                  <h1 className="text--white">Sell Your Products</h1>
+                  <h1 className="text--white">Start Selling Digital Products</h1>
                   <p className="text--white">
-                    Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam
-                    aliquet diamcongue is laoreet elit metus.
+                    Share your templates, code, graphics, and resources with people looking for their next digital tool.
                   </p>
                 </div>
                 <Link href="#" className="btn--round btn btn--lg btn--white">
-                  Become an Author
+                  Become a Seller
                 </Link>
               </div>
             </div>
@@ -53,14 +52,13 @@ export default function ProposalAreaSection() {
                   <img src={withBasePath("/images/sell.png")} alt="Sell icon" />
                 </div>
                 <div className="proposal__content">
-                  <h1 className="text--white">Start Shopping Today</h1>
+                  <h1 className="text--white">Find Your Next Resource</h1>
                   <p className="text--white">
-                    Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam
-                    aliquet diamcongue is laoreet elit metus.
+                    Browse a focused collection of digital products from independent creators.
                   </p>
                 </div>
                 <Link href="#" className="btn--round btn btn--lg btn--white">
-                  Start Shopping
+                  Browse Products
                 </Link>
               </div>
             </div>

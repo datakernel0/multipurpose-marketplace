@@ -53,20 +53,20 @@ export default function HeroSection() {
               <div className="col-md-12">
                 <div className="hero__content__title">
                   <h1>
-                    <span className="light">Create Your Own</span>
-                    <span className="bold">Digital Product Marketplace</span>
+                    <span className="light">Discover Digital Products</span>
+                    <span className="bold">Built to Help You Create More</span>
                   </h1>
                   <p className="tagline">
-                    MartPlace is the most powerful, & customizable template for Easy Digital Downloads Products
+                    Explore templates, source code, graphics, tools, and digital resources from independent creators.
                   </p>
                 </div>
 
                 <div className="hero__btn-area">
                   <Link href="/all-products" className="btn btn--round btn--lg">
-                    View All Products
+                    Browse Products
                   </Link>
-                  <Link href="/all-products" className="btn btn--round btn--lg">
-                    Popular Products
+                  <Link href="/dashboard/upload" className="btn btn--round btn--lg">
+                    Start Selling
                   </Link>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function HeroSection() {
                     type="text"
                     className="text_field"
                     name="q"
-                    placeholder="Search your products..."
+                    placeholder="Search digital products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />

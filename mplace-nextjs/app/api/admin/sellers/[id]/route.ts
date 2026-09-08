@@ -21,7 +21,7 @@ const STATUS_COPY: Record<string, {
     message: (name) => `${name ? `${name}, ` : ""}Your seller application has been approved. You can now publish products.`,
     emailSubject: (name) => `${name ? `${name}, ` : ""}your seller account is approved!`,
     emailBody: (name, notes) => {
-      let body = `Hi ${name || "there"},<br><br>Your seller account has been approved. You now have access to the MartPlace seller tools and can begin publishing products.`
+      let body = `Hi ${name || "there"},<br><br>Your seller account has been approved. You now have access to the MarketNest seller tools and can begin publishing products.`
       if (notes) {
         body += `<br><br><strong>Admin notes:</strong><br>${notes.replace(/\n/g, "<br>")}`
       }

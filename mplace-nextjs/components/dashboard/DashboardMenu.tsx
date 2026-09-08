@@ -14,12 +14,15 @@ export default function DashboardMenu() {
 
   const menuItems: DashboardMenuItem[] = [
     { href: "/dashboard", icon: "lnr-home", label: "Dashboard" },
-    { href: "/dashboard/settings", icon: "lnr-cog", label: "Setting" },
-    { href: "/dashboard/purchase", icon: "lnr-cart", label: "Purchase" },
-    { href: "/dashboard/add-credit", icon: "lnr-dice", label: "Add Credits" },
-    { href: "/dashboard/statement", icon: "lnr-chart-bars", label: "Statements" },
-    { href: "/dashboard/upload", icon: "lnr-upload", label: "Upload Items" },
-    { href: "/dashboard/manage-item", icon: "lnr-briefcase", label: "Manage Items" },
+    { href: "/dashboard/purchase", icon: "lnr-cart", label: "My Purchases / Orders" },
+    { href: "/customer/downloads", icon: "lnr-download", label: "Downloads" },
+    { href: "/favourites", icon: "lnr-heart", label: "Favorites" },
+    { href: "/author/reviews", icon: "lnr-star", label: "Reviews" },
+    { href: "/notification", icon: "lnr-alarm", label: "Notifications" },
+    { href: "/dashboard/customer/info", icon: "lnr-user", label: "Profile / Settings" },
+    { href: "/contact", icon: "lnr-bubble", label: "Support" },
+    { href: "/dashboard/upload", icon: "lnr-upload", label: "Upload Product" },
+    { href: "/dashboard/manage-item", icon: "lnr-briefcase", label: "My Products" },
     { href: "/dashboard/withdrawal", icon: "lnr-briefcase", label: "Withdrawals" },
   ]
 

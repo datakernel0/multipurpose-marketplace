@@ -51,7 +51,7 @@ export default function SearchArea() {
               <div className="search">
                 <div className="search__title">
                   <h3>
-                    <span>35,270</span> website templates from our creative community
+                    Browse digital products from independent creators
                   </h3>
                 </div>
                 <div className="search__field">

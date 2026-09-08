@@ -13,9 +13,14 @@ export default function CustomerMenu() {
   const pathname = usePathname()
 
   const menuItems: CustomerMenuItem[] = [
-    { href: "/dashboard/customer", icon: "lnr-briefcase", label: "Purchase History" },
+    { href: "/dashboard", icon: "lnr-home", label: "Dashboard" },
+    { href: "/dashboard/customer", icon: "lnr-briefcase", label: "My Purchases / Orders" },
     { href: "/customer/downloads", icon: "lnr-download", label: "Downloads" },
-    { href: "/dashboard/customer/info", icon: "lnr-cog", label: "Account Info" },
+    { href: "/favourites", icon: "lnr-heart", label: "Favorites" },
+    { href: "/author/reviews", icon: "lnr-star", label: "Reviews" },
+    { href: "/notification", icon: "lnr-alarm", label: "Notifications" },
+    { href: "/contact", icon: "lnr-bubble", label: "Support" },
+    { href: "/dashboard/customer/info", icon: "lnr-cog", label: "Profile / Settings" },
   ]
 
   return (

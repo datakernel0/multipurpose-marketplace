@@ -225,7 +225,7 @@ export default function DashboardAddCreditPage() {
                 <div className="dashboard_title_area">
                   <div className="dashboard__title">
                     <h3>Buy Credits</h3>
-                    <p className="credit_subtitle">Top up your MartPlace wallet to purchase products faster.</p>
+                    <p className="credit_subtitle">Manage your marketplace credits for digital-product purchases.</p>
                   </div>
                 </div>
               </div>

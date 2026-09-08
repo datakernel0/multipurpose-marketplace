@@ -1,0 +1,383 @@
+Start PHASE 2: MARKETPLACE REBRANDING AND UI STRUCTURE.
+
+The cleaned marketplace foundation has already been verified.
+
+IMPORTANT:
+Do NOT implement payments, commissions, withdrawals, secure downloads, or financial logic in this phase.
+Do NOT change Prisma financial models.
+Do NOT remove core marketplace features.
+Do NOT redesign backend APIs unless required for UI compatibility.
+
+The goal of this phase is to transform the remaining MartPlace/template identity into a clean, professional digital-products marketplace.
+
+====================================
+1. REMOVE MARTPLACE BRANDING
+====================================
+
+Search the full application for:
+
+MartPlace
+martplace
+Mart Place
+
+Replace/remove marketplace-facing references where appropriate.
+
+Do not rename internal technical folders/files unnecessarily unless required.
+
+Update:
+- site title
+- metadata
+- header branding
+- footer branding
+- login/signup branding
+- dashboard branding
+- admin branding
+- email-visible brand references if safely centralized
+- favicon references if currently MartPlace-specific
+- placeholder logo usage
+
+For now use this temporary brand name:
+
+"MarketNest"
+
+Tagline:
+
+"Discover. Sell. Grow."
+
+Use text-based branding if a final logo asset does not exist yet.
+
+Do NOT create fake company information.
+
+====================================
+2. MARKETPLACE TYPE
+====================================
+
+The marketplace is focused on DIGITAL PRODUCTS.
+
+The product experience should clearly support categories such as:
+
+- Templates
+- Source Code
+- UI Kits
+- Graphics
+- Themes
+- Plugins
+- Ebooks
+- Excel Templates
+- Power BI Templates
+- AI Resources
+- Audio
+- Video
+- Other Digital Products
+
+Do not build physical-product shipping features.
+
+Do not add inventory/shipping complexity.
+
+====================================
+3. HEADER
+====================================
+
+Simplify the public header.
+
+Keep useful marketplace navigation such as:
+
+- Home
+- Browse Products
+- Categories
+- Become a Seller
+- Cart
+- Favorites
+- Login / Account
+
+Keep search prominently available.
+
+Remove links to features that were removed in Phase 1.
+
+Do not add blog, careers, events, forum, affiliate, or pricing links.
+
+Mobile navigation must match the same structure.
+
+====================================
+4. HOMEPAGE STRUCTURE
+====================================
+
+Keep the existing design system as much as practical, but simplify the homepage into a professional digital marketplace.
+
+Recommended homepage order:
+
+1. Header
+2. Hero section
+3. Search bar
+4. Popular categories
+5. Featured products
+6. New products
+7. Best-selling / popular products
+8. Seller CTA
+9. Simple trust/value section
+10. Footer
+
+Avoid unnecessary template sections.
+
+Do NOT use fake statistics.
+
+If no real data exists:
+- show empty states
+- hide the section
+- or use static explanatory copy that does not claim fake marketplace activity
+
+Do not use fake customer testimonials.
+
+====================================
+5. HERO SECTION
+====================================
+
+Use marketplace-focused copy.
+
+Suggested structure:
+
+Heading:
+"Discover Digital Products Built to Help You Create More"
+
+Supporting text:
+"Explore templates, source code, graphics, tools and digital resources from independent creators."
+
+Primary CTA:
+"Browse Products"
+
+Secondary CTA:
+"Start Selling"
+
+Do not make exaggerated claims such as:
+- thousands of sellers
+- millions of downloads
+- #1 marketplace
+unless backed by real data.
+
+====================================
+6. PRODUCT CARDS
+====================================
+
+Standardize marketplace product cards.
+
+Each product card should prioritize:
+
+- preview image
+- title
+- category
+- seller
+- rating if available
+- price
+- sale price if applicable
+- favorites control
+
+Avoid unnecessary template metadata.
+
+Use the same consistent product-card design across homepage and product browsing where practical.
+
+====================================
+7. CATEGORIES
+====================================
+
+Refocus categories around digital products.
+
+Do not destructively replace database category records yet.
+
+Update visible default/category UI labels where safe.
+
+Create a clear structure for future production categories.
+
+====================================
+8. BUYER DASHBOARD NAVIGATION
+====================================
+
+Simplify buyer navigation to:
+
+- Dashboard
+- My Purchases / Orders
+- Downloads
+- Favorites
+- Reviews
+- Notifications
+- Support
+- Profile / Settings
+
+Hide/remove UI links for features that are not part of V1.
+
+Do not break existing routes/APIs.
+
+====================================
+9. SELLER DASHBOARD NAVIGATION
+====================================
+
+Simplify seller navigation to:
+
+- Dashboard
+- My Products
+- Upload Product
+- Sales / Orders
+- Earnings
+- Withdrawals
+- Reviews
+- Notifications
+- Support
+- Store / Profile Settings
+
+IMPORTANT:
+Existing earnings and withdrawals may still be incomplete backend features.
+
+Do not pretend they are operational.
+
+UI may remain visible but clearly avoid fake balances or fake transaction history.
+
+Use empty states if real data is unavailable.
+
+====================================
+10. ADMIN NAVIGATION
+====================================
+
+Simplify admin navigation around:
+
+- Dashboard
+- Products
+- Product Moderation
+- Categories
+- Sellers
+- Customers
+- Orders
+- Withdrawals
+- Reviews
+- Support
+- Notifications
+- Settings
+- Audit Logs
+
+If Orders or Withdrawals admin modules do not exist yet:
+do NOT fake them.
+
+Either:
+- leave a clearly disabled placeholder,
+or
+- omit the navigation item and report it as a Phase 3/4 requirement.
+
+====================================
+11. FOOTER
+====================================
+
+Create a simple marketplace footer with relevant groups:
+
+Marketplace:
+- Browse Products
+- Categories
+- Become a Seller
+
+Support:
+- Contact / Support
+- FAQ only if a real retained FAQ route exists
+
+Legal:
+- Terms
+- Privacy
+- Refund Policy
+- Seller Terms
+
+Do not create fake legal text during this phase if pages do not exist.
+
+Remove links to deleted features.
+
+====================================
+12. EMPTY STATES
+====================================
+
+Replace fake/demo data with proper empty states.
+
+Examples:
+
+"No products yet."
+"No sales yet."
+"No withdrawals yet."
+"No orders yet."
+"No reviews yet."
+
+Never reintroduce random statistics or demo transactions.
+
+====================================
+13. RESPONSIVE UI
+====================================
+
+Preserve responsive behavior.
+
+Check:
+- desktop
+- tablet
+- mobile
+
+Pay special attention to:
+- header
+- search
+- product grid
+- dashboard sidebar
+- product cards
+- footer
+
+====================================
+14. DO NOT TOUCH
+====================================
+
+Do NOT implement or modify:
+
+- Real payment gateway
+- Payment webhooks
+- Commission engine
+- Financial ledger
+- Withdrawal API
+- Payout provider
+- Secure file delivery
+- Refund system
+- Tax engine
+
+These will be separate phases.
+
+====================================
+15. VALIDATION
+====================================
+
+After changes:
+
+- run TypeScript check
+- run production build
+- check homepage
+- check product browsing
+- check product detail
+- check login/signup
+- check cart
+- check buyer dashboard
+- check seller dashboard
+- check admin redirect/auth protection
+- scan for broken links to Phase 1 removed routes
+- scan visible UI for remaining "MartPlace" branding
+
+Do not spend this phase fixing unrelated historical lint warnings.
+
+====================================
+FINAL REPORT
+====================================
+
+When finished provide:
+
+1. Branding references changed
+2. Files modified
+3. Homepage sections removed/changed
+4. Header changes
+5. Footer changes
+6. Buyer dashboard navigation changes
+7. Seller dashboard navigation changes
+8. Admin navigation changes
+9. Product-card changes
+10. Remaining MartPlace references, if any
+11. TypeScript result
+12. Build result
+13. Runtime route check result
+14. Items intentionally deferred to later phases
+
+Stop after Phase 2.

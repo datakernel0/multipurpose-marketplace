@@ -15,7 +15,7 @@ export default function HowItWorksPage() {
     <div className="preload how-it-works-page">
       <Preloader />
       <Header />
-      <Breadcrumb pageTitle="Become A MartPlace Author" subtitle="& Sell Your Products" paths={[{ name: "How It Works", link: "/how-it-works" }]} />
+      <Breadcrumb pageTitle="Become a MarketNest Seller" subtitle="& Share Your Digital Products" paths={[{ name: "How It Works", link: "/how-it-works" }]} />
       <section className="how_it_works">
         <div className="how_it_works_module">
           <div className="container">

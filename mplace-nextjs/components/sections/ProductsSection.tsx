@@ -42,56 +42,7 @@ interface ProductCard {
   livePreviewUrl?: string | null;
 }
 
-const FALLBACK_PRODUCTS: ProductCard[] = [
-  {
-    id: "fallback-1",
-    slug: "martplace-extension-bundle",
-    title: "MartPlace Extension Bundle",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-    image: withBasePath("/images/p1.jpg"),
-    author: "BackTheme",
-    authorImg: withBasePath("/images/auth.jpg"),
-    category: "Plugin",
-    priceLabel: "$10 - $50",
-    favorites: 90,
-    sales: 16,
-    rating: 4.5,
-    livePreviewUrl: "#",
-  },
-  {
-    id: "fallback-2",
-    slug: "mccarther-coffee-shop",
-    title: "Mccarther Coffee Shop",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-    image: withBasePath("/images/p2.jpg"),
-    author: "BackTheme",
-    authorImg: withBasePath("/images/auth2.jpg"),
-    category: "Plugin",
-    priceLabel: "$10",
-    favorites: 48,
-    sales: 50,
-    rating: 4.8,
-    livePreviewUrl: "#",
-  },
-  {
-    id: "fallback-3",
-    slug: "visibility-manager-subscriptions",
-    title: "Visibility Manager Subscriptions",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue.",
-    image: withBasePath("/images/p3.jpg"),
-    author: "BackTheme",
-    authorImg: withBasePath("/images/auth3.jpg"),
-    category: "Plugin",
-    priceLabel: "Free",
-    favorites: 24,
-    sales: 27,
-    rating: 5,
-    livePreviewUrl: "#",
-  },
-];
+const FALLBACK_PRODUCTS: ProductCard[] = [];
 
 function resolveImage(path: string | undefined | null, fallback: string) {
   if (!path) {
@@ -174,7 +125,7 @@ function ProductsSectionClient({
           <div className="col-md-12">
             <div className="product-title-area">
               <div className="product__title">
-                <h2>Newest Release Products</h2>
+                <h2>New Digital Products</h2>
               </div>
 
               <div className="filter__menu">
@@ -234,7 +185,14 @@ function ProductsSectionClient({
         </div>
 
         <div className="row">
-          {products.map((product) => (
+          {products.length === 0 ? (
+            <div className="col-md-12">
+              <div className="marketnest-empty-state">
+                <h3>No products yet.</h3>
+                <p>New digital products will appear here as creators publish their work.</p>
+              </div>
+            </div>
+          ) : products.map((product) => (
             <div key={product.id} className="col-lg-4 col-md-6">
               <div className="product product--card">
                 <div className="product__thumbnail">
@@ -372,7 +330,7 @@ async function fetchProducts(
       : [];
 
     if (items.length === 0) {
-      return { products: FALLBACK_PRODUCTS };
+      return { products: [] };
     }
 
     const formatted: ProductCard[] = items.map((product) => {
@@ -408,7 +366,7 @@ async function fetchProducts(
 
     return { products: formatted };
   } catch (error) {
-    return { products: FALLBACK_PRODUCTS, error: "Unable to load products" };
+    return { products: [], error: "Products are unavailable right now." };
   }
 }
 

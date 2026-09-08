@@ -83,7 +83,7 @@ export default function ProductsPage() {
 
                   <div className="product-desc">
                     <Link href="/single-product/1" className="product_title">
-                      <h4>MartPlace Extension Bundle</h4>
+                      <h4>Digital Product Starter Kit</h4>
                     </Link>
                     <ul className="titlebtm">
                       <li>
@@ -320,7 +320,7 @@ export default function ProductsPage() {
 
                   <div className="product-desc">
                     <Link href="/single-product/1" className="product_title">
-                      <h4>MartPlace Extension Bundle</h4>
+                      <h4>Digital Product Starter Kit</h4>
                     </Link>
 
                     <p>
@@ -530,7 +530,7 @@ export default function ProductsPage() {
 
                   <div className="product-desc">
                     <Link href="/single-product/1" className="product_title">
-                      <h4>MartPlace Extension Bundle</h4>
+                      <h4>Digital Product Starter Kit</h4>
                     </Link>
                     <ul className="titlebtm">
                       <li>

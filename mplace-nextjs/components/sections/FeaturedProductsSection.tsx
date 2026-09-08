@@ -50,42 +50,7 @@ interface FeaturedCard {
   livePreviewUrl?: string | null;
 }
 
-const FALLBACK_FEATURED: FeaturedCard[] = [
-  {
-    id: "fallback-1",
-    slug: "rida-vcard-portfolio-resume-template",
-    title: "Rida - vCard, Portfolio / Resume Template",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis.",
-    image: withBasePath("/images/featprod.jpg"),
-    author: "BackTheme",
-    authorImg: withBasePath("/images/auth.jpg"),
-    category: "WordPress",
-    priceLabel: "$10 - $50",
-    favorites: 90,
-    sales: 16,
-    rating: 4.5,
-    tags: ["website", "plugin", "landing page"],
-    livePreviewUrl: "#",
-  },
-  {
-    id: "fallback-2",
-    slug: "one-page-resume-template",
-    title: "One Page Resume Template",
-    description:
-      "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis.",
-    image: withBasePath("/images/featprod.jpg"),
-    author: "BackTheme",
-    authorImg: withBasePath("/images/auth.jpg"),
-    category: "WordPress",
-    priceLabel: "$10 - $50",
-    favorites: 90,
-    sales: 16,
-    rating: 4.2,
-    tags: ["portfolio", "resume", "bootstrap"],
-    livePreviewUrl: "#",
-  },
-];
+const FALLBACK_FEATURED: FeaturedCard[] = [];
 
 function resolveImage(path: string | undefined | null, fallback: string) {
   if (!path) {
@@ -132,7 +97,7 @@ export default function FeaturedProductsSection() {
         }
 
         if (items.length === 0) {
-          setFeatured(FALLBACK_FEATURED);
+          setFeatured([]);
           return;
         }
 
@@ -183,7 +148,7 @@ export default function FeaturedProductsSection() {
 
         setFeatured(formatted);
       } catch (error) {
-        setFeatured(FALLBACK_FEATURED);
+        setFeatured([]);
       }
     };
 
@@ -206,7 +171,7 @@ export default function FeaturedProductsSection() {
           <div className="col-md-12">
             <div className="product-title-area">
               <div className="product__title">
-                <h2>Weekly Featured Products</h2>
+                <h2>Featured Digital Products</h2>
               </div>
               <div className="product__slider-nav rounded">
                 <span
@@ -226,7 +191,13 @@ export default function FeaturedProductsSection() {
       <div className="container">
         <div className="row">
           <div className="col-md-12 no0-padding">
-            <div className="featured-product-slider prod-slider1">
+              {featured.length === 0 ? (
+                <div className="marketnest-empty-state">
+                  <h3>No featured products yet.</h3>
+                  <p>Featured digital products will appear here as creators publish their work.</p>
+                </div>
+              ) : (
+              <div className="featured-product-slider prod-slider1">
               <Slider ref={sliderRef} {...settings}>
                 {featured.map((product) => (
                   <div key={product.id} className="featured__single-slider">
@@ -360,6 +331,7 @@ export default function FeaturedProductsSection() {
                 ))}
               </Slider>
             </div>
+              )}
           </div>
         </div>
       </div>

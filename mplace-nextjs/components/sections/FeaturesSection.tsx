@@ -1,33 +1,37 @@
-import { withBasePath } from "@/utils/paths"
+import Link from "next/link"
 
 export default function FeaturesSection() {
   const features = [
     {
-      image: withBasePath("/images/feature1.png"),
-      title: "Best UX Research",
-      description: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+      icon: "lnr-laptop",
+      title: "Templates",
+      description: "Ready-to-use layouts, documents, and creative starting points.",
     },
     {
-      image: withBasePath("/images/feature2.png"),
-      title: "Fully Responsive",
-      description: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+      icon: "lnr-code",
+      title: "Source Code",
+      description: "Practical code, plugins, and developer resources for your next build.",
     },
     {
-      image: withBasePath("/images/feature3.png"),
-      title: "Buy & Sell Easily",
-      description: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is laoreet elit metus.",
+      icon: "lnr-picture",
+      title: "Graphics & UI Kits",
+      description: "Visual assets and interface systems to help ideas take shape.",
     },
   ]
 
   return (
-    <section className="features section--padding">
+    <section className="features section--padding" aria-labelledby="popular-categories-title">
       <div className="container">
+        <div className="section-title text-center">
+          <h2 id="popular-categories-title">Popular Categories</h2>
+          <p>Start with a category and find a digital resource that fits your next idea.</p>
+        </div>
         <div className="row">
-          {features.map((feature, index) => (
-            <div key={index} className="col-lg-4 col-md-6">
-              <div className="feature">
+            {features.map((feature) => (
+              <div key={feature.title} className="col-lg-4 col-md-6">
+              <Link href="/category-grid" className="feature marketnest-category-card">
                 <div className="feature__img">
-                  <img src={feature.image} alt={feature.title} />
+                  <span className={`lnr ${feature.icon}`} aria-hidden="true"></span>
                 </div>
                 <div className="feature__title">
                   <h3>{feature.title}</h3>
@@ -35,7 +39,7 @@ export default function FeaturesSection() {
                 <div className="feature__desc">
                   <p>{feature.description}</p>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

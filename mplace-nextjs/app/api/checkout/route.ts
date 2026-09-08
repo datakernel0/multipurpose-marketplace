@@ -212,7 +212,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, orderId: order.id })
   } catch (error) {
     if (error instanceof Error && error.message === "INSUFFICIENT_CREDIT") {
-      return NextResponse.json({ error: "Insufficient MartPlace credits. Please add more credits to complete your purchase." }, { status: 402 })
+      return NextResponse.json({ error: "Insufficient MarketNest credits. Please add more credits to complete your purchase." }, { status: 402 })
     }
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 })

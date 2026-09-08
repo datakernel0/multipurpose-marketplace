@@ -22,7 +22,7 @@ export default function PartnerAreaSection() {
             <div className="section-title">
               <h1>
                 Websites That Use
-                <span className="highlighted">MartPlace</span>
+                <span className="highlighted">MarketNest</span>
               </h1>
               <p>
                 Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid

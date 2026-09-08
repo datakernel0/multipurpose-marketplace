@@ -90,7 +90,7 @@ export default function SignupPage() {
                   <div className="login--header">
                     <h3>Create Your Account</h3>
                     <p>
-                      Please fill the following fields with appropriate information to register a new MartPlace account.
+                      Create your MarketNest account to discover and sell digital products.
                     </p>
                   </div>
                   {/* end .login_header */}

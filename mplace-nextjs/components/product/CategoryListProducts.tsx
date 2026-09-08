@@ -8,7 +8,7 @@ export default function CategoryListProducts() {
     {
       id: 1,
       image: withBasePath("/images/pl1.jpg"),
-      title: "MartPlace Extension Bundle",
+      title: "Digital Product Starter Kit",
       description:
         "Nunc placerat mi id nisi inter dum mollis. Praesent phare...",
       category: "Plugin",

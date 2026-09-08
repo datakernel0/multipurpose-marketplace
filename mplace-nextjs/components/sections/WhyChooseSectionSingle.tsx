@@ -67,7 +67,7 @@ export default function WhyChooseSectionSingle() {
           <div className="col-md-12">
             <div className="section-title">
               <h1>
-                Why Choose <span className="highlighted">MartPlace</span>
+                Why creators choose <span className="highlighted">MarketNest</span>
               </h1>
               <p>
                 Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid est laborum

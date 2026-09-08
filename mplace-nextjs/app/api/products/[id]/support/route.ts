@@ -56,10 +56,10 @@ export async function POST(
       return NextResponse.json({ error: "Seller does not have a contact email" }, { status: 400 })
     }
 
-    const requesterName = session.user?.name || session.user?.email || "MartPlace Customer"
+    const requesterName = session.user?.name || session.user?.email || "MarketNest Customer"
     const requesterEmail = session.user?.email || undefined
 
-    const emailSubject = `[MartPlace Support] ${subject}`
+    const emailSubject = `[MarketNest Support] ${subject}`
     const emailText = `Support request for ${product.title} (ID: ${product.id})
 
 From: ${requesterName}${requesterEmail ? ` <${requesterEmail}>` : ""}

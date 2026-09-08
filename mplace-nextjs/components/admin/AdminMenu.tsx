@@ -36,7 +36,7 @@ export default function AdminMenu() {
     {
       key: "overview",
       icon: <FeatherIcon icon="home" size={16} />,
-      label: "Overview",
+       label: "Dashboard",
     },
     {
       key: "products",
@@ -56,7 +56,7 @@ export default function AdminMenu() {
     {
       key: "moderation",
       icon: <FeatherIcon icon="shield" size={16} />,
-      label: "Moderation Queue",
+       label: "Product Moderation",
     },
     {
       key: "logs",

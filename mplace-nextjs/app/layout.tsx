@@ -17,9 +17,9 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "MartPlace - Complete Online Multipurpose Marketplace",
-  description: "MartPlace - Complete Online Multipurpose Marketplace HTML Template",
-  keywords: "marketplace, easy digital download, digital product, digital, html5",
+  title: "MarketNest | Discover. Sell. Grow.",
+  description: "MarketNest is a digital-products marketplace for templates, code, graphics, and creator resources.",
+  keywords: "digital products, templates, source code, UI kits, marketplace",
 };
 
 export default function RootLayout({
