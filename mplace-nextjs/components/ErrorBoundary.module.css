@@ -1,0 +1,55 @@
+.errorBoundaryContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.errorBoundaryContent {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.errorBoundaryTitle {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #ff4d4f;
+}
+
+.errorBoundaryMessage {
+  margin-bottom: 24px;
+  color: #666;
+}
+
+.errorBoundaryDetails {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.errorBoundarySummary {
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.errorBoundaryErrorText {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.errorBoundaryActions {
+  display: flex;
+  gap: 12px;
+}
+

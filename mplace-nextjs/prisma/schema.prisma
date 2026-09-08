@@ -1,0 +1,910 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  password      String?
+  image         String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Author Profile Fields
+  username          String?   @unique
+  bio               String?   @db.Text
+  profileHeading    String?
+  website           String?
+  country           String?
+  coverImage        String?
+  
+  // Social Links
+  facebookUrl       String?
+  twitterUrl        String?
+  googlePlusUrl     String?
+  behanceUrl        String?
+  dribbbleUrl       String?
+  
+  // Billing Information
+  billingFirstName  String?
+  billingLastName   String?
+  billingCompany    String?
+  billingEmail      String?
+  billingCountry    String?
+  billingAddress1   String?
+  billingAddress2   String?
+  billingCity       String?
+  billingZipCode    String?
+  
+  // Email Notification Preferences
+  emailRatingReminder        Boolean @default(true)
+  emailUpdateNotifications   Boolean @default(true)
+  emailCommentNotifications  Boolean @default(true)
+  emailReviewNotifications   Boolean @default(true)
+  emailItemReviewNotifications Boolean @default(true)
+  emailSupportNotifications  Boolean @default(true)
+  emailWeeklySummary         Boolean @default(false)
+  emailNewsletter            Boolean @default(false)
+  sellerStatus               SellerStatus @default(NOT_APPLICABLE)
+  sellerVerificationNotes    String?   @db.Text
+  sellerVerifiedAt           DateTime?
+
+  accounts          Account[]
+  sessions          Session[]
+  products          Product[]
+  cartItems         CartItem[]
+  orders            Order[]
+  reviews           Review[]
+  favorites         Favorite[]
+  notifications     Notification[]
+  sentMessages      Message[] @relation("MessageSender")
+  receivedMessages  Message[] @relation("MessageReceiver")
+  chatsAsUser1      Chat[] @relation("User1")
+  chatsAsUser2      Chat[] @relation("User2")
+  withdrawals       Withdrawal[]
+  purchases         Purchase[]
+  uploads           Upload[]
+  statements        Statement[]
+  credits           Credit[]
+  blogs             Blog[]
+  blogComments      BlogComment[]
+  forumThreads      ForumThread[]
+  forumReplies      ForumReply[]
+  lastAnswerThreads ForumThread[] @relation("LastAnswerUser")
+  followers         Follow[] @relation("Follower")
+  following         Follow[] @relation("Following")
+  comments          Comment[]
+  moderatedProducts Product[] @relation("ProductModerator")
+  moderationActions ModerationAction[] @relation("Moderator")
+  adminRoleAssignments AdminRoleAssignment[] @relation("AdminRoleAssignmentUser")
+  adminRoleGrants      AdminRoleAssignment[] @relation("AdminRoleAssigner")
+  customerSupportTickets SupportTicket[] @relation("CustomerSupportTickets")
+  assignedSupportTickets SupportTicket[] @relation("AssignedSupportAgent")
+  supportTicketHistoryEntries SupportTicketHistory[] @relation("SupportTicketActor")
+  systemSettingsUpdated  SystemSetting[] @relation("SystemSettingUpdatedBy")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum Role {
+  USER
+  SELLER
+  ADMIN
+  SUPERADMIN
+  MODERATOR
+  REVIEWER
+  SUPPORT
+}
+
+enum SellerStatus {
+  NOT_APPLICABLE
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum ModerationStatus {
+  PENDING_REVIEW
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+}
+
+enum ModerationEntityType {
+  PRODUCT
+  USER
+  SELLER_PROFILE
+  REVIEW
+  SUPPORT_TICKET
+  WITHDRAWAL_REQUEST
+}
+
+enum ModerationActionType {
+  SUBMITTED
+  APPROVED
+  REJECTED
+  SUSPENDED
+  REINSTATED
+  FLAGGED
+}
+
+model Product {
+  id                String   @id @default(cuid())
+  title             String
+  slug              String   @unique
+  description       String   @db.Text
+  price             Float
+  salePrice         Float?
+  images            String[] // Array of image URLs
+  livePreviewUrl    String?  // Live preview/demo URL
+  tags              String?  @db.Text // Comma-separated tags
+  filesIncluded     String[] // Array of file types
+  compatibleBrowsers String[] // Array of browser names
+  columns           String?  // Column count
+  dimensions        String?  // Item dimensions
+  minSoftwareVersion String? // Minimum software version
+  highResolution    String?  // "yes" or "no"
+  retinaReady       String?  // "yes" or "no"
+  downloadUrl       String?
+  categoryId        String
+  sellerId          String
+  status            ProductStatus   @default(DRAFT)
+  moderationStatus  ModerationStatus @default(PENDING_REVIEW)
+  moderatedById     String?
+  moderatedAt       DateTime?
+  moderationNotes   String?   @db.Text
+  featured          Boolean  @default(false)
+  downloads         Int      @default(0)
+  views             Int      @default(0)
+  rating            Float    @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  seller      User       @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  category    Category   @relation(fields: [categoryId], references: [id])
+  moderatedBy User?      @relation("ProductModerator", fields: [moderatedById], references: [id], onDelete: SetNull)
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  reviews     Review[]
+  favorites   Favorite[]
+  comments    Comment[]
+  moderationActions ModerationAction[] @relation("ProductModeration")
+
+  @@map("products")
+}
+
+enum ProductStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  SUSPENDED
+  PUBLISHED
+  ARCHIVED
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?   @db.Text
+  image       String?
+  parentId    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+  products Product[]
+
+  @@map("categories")
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("cart_items")
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  userId       String
+  totalAmount  Float
+  status       OrderStatus @default(PENDING)
+  paymentMethod String?
+  paymentStatus String?
+  billingFirstName String
+  billingLastName  String
+  billingCompany   String?
+  billingEmail     String
+  billingCountry   String?
+  billingAddress1  String?
+  billingAddress2  String?
+  billingCity      String?
+  billingPostalCode String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  rating    Int      // 1-5
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("reviews")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  userId    String
+  productId String
+  parentId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  parent  Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("favorites")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String   @db.Text
+  type      String
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model Follow {
+  id         String   @id @default(cuid())
+  followerId String   // User who is following
+  followingId String  // User being followed
+  createdAt  DateTime @default(now())
+
+  follower  User @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@map("follows")
+}
+
+model AdminRole {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  level       Int      @default(0)
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  permissions AdminRolePermission[]
+  assignments AdminRoleAssignment[]
+
+  @@map("admin_roles")
+}
+
+model AdminPermission {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  description String?
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  roles AdminRolePermission[]
+
+  @@map("admin_permissions")
+}
+
+model AdminRolePermission {
+  id           String   @id @default(cuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role        AdminRole       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission  AdminPermission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("admin_role_permissions")
+}
+
+model AdminRoleAssignment {
+  id            String   @id @default(cuid())
+  userId        String
+  roleId        String
+  assignedById  String?
+  assignedAt    DateTime @default(now())
+  expiresAt     DateTime?
+
+  user       User     @relation("AdminRoleAssignmentUser", fields: [userId], references: [id], onDelete: Cascade)
+  role       AdminRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  assignedBy User?     @relation("AdminRoleAssigner", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@unique([userId, roleId])
+  @@map("admin_role_assignments")
+}
+
+model ModerationAction {
+  id             String                @id @default(cuid())
+  entityType     ModerationEntityType
+  entityId       String
+  action         ModerationActionType
+  performedById  String?
+  productId      String?
+  notes          String?   @db.Text
+  metadata       Json?
+  createdAt      DateTime  @default(now())
+
+  performedBy User?    @relation("Moderator", fields: [performedById], references: [id], onDelete: SetNull)
+  product     Product? @relation("ProductModeration", fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+  @@map("moderation_actions")
+}
+
+model Chat {
+  id        String   @id @default(cuid())
+  user1Id   String
+  user2Id   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user1 User    @relation("User1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 User    @relation("User2", fields: [user2Id], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@unique([user1Id, user2Id])
+  @@map("chats")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  chatId    String
+  senderId  String
+  receiverId String
+  content   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  chat     Chat  @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  sender   User  @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User  @relation("MessageReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  attachments MessageAttachment[]
+
+  @@map("messages")
+}
+
+model MessageAttachment {
+  id         String   @id @default(cuid())
+  messageId  String
+  fileUrl    String
+  fileName   String
+  mimeType   String
+  fileSize   Int
+  createdAt  DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("message_attachments")
+}
+
+model Withdrawal {
+  id        String            @id @default(cuid())
+  userId    String
+  amount    Float
+  status    WithdrawalStatus  @default(PENDING)
+  method    String?
+  account   String?           @db.Text
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("withdrawals")
+}
+
+enum WithdrawalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PROCESSED
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  amount    Float
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("purchases")
+}
+
+model Upload {
+  id        String   @id @default(cuid())
+  userId    String
+  fileName  String
+  filePath  String
+  fileSize  Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("uploads")
+}
+
+model Statement {
+  id          String   @id @default(cuid())
+  userId      String
+  description String   @db.Text
+  amount      Float
+  type        String   // credit, debit
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("statements")
+}
+
+enum CreditSource {
+  MANUAL
+  SALE_CONVERSION
+  PURCHASE
+}
+
+model Credit {
+  id        String   @id @default(cuid())
+  userId    String
+  amount    Float
+  paymentMethod String?
+  reference String?
+  source    CreditSource @default(MANUAL)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("credits")
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String   @db.Text
+  content     String   @db.Text
+  image       String
+  authorId    String
+  views       Int      @default(0)
+  commentCount Int     @default(0)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author   User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments BlogComment[]
+
+  @@map("blogs")
+}
+
+model BlogComment {
+  id        String   @id @default(cuid())
+  blogId    String
+  userId    String?
+  name      String
+  email     String
+  content   String   @db.Text
+  parentId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  blog     Blog           @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  user     User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent   BlogComment?   @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  BlogComment[]  @relation("CommentReplies")
+
+  @@map("blog_comments")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?  @db.Text
+  image       String
+  date        String   // Date as string (e.g., "May 17-19, 2019")
+  location    String
+  featured    Boolean  @default(false)
+  targetDate  DateTime? // For countdown
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  speakers EventSpeaker[]
+
+  @@map("events")
+}
+
+model EventSpeaker {
+  id        String   @id @default(cuid())
+  eventId   String
+  name      String
+  title     String
+  image     String
+  bio       String?  @db.Text
+  createdAt DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_speakers")
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @db.Text
+  location    String
+  type        String   // Full Time, Part Time, Remotely
+  typeClass   String   // CSS class
+  requirements String? @db.Text
+  salary      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("jobs")
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  category  String?  // For Authors, For Buyers, etc.
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  designation String
+  text        String   @db.Text
+  avatar      String
+  rating      Int?     // 1-5
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model ForumThread {
+  id                String   @id @default(cuid())
+  title             String
+  slug              String   @unique
+  content           String   @db.Text
+  authorId          String
+  tag               String
+  isPinned          Boolean  @default(false)
+  isResolved        Boolean  @default(false)
+  votes             Int      @default(0)
+  views             Int      @default(0)
+  lastAnswerTime    DateTime?
+  lastAnswerUserId  String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  author        User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  lastAnswerUser User?        @relation("LastAnswerUser", fields: [lastAnswerUserId], references: [id])
+  replies       ForumReply[]
+
+  @@map("forum_threads")
+}
+
+model ForumReply {
+  id        String   @id @default(cuid())
+  threadId  String
+  userId    String
+  content   String   @db.Text
+  parentId  String?
+  isSolution Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  thread   ForumThread  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent   ForumReply?  @relation("ReplyReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  ForumReply[] @relation("ReplyReplies")
+
+  @@map("forum_replies")
+}
+
+model TermCondition {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("term_conditions")
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  icon        String?
+  image       String?
+  type        String   // author_rank, more, etc.
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("badges")
+}
+
+model CareerFeature {
+  id          String   @id @default(cuid())
+  icon        String   // lnr icon class
+  title       String
+  description String   @db.Text
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("career_features")
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  subscribed Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("newsletter_subscriptions")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_messages")
+}
+
+model SupportTicket {
+  id            String   @id @default(cuid())
+  reference     String   @unique
+  subject       String
+  description   String   @db.Text
+  status        SupportTicketStatus @default(OPEN)
+  priority      SupportTicketPriority @default(MEDIUM)
+  category      SupportTicketCategory @default(GENERAL)
+  resolution    String?  @db.Text
+  customerId    String
+  assignedToId  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  closedAt      DateTime?
+  lastActivityAt DateTime @default(now())
+
+  customer   User   @relation("CustomerSupportTickets", fields: [customerId], references: [id], onDelete: Cascade)
+  assignedTo User?  @relation("AssignedSupportAgent", fields: [assignedToId], references: [id], onDelete: SetNull)
+  history    SupportTicketHistory[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([category])
+  @@index([customerId])
+  @@index([assignedToId])
+}
+
+model SupportTicketHistory {
+  id          String   @id @default(cuid())
+  ticketId    String
+  actorId     String?
+  action      SupportTicketAction
+  message     String?  @db.Text
+  createdAt   DateTime @default(now())
+
+  ticket SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  actor  User?         @relation("SupportTicketActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([ticketId])
+  @@index([actorId])
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_CUSTOMER
+  WAITING_SUPPORT
+  RESOLVED
+  CLOSED
+}
+
+enum SupportTicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum SupportTicketCategory {
+  GENERAL
+  BILLING
+  TECHNICAL
+  ACCOUNT
+  SALES
+}
+
+enum SupportTicketAction {
+  CREATED
+  STATUS_CHANGED
+  PRIORITY_CHANGED
+  ASSIGNED
+  NOTE_ADDED
+  CUSTOMER_REPLIED
+  SUPPORT_REPLIED
+  CLOSED
+}
+
+model SystemSetting {
+  id           String               @id @default(cuid())
+  key          String               @unique
+  value        String               @db.Text
+  type         SystemSettingType    @default(STRING)
+  label        String?
+  description  String?              @db.Text
+  group        SystemSettingGroup   @default(GENERAL)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  updatedById  String?
+
+  updatedBy    User?                @relation("SystemSettingUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+}
+
+enum SystemSettingType {
+  STRING
+  TEXT
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+enum SystemSettingGroup {
+  GENERAL
+  MARKETPLACE
+  BILLING
+  NOTIFICATIONS
+  SUPPORT
+}

@@ -1,0 +1,25 @@
+.loadingSpinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.loadingSpinnerMinHeight {
+  min-height: 200px;
+}
+
+.loadingSpinnerFullHeight {
+  min-height: 100vh;
+}
+
+.pageLoadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+

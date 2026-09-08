@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MartPlace Next.js - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .doc-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .doc-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .doc-version {
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .alert-center {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .alert-note {
+            margin-top: 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .directories-section {
+            margin-top: 20px;
+        }
+
+        .directory-icon {
+            color: #4ec9b0;
+        }
+
+        /* Container */
+        .doc-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 40px;
+        }
+
+        /* Sidebar */
+        .doc-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .doc-sidebar h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .doc-sidebar ul {
+            list-style: none;
+        }
+
+        .doc-sidebar ul li {
+            margin-bottom: 8px;
+        }
+
+        .doc-sidebar ul li a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .doc-sidebar ul li a:hover,
+        .doc-sidebar ul li a.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .doc-sidebar ul ul {
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+
+        .doc-sidebar ul ul li a {
+            font-size: 0.9em;
+            padding: 6px 10px;
+        }
+
+        /* Main Content */
+        .doc-content {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .doc-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        .doc-section h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .doc-section h3 {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .doc-section h4 {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .doc-section p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .doc-section ul,
+        .doc-section ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .doc-section ul li,
+        .doc-section ol li {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+            border: 1px solid #3e3e3e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-block-header {
+            background: #252526;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3e3e3e;
+        }
+
+        .code-block-header .lang-label {
+            color: #858585;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .code-block .copy-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .code-block .copy-btn:hover {
+            background: #1177bb;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-block .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .code-block .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', 'Courier New', monospace;
+            font-size: 0.875em;
+            line-height: 1.7;
+            color: #d4d4d4;
+            background: #1e1e1e;
+        }
+
+        /* Custom scrollbar for code blocks */
+        .code-block pre::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .code-block pre::-webkit-scrollbar-track {
+            background: #252526;
+        }
+
+        .code-block pre::-webkit-scrollbar-thumb {
+            background: #424242;
+            border-radius: 4px;
+        }
+
+        .code-block pre::-webkit-scrollbar-thumb:hover {
+            background: #4e4e4e;
+        }
+
+        .code-block code {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            white-space: pre;
+            word-wrap: normal;
+            display: block;
+        }
+
+        /* Syntax highlighting colors (for future enhancement) */
+        .code-block code .keyword { color: #569cd6; }
+        .code-block code .string { color: #ce9178; }
+        .code-block code .comment { color: #6a9955; font-style: italic; }
+        .code-block code .function { color: #dcdcaa; }
+        .code-block code .number { color: #b5cea8; }
+        .code-block code .operator { color: #d4d4d4; }
+        .code-block code .punctuation { color: #d4d4d4; }
+
+        .code-inline {
+            background: #f1f3f5;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', 'Courier New', monospace;
+            font-size: 0.875em;
+            color: #e83e8c;
+            border: 1px solid #dee2e6;
+            font-weight: 500;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e7f3ff;
+            border-color: #2196F3;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .badge-new {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-updated {
+            background: #ffc107;
+            color: #333;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .doc-container {
+                flex-direction: column;
+            }
+
+            .doc-sidebar {
+                width: 100%;
+                position: relative;
+            }
+
+            .doc-header h1 {
+                font-size: 2em;
+            }
+
+            .doc-content {
+                padding: 20px;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* Image */
+        .doc-image {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* File Tree Structure */
+        .file-tree {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .file-tree .tree-line {
+            white-space: pre;
+            margin: 0;
+        }
+
+        .file-tree .folder {
+            color: #4ec9b0;
+            font-weight: 600;
+        }
+
+        .file-tree .file {
+            color: #9cdcfe;
+        }
+
+        .file-tree .file-config {
+            color: #dcdcaa;
+        }
+
+        .file-tree .file-ts {
+            color: #4ec9b0;
+        }
+
+        .file-tree .file-tsx {
+            color: #569cd6;
+        }
+
+        .file-tree .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .file-tree .tree-connector {
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="doc-header">
+        <h1>MartPlace Next.js</h1>
+        <p>Complete Documentation & Installation Guide</p>
+        <p class="doc-version">Version 1.0.0 | Last Updated: 2026</p>
+    </div>
+
+    <!-- Container -->
+    <div class="doc-container">
+        <!-- Sidebar -->
+        <nav class="doc-sidebar">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#system-requirements">System Requirements</a></li>
+                <li><a href="#browser-compatibility">Browser Compatibility</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#project-structure">Project Structure</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#nextjs-configuration">Next.js Configuration</a></li>
+                <li><a href="#app-router">App Router Structure</a></li>
+                <li><a href="#server-client-components">Server vs Client Components</a></li>
+                <li><a href="#api-routes">API Routes</a></li>
+                <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+                <li><a href="#customization">Customization</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="doc-content">
+            <!-- Introduction -->
+            <section id="introduction" class="doc-section">
+                <h2>Introduction</h2>
+                <p>Welcome to <strong>MartPlace Next.js</strong> - a modern, fully-featured marketplace application built with Next.js 16, React 19, and TypeScript. This is a complete conversion of the original MartPlace HTML template, maintaining the exact same beautiful UI while leveraging modern React architecture and best practices.</p>
+                
+                <div class="alert alert-info">
+                    <strong>Note:</strong> This documentation is for the Next.js version. The UI remains identical to the original HTML template, but all functionality is now powered by React and Next.js.
+                </div>
+
+                <h3>What's Included</h3>
+                <ul>
+                    <li>Complete Next.js 16 application with App Router</li>
+                    <li>TypeScript for type safety</li>
+                    <li>PostgreSQL database with Prisma ORM</li>
+                    <li>NextAuth.js authentication system</li>
+                    <li>Real-time chat with Socket.io</li>
+                    <li>Email functionality with Nodemailer</li>
+                    <li>All original UI components and pages</li>
+                    <li>Fully responsive design</li>
+                    <li>SEO optimized</li>
+                </ul>
+            </section>
+
+            <!-- Features -->
+            <section id="features" class="doc-section">
+                <h2>Features</h2>
+                
+                <h3>Core Features</h3>
+                <ul>
+                    <li><strong>User Authentication:</strong> Registration, login, password reset with NextAuth.js</li>
+                    <li><strong>Product Management:</strong> Create, edit, delete products with image uploads</li>
+                    <li><strong>Shopping Cart:</strong> Add to cart, checkout, and order management</li>
+                    <li><strong>User Dashboard:</strong> Complete dashboard for sellers and buyers</li>
+                    <li><strong>Admin Panel:</strong> Full admin interface for managing the marketplace</li>
+                    <li><strong>Real-time Chat:</strong> Socket.io powered messaging system</li>
+                    <li><strong>Reviews & Ratings:</strong> Product reviews and rating system</li>
+                    <li><strong>Favorites:</strong> Save favorite products</li>
+                    <li><strong>Search & Filters:</strong> Advanced product search and filtering</li>
+                    <li><strong>Blog System:</strong> Complete blog with categories and tags</li>
+                </ul>
+
+                <h3>Technology Stack</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Technology</th>
+                            <th>Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Framework</td>
+                            <td>Next.js</td>
+                            <td>16.0.1</td>
+                        </tr>
+                        <tr>
+                            <td>UI Library</td>
+                            <td>React</td>
+                            <td>19.2.0</td>
+                        </tr>
+                        <tr>
+                            <td>Language</td>
+                            <td>TypeScript</td>
+                            <td>5.x</td>
+                        </tr>
+                        <tr>
+                            <td>CSS Framework</td>
+                            <td>Bootstrap</td>
+                            <td>5.3.8</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>PostgreSQL</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>ORM</td>
+                            <td>Prisma</td>
+                            <td>6.18.0</td>
+                        </tr>
+                        <tr>
+                            <td>Authentication</td>
+                            <td>NextAuth.js</td>
+                            <td>4.24.13</td>
+                        </tr>
+                        <tr>
+                            <td>Real-time</td>
+                            <td>Socket.io</td>
+                            <td>4.8.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- System Requirements -->
+            <section id="system-requirements" class="doc-section">
+                <h2>System Requirements</h2>
+                
+                <h3>Server Requirements</h3>
+                <p>To run MartPlace Next.js, your server must meet the following minimum requirements:</p>
+                <ul>
+                    <li><strong>Node.js:</strong> Version 18.0.0 or higher (LTS version recommended)</li>
+                    <li><strong>npm:</strong> Version 9.0.0 or higher (comes bundled with Node.js)</li>
+                    <li><strong>PostgreSQL:</strong> Version 12.0 or higher (14.x or 15.x recommended)</li>
+                    <li><strong>RAM:</strong> Minimum 2GB (4GB or more recommended for production)</li>
+                    <li><strong>Disk Space:</strong> Minimum 500MB for application files (additional space for uploads and database)</li>
+                    <li><strong>CPU:</strong> 2 cores minimum (4+ cores recommended for production)</li>
+                </ul>
+
+                <h3>Development Requirements</h3>
+                <p>For local development, you'll also need:</p>
+                <ul>
+                    <li><strong>Git:</strong> For version control and cloning repositories</li>
+                    <li><strong>Code Editor:</strong> VS Code, WebStorm, or any modern IDE</li>
+                    <li><strong>Terminal:</strong> Command line access (Terminal on Mac/Linux, PowerShell/CMD on Windows)</li>
+                    <li><strong>Web Browser:</strong> Modern browser for testing (Chrome, Firefox, Safari, Edge)</li>
+                </ul>
+
+                <h3>Recommended Versions</h3>
+                <p>For the best experience, we recommend using these versions:</p>
+                <ul>
+                    <li><strong>Node.js:</strong> 20.x LTS (Long Term Support)</li>
+                    <li><strong>PostgreSQL:</strong> 15.x or 16.x</li>
+                    <li><strong>npm:</strong> 10.x (latest stable)</li>
+                </ul>
+
+                <div class="alert alert-info">
+                    <strong>Note:</strong> You can check your Node.js version by running <span class="code-inline">node --version</span> and npm version with <span class="code-inline">npm --version</span> in your terminal.
+                </div>
+            </section>
+
+            <!-- Browser Compatibility -->
+            <section id="browser-compatibility" class="doc-section">
+                <h2>Browser Compatibility</h2>
+                
+                <p>MartPlace Next.js is tested and fully compatible with the following browsers:</p>
+                
+                <h3>Desktop Browsers</h3>
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Browser</th>
+                            <th>Minimum Version</th>
+                            <th>Recommended Version</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Google Chrome</td>
+                            <td>90+</td>
+                            <td>Latest</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Mozilla Firefox</td>
+                            <td>88+</td>
+                            <td>Latest</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Safari</td>
+                            <td>14+</td>
+                            <td>Latest</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Edge</td>
+                            <td>90+</td>
+                            <td>Latest</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Opera</td>
+                            <td>76+</td>
+                            <td>Latest</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Mobile Browsers</h3>
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Browser</th>
+                            <th>Minimum Version</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chrome Mobile (Android)</td>
+                            <td>90+</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Safari Mobile (iOS)</td>
+                            <td>14+</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Firefox Mobile (Android)</td>
+                            <td>88+</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                        <tr>
+                            <td>Samsung Internet</td>
+                            <td>14+</td>
+                            <td>✅ Fully Supported</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Features Requiring Modern Browsers</h3>
+                <p>Some features require modern browser capabilities:</p>
+                <ul>
+                    <li><strong>Real-time Chat:</strong> Requires WebSocket support (all modern browsers)</li>
+                    <li><strong>File Upload:</strong> Requires File API support (all modern browsers)</li>
+                    <li><strong>Image Cropping:</strong> Requires Canvas API (all modern browsers)</li>
+                    <li><strong>Responsive Design:</strong> Works on all screen sizes (320px and above)</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <strong>Note:</strong> Internet Explorer 11 and older browsers are not supported. Please use a modern browser for the best experience.
+                </div>
+            </section>
+
+            <!-- Installation -->
+            <section id="installation" class="doc-section">
+                <h2>Installation</h2>
+                
+                <div class="alert alert-info">
+                    <strong>Quick Start:</strong> Follow this step-by-step guide to get your MartPlace Next.js application up and running. The entire process should take approximately 10-15 minutes.
+                </div>
+
+                <h3>Prerequisites</h3>
+                <p>Before you begin, ensure you have the following installed (see <a href="#system-requirements">System Requirements</a> for details):</p>
+                <ul>
+                    <li><strong>Node.js:</strong> Version 18.x or higher</li>
+                    <li><strong>npm:</strong> Version 9.x or higher (comes with Node.js)</li>
+                    <li><strong>PostgreSQL:</strong> Version 12 or higher</li>
+                    <li><strong>Git:</strong> For version control</li>
+                </ul>
+
+                <h3>Installation Video Guide</h3>
+                <div class="alert alert-info alert-center">
+                    <p><strong>📹 Video Tutorial Available</strong></p>
+                    <p>For a visual walkthrough of the installation process, please refer to the installation video included with your purchase or visit our documentation website.</p>
+                    <p class="alert-note">The video covers: extracting files, installing dependencies, database setup, environment configuration, and running the application.</p>
+                </div>
+
+                <h3>Step-by-Step Installation Guide</h3>
+                <p>Follow these steps carefully to install MartPlace Next.js:</p>
+
+                <h3>Step 1: Extract Files</h3>
+                <p>Extract the downloaded zip file to your desired location:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>unzip martplace-nextjs.zip
+cd martplace-nextjs</code></pre>
+                </div>
+
+                <h3>Step 2: Install Dependencies</h3>
+                <p>Install all required npm packages:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm install</code></pre>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Note:</strong> This may take a few minutes depending on your internet connection.
+                </div>
+
+                <h3>Step 3: Database Setup</h3>
+                <p>Create a PostgreSQL database for the application:</p>
+                <div class="code-block" data-lang="sql">
+                    <div class="code-block-header">
+                        <span class="lang-label">sql</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>CREATE DATABASE martplace;</code></pre>
+                </div>
+
+                <h3>Step 4: Environment Variables</h3>
+                <p>The project includes a <span class="code-inline">.env.example</span> file that contains all the required environment variables with placeholder values. Copy this file to create your <span class="code-inline">.env</span> file:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># On Linux/Mac
+cp .env.example .env
+
+# On Windows
+copy .env.example .env</code></pre>
+                </div>
+                <p>Then edit the <span class="code-inline">.env</span> file and replace all placeholder values with your actual credentials:</p>
+                <div class="code-block" data-lang="env">
+                    <div class="code-block-header">
+                        <span class="lang-label">env</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Database
+DATABASE_URL="postgresql://user:password@localhost:5432/martplace?schema=public"
+
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-here-change-in-production
+
+# Email Configuration (Nodemailer)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+SMTP_FROM=noreply@martplace.com
+
+# OAuth Providers (Optional)
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+FACEBOOK_CLIENT_ID=your-facebook-client-id
+FACEBOOK_CLIENT_SECRET=your-facebook-client-secret
+
+# Application
+NODE_ENV=development
+NEXT_PUBLIC_BASE_PATH=""  # Optional: for subdirectory deployment
+NEXT_PUBLIC_SITE_URL=http://localhost:3000</code></pre>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> Replace all placeholder values with your actual credentials. Never commit the <span class="code-inline">.env</span> file to version control. The <span class="code-inline">.env.example</span> file is safe to commit as it contains no sensitive information.
+                </div>
+                <div class="alert alert-info">
+                    <strong>Note:</strong> The <span class="code-inline">.env.example</span> file serves as a template and documentation for all required environment variables. Always refer to it when setting up a new environment.
+                </div>
+
+                <h3>Step 5: Generate Prisma Client</h3>
+                <p>Generate the Prisma Client for database operations:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm run db:generate</code></pre>
+                </div>
+
+                <h3>Step 6: Run Database Migrations</h3>
+                <p>Create the database tables:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm run db:migrate</code></pre>
+                </div>
+
+                <h3>Step 7: (Optional) Seed Database</h3>
+                <p>Populate the database with sample data:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm run db:seed</code></pre>
+                </div>
+
+                <h3>Step 8: Start Development Server</h3>
+                <p>Run the development server:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm run dev</code></pre>
+                </div>
+                <p>Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> in your browser.</p>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Your application should now be running. If you encounter any errors, check the Troubleshooting section.
+                </div>
+
+                <h3>Important Project Files</h3>
+                <p>This project includes several important files that you should be aware of:</p>
+                
+                <h4>.env.example</h4>
+                <p>The <span class="code-inline">.env.example</span> file contains a template of all required environment variables with placeholder values. This file:</p>
+                <ul>
+                    <li>Documents all required environment variables</li>
+                    <li>Provides a safe template for creating your <span class="code-inline">.env</span> file</li>
+                    <li>Can be safely committed to version control (no sensitive data)</li>
+                    <li>Helps new developers understand what configuration is needed</li>
+                </ul>
+                <p><strong>Usage:</strong> Copy <span class="code-inline">.env.example</span> to <span class="code-inline">.env</span> and fill in your actual values.</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># On Linux/Mac
+cp .env.example .env
+
+# On Windows
+copy .env.example .env</code></pre>
+                </div>
+
+                <h4>CHANGELOG.md</h4>
+                <p>The <span class="code-inline">CHANGELOG.md</span> file contains a detailed history of all changes, updates, and new features in each version of the application. This file:</p>
+                <ul>
+                    <li>Follows the <a href="https://keepachangelog.com/" target="_blank">Keep a Changelog</a> format</li>
+                    <li>Uses <a href="https://semver.org/" target="_blank">Semantic Versioning</a></li>
+                    <li>Documents all new features, bug fixes, and breaking changes</li>
+                    <li>Helps users understand what's new in each version</li>
+                </ul>
+                <p><strong>Viewing:</strong> Open <span class="code-inline">CHANGELOG.md</span> in any text editor to see the version history. The changelog is organized by version with sections for Added, Changed, Deprecated, Removed, Fixed, and Security.</p>
+
+                <h4>LICENSE</h4>
+                <p>The <span class="code-inline">LICENSE</span> file contains the license terms for this software. This project uses a Regular License, which means:</p>
+                <ul>
+                    <li>You can use the software for personal or commercial projects</li>
+                    <li>You cannot resell or redistribute the software as a standalone product</li>
+                    <li>You can use it in unlimited projects</li>
+                    <li>Attribution is appreciated but not required</li>
+                </ul>
+                <p><strong>Important:</strong> Please read the <span class="code-inline">LICENSE</span> file carefully to understand your rights and limitations when using this software.</p>
+                <div class="alert alert-warning">
+                    <strong>License Note:</strong> If you purchased an Extended License, different terms may apply. Please check your purchase details on ThemeForest.
+                </div>
+            </section>
+
+            <!-- Configuration -->
+            <section id="configuration" class="doc-section">
+                <h2>Configuration</h2>
+                
+                <h3>Base Path Configuration</h3>
+                <p>If you're deploying to a subdirectory (e.g., <span class="code-inline">/martplace-nextjs</span>), set the base path:</p>
+                <div class="code-block" data-lang="env">
+                    <div class="code-block-header">
+                        <span class="lang-label">env</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>NEXT_PUBLIC_BASE_PATH=/martplace-nextjs
+NEXTAUTH_URL=http://localhost:3000/martplace-nextjs
+NEXT_PUBLIC_SITE_URL=http://localhost:3000</code></pre>
+                </div>
+
+                <h3>Email Configuration</h3>
+                <p>For Gmail, you'll need to:</p>
+                <ol>
+                    <li>Enable 2-Step Verification</li>
+                    <li>Generate an App Password</li>
+                    <li>Use the App Password in <span class="code-inline">SMTP_PASSWORD</span></li>
+                </ol>
+
+                <h3>OAuth Configuration</h3>
+                <h4>Google OAuth</h4>
+                <ol>
+                    <li>Go to <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+                    <li>Create a new project or select existing</li>
+                    <li>Enable Google+ API</li>
+                    <li>Create OAuth 2.0 credentials</li>
+                    <li>Add authorized redirect URI: <span class="code-inline">http://localhost:3000/api/auth/callback/google</span></li>
+                    <li>Copy Client ID and Client Secret to <span class="code-inline">.env</span></li>
+                </ol>
+
+                <h4>Facebook OAuth</h4>
+                <ol>
+                    <li>Go to <a href="https://developers.facebook.com" target="_blank">Facebook Developers</a></li>
+                    <li>Create a new app</li>
+                    <li>Add Facebook Login product</li>
+                    <li>Set Valid OAuth Redirect URIs</li>
+                    <li>Copy App ID and App Secret to <span class="code-inline">.env</span></li>
+                </ol>
+            </section>
+
+            <!-- Project Structure -->
+            <section id="project-structure" class="doc-section">
+                <h2>Project Structure</h2>
+                <p>Understanding the project structure will help you navigate and customize the application. Below is a visual representation of the directory structure:</p>
+                
+                <div class="file-tree">
+                    <div class="tree-line"><span class="folder">nextjs-martplace/</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">app/</span>                    <span class="comment"># Next.js App Router</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">api/</span>                <span class="comment"># API routes</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   │   ├──</span> <span class="folder">auth/</span>          <span class="comment"># NextAuth authentication</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   │   ├──</span> <span class="folder">products/</span>      <span class="comment"># Product endpoints</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   │   ├──</span> <span class="folder">cart/</span>          <span class="comment"># Shopping cart</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   │   ├──</span> <span class="folder">upload/</span>        <span class="comment"># File uploads</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   │   └──</span> <span class="comment">...</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">(auth)/</span>            <span class="comment"># Auth pages (login, signup)</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">dashboard/</span>         <span class="comment"># User dashboard</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">admin/</span>             <span class="comment"># Admin panel</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-tsx">layout.tsx</span>         <span class="comment"># Root layout</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="file-tsx">page.tsx</span>           <span class="comment"># Home page</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">components/</span>            <span class="comment"># React components</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-tsx">Header.tsx</span>         <span class="comment"># Site header</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-tsx">Footer.tsx</span>         <span class="comment"># Site footer</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">sections/</span>          <span class="comment"># Page sections</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">product/</span>           <span class="comment"># Product components</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="folder">admin/</span>             <span class="comment"># Admin components</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">hooks/</span>                 <span class="comment"># Custom React hooks</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">lib/</span>                   <span class="comment"># Utility libraries</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-ts">prisma.ts</span>         <span class="comment"># Prisma client</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-ts">email.ts</span>          <span class="comment"># Email utilities</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="file-ts">socketClient.ts</span>   <span class="comment"># Socket.io client</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">prisma/</span>               <span class="comment"># Database schema</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="file-config">schema.prisma</span>     <span class="comment"># Prisma schema</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="folder">migrations/</span>       <span class="comment"># Database migrations</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">public/</span>               <span class="comment"># Static assets</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">css/</span>              <span class="comment"># CSS files</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   ├──</span> <span class="folder">fonts/</span>            <span class="comment"># Font files</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="folder">images/</span>           <span class="comment"># Image assets</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">styles/</span>               <span class="comment"># Global styles</span></div>
+                    <div class="tree-line"><span class="tree-connector">│   └──</span> <span class="file-config">globals.css</span>       <span class="comment"># Global CSS</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">utils/</span>                 <span class="comment"># Utility functions</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="folder">types/</span>                 <span class="comment"># TypeScript types</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="file-config">.env</span>                  <span class="comment"># Environment variables</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="file-config">next.config.ts</span>        <span class="comment"># Next.js configuration</span></div>
+                    <div class="tree-line"><span class="tree-connector">├──</span> <span class="file-config">package.json</span>          <span class="comment"># Dependencies</span></div>
+                    <div class="tree-line"><span class="tree-connector">└──</span> <span class="file-config">tsconfig.json</span>         <span class="comment"># TypeScript config</span></div>
+                </div>
+
+                <h3>Key Directories Explained</h3>
+                <div class="directories-section">
+                    <h4><span class="directory-icon">📁 app/</span></h4>
+                    <p>Contains all Next.js pages and API routes. Uses the App Router pattern where each folder represents a route.</p>
+                    
+                    <h4><span class="directory-icon">📁 components/</span></h4>
+                    <p>Reusable React components organized by functionality (Header, Footer, sections, product components, etc.).</p>
+                    
+                    <h4><span class="directory-icon">📁 hooks/</span></h4>
+                    <p>Custom React hooks for reusable logic (useCounter, useFileUpload, useScrollToTop, etc.).</p>
+                    
+                    <h4><span class="directory-icon">📁 lib/</span></h4>
+                    <p>Utility libraries and configurations (Prisma client, email service, Socket.io client).</p>
+                    
+                    <h4><span class="directory-icon">📁 prisma/</span></h4>
+                    <p>Database schema definition and migration files for Prisma ORM.</p>
+                    
+                    <h4><span class="directory-icon">📁 public/</span></h4>
+                    <p>Static assets served directly (CSS files, fonts, images). Files here are accessible via URL.</p>
+                    
+                    <h4><span class="directory-icon">📁 styles/</span></h4>
+                    <p>Global CSS styles and custom additions to the template styles.</p>
+                </div>
+            </section>
+
+            <!-- Getting Started -->
+            <section id="getting-started" class="doc-section">
+                <h2>Getting Started</h2>
+                
+                <h3>Creating Your First Product</h3>
+                <ol>
+                    <li>Register a new account or login</li>
+                    <li>Navigate to Dashboard → Upload Item</li>
+                    <li>Fill in product details (title, description, price, etc.)</li>
+                    <li>Upload product images</li>
+                    <li>Select category and tags</li>
+                    <li>Submit for review</li>
+                </ol>
+
+                <h3>Managing Products</h3>
+                <p>Access your products from Dashboard → Manage Items. You can:</p>
+                <ul>
+                    <li>Edit product details</li>
+                    <li>Update images</li>
+                    <li>Change pricing</li>
+                    <li>View sales statistics</li>
+                    <li>Delete products</li>
+                </ul>
+
+                <h3>Admin Panel</h3>
+                <p>To access the admin panel:</p>
+                <ol>
+                    <li>Create a user with <span class="code-inline">ADMIN</span> role in the database</li>
+                    <li>Login with that account</li>
+                    <li>Navigate to <span class="code-inline">/admin</span></li>
+                </ol>
+                <div class="alert alert-warning">
+                    <strong>Security:</strong> Only grant admin access to trusted users.
+                </div>
+            </section>
+
+            <!-- Next.js Configuration -->
+            <section id="nextjs-configuration" class="doc-section">
+                <h2>Next.js Configuration</h2>
+                
+                <p>The Next.js configuration is defined in <span class="code-inline">next.config.ts</span>. This file controls various aspects of your Next.js application.</p>
+
+                <h3>Configuration File</h3>
+                <p>The configuration file is located at the root of your project: <span class="code-inline">next.config.ts</span></p>
+
+                <h3>Key Configuration Options</h3>
+                
+                <h4>1. Base Path</h4>
+                <p>If your application is deployed in a subdirectory, set the base path:</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>basePath: process.env.NEXT_PUBLIC_BASE_PATH || ""</code></pre>
+                </div>
+                <p>Example: If deployed at <span class="code-inline">https://example.com/martplace-nextjs</span>, set <span class="code-inline">NEXT_PUBLIC_BASE_PATH=/martplace-nextjs</span></p>
+
+                <h4>2. Production Optimizations</h4>
+                <ul>
+                    <li><strong>compress:</strong> Enables gzip/brotli compression for all responses</li>
+                    <li><strong>poweredByHeader:</strong> Removes the X-Powered-By header for security</li>
+                    <li><strong>reactStrictMode:</strong> Enables React's strict mode for better development experience</li>
+                </ul>
+
+                <h4>3. Image Optimization</h4>
+                <p>Next.js automatically optimizes images. Configuration includes:</p>
+                <ul>
+                    <li><strong>remotePatterns:</strong> Allowed external image domains (e.g., Google OAuth avatars)</li>
+                    <li><strong>formats:</strong> Supported formats (AVIF, WebP for better compression)</li>
+                    <li><strong>deviceSizes:</strong> Image sizes for different device breakpoints</li>
+                    <li><strong>minimumCacheTTL:</strong> Minimum cache time-to-live for optimized images</li>
+                </ul>
+
+                <h4>4. Compiler Options</h4>
+                <p>In production, console.log statements are automatically removed (keeps console.error and console.warn):</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>compiler: {
+  removeConsole: process.env.NODE_ENV === 'production' ? {
+    exclude: ['error', 'warn'],
+  } : false,
+}</code></pre>
+                </div>
+
+                <h4>5. Output Configuration</h4>
+                <p>The <span class="code-inline">standalone</span> output creates a minimal server for Docker deployments:</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>output: 'standalone'</code></pre>
+                </div>
+
+                <h3>Modifying Configuration</h3>
+                <p>To modify the configuration:</p>
+                <ol>
+                    <li>Edit <span class="code-inline">next.config.ts</span></li>
+                    <li>Restart the development server: <span class="code-inline">npm run dev</span></li>
+                    <li>For production, rebuild: <span class="code-inline">npm run build</span></li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>Note:</strong> Some configuration changes require a server restart. Always test configuration changes in development before deploying to production.
+                </div>
+            </section>
+
+            <!-- App Router Structure -->
+            <section id="app-router" class="doc-section">
+                <h2>App Router Structure</h2>
+                
+                <p>MartPlace Next.js uses the Next.js 13+ App Router, which provides a file-system based routing system with improved performance and developer experience.</p>
+
+                <h3>Directory Structure</h3>
+                <p>The <span class="code-inline">app</span> directory contains all routes and layouts:</p>
+                <div class="code-block" data-lang="text">
+                    <div class="code-block-header">
+                        <span class="lang-label">text</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>app/
+├── layout.tsx          # Root layout (wraps all pages)
+├── page.tsx            # Home page (/)
+├── providers.tsx       # Client providers (SessionProvider, etc.)
+├── (auth)/             # Auth route group
+│   ├── login/
+│   └── signup/
+├── dashboard/          # Dashboard routes
+│   ├── customer/
+│   └── upload/
+├── admin/              # Admin routes
+│   ├── products/
+│   ├── sellers/
+│   └── customers/
+├── api/                # API routes
+│   ├── auth/
+│   ├── products/
+│   └── admin/
+└── [dynamic]/          # Dynamic routes</code></pre>
+                </div>
+
+                <h3>Route Conventions</h3>
+                <ul>
+                    <li><strong>page.tsx:</strong> Creates a route segment (e.g., <span class="code-inline">app/about/page.tsx</span> → <span class="code-inline">/about</span>)</li>
+                    <li><strong>layout.tsx:</strong> Shared UI for a segment and its children</li>
+                    <li><strong>loading.tsx:</strong> Loading UI shown while page is loading</li>
+                    <li><strong>error.tsx:</strong> Error UI for error boundaries</li>
+                    <li><strong>not-found.tsx:</strong> 404 page for the route</li>
+                </ul>
+
+                <h3>Dynamic Routes</h3>
+                <p>Use square brackets for dynamic segments:</p>
+                <ul>
+                    <li><span class="code-inline">app/product/[id]/page.tsx</span> → <span class="code-inline">/product/123</span></li>
+                    <li><span class="code-inline">app/blog/[slug]/page.tsx</span> → <span class="code-inline">/blog/my-post</span></li>
+                </ul>
+
+                <h3>Route Groups</h3>
+                <p>Use parentheses for route groups (don't affect URL):</p>
+                <ul>
+                    <li><span class="code-inline">app/(auth)/login/page.tsx</span> → <span class="code-inline">/login</span></li>
+                    <li><span class="code-inline">app/(marketing)/about/page.tsx</span> → <span class="code-inline">/about</span></li>
+                </ul>
+
+                <h3>Layouts</h3>
+                <p>Layouts wrap pages and persist across navigation:</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// app/layout.tsx (Root layout)
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    &lt;html&gt;
+      &lt;body&gt;
+        {children}
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3>Metadata</h3>
+                <p>Export metadata for SEO:</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>export const metadata = {
+  title: 'Page Title',
+  description: 'Page description',
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Server vs Client Components -->
+            <section id="server-client-components" class="doc-section">
+                <h2>Server vs Client Components</h2>
+                
+                <p>Next.js App Router uses React Server Components by default. Understanding when to use server vs client components is crucial for optimal performance.</p>
+
+                <h3>Server Components (Default)</h3>
+                <p>Server Components render on the server and are the default in the App Router:</p>
+                <ul>
+                    <li><strong>Benefits:</strong> Smaller bundle size, direct database access, better security</li>
+                    <li><strong>Use for:</strong> Data fetching, accessing backend resources, large dependencies</li>
+                    <li><strong>Cannot use:</strong> useState, useEffect, browser APIs, event handlers</li>
+                </ul>
+
+                <h4>Example: Server Component</h4>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// app/products/page.tsx (Server Component)
+import { prisma } from '@/lib/prisma'
+
+export default async function ProductsPage() {
+  // Direct database access (server-side only)
+  const products = await prisma.product.findMany()
+  
+  return (
+    &lt;div&gt;
+      {products.map(product => (
+        &lt;div key={product.id}&gt;{product.title}&lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3>Client Components</h3>
+                <p>Client Components render in the browser and require the <span class="code-inline">"use client"</span> directive:</p>
+                <ul>
+                    <li><strong>Benefits:</strong> Interactivity, browser APIs, React hooks</li>
+                    <li><strong>Use for:</strong> Forms, buttons, interactive UI, useState/useEffect</li>
+                    <li><strong>Trade-off:</strong> Larger bundle size, runs in browser</li>
+                </ul>
+
+                <h4>Example: Client Component</h4>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>"use client"
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;
+      Count: {count}
+    &lt;/button&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3>When to Use Each</h3>
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Server Component</th>
+                            <th>Client Component</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Fetching</td>
+                            <td>✅ Yes</td>
+                            <td>❌ No (use useEffect)</td>
+                        </tr>
+                        <tr>
+                            <td>Database Access</td>
+                            <td>✅ Yes</td>
+                            <td>❌ No</td>
+                        </tr>
+                        <tr>
+                            <td>useState/useEffect</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Event Handlers</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Browser APIs</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Third-party Libraries</td>
+                            <td>⚠️ Depends</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Best Practices</h3>
+                <ol>
+                    <li><strong>Start with Server Components:</strong> Default to server components unless you need interactivity</li>
+                    <li><strong>Move Client Code Down:</strong> Keep client components as leaf nodes when possible</li>
+                    <li><strong>Composition:</strong> Pass server-fetched data as props to client components</li>
+                    <li><strong>Minimize Client Bundle:</strong> Only mark components as client when necessary</li>
+                </ol>
+
+                <h3>Example: Hybrid Approach</h3>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// app/products/page.tsx (Server Component)
+import { prisma } from '@/lib/prisma'
+import ProductList from '@/components/ProductList' // Client Component
+
+export default async function ProductsPage() {
+  // Fetch on server
+  const products = await prisma.product.findMany()
+  
+  // Pass to client component
+  return &lt;ProductList products={products} /&gt;
+}
+
+// components/ProductList.tsx (Client Component)
+"use client"
+export default function ProductList({ products }) {
+  const [filter, setFilter] = useState('')
+  // Interactive filtering on client
+  return &lt;div&gt;...&lt;/div&gt;
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- API Routes -->
+            <section id="api-routes" class="doc-section">
+                <h2>API Routes</h2>
+                
+                <p>API routes in Next.js App Router are defined in the <span class="code-inline">app/api</span> directory. Each route file exports HTTP method handlers (GET, POST, PUT, DELETE, etc.).</p>
+
+                <h3>Route Structure</h3>
+                <p>API routes follow the same file-system routing as pages:</p>
+                <div class="code-block" data-lang="text">
+                    <div class="code-block-header">
+                        <span class="lang-label">text</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>app/api/
+├── products/
+│   ├── route.ts           # GET /api/products, POST /api/products
+│   └── [id]/
+│       └── route.ts       # GET /api/products/:id
+├── auth/
+│   └── [...nextauth]/
+│       └── route.ts       # NextAuth.js routes
+└── admin/
+    ├── products/
+    └── dashboard/</code></pre>
+                </div>
+
+                <h3>Basic API Route</h3>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// app/api/products/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+
+// GET /api/products
+export async function GET(request: NextRequest) {
+  try {
+    const products = await prisma.product.findMany()
+    return NextResponse.json({ products })
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to fetch products' },
+      { status: 500 }
+    )
+  }
+}
+
+// POST /api/products
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const product = await prisma.product.create({ data: body })
+    return NextResponse.json({ product }, { status: 201 })
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to create product' },
+      { status: 500 }
+    )
+  }
+}</code></pre>
+                </div>
+
+                <h3>Dynamic Routes</h3>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// app/api/products/[id]/route.ts
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
+  const product = await prisma.product.findUnique({ where: { id } })
+  
+  if (!product) {
+    return NextResponse.json(
+      { error: 'Product not found' },
+      { status: 404 }
+    )
+  }
+  
+  return NextResponse.json({ product })
+}</code></pre>
+                </div>
+
+                <h3>Request Handling</h3>
+                <ul>
+                    <li><strong>Request Body:</strong> <span class="code-inline">await request.json()</span></li>
+                    <li><strong>Query Parameters:</strong> <span class="code-inline">new URL(request.url).searchParams</span></li>
+                    <li><strong>Headers:</strong> <span class="code-inline">request.headers.get('Authorization')</span></li>
+                    <li><strong>Cookies:</strong> <span class="code-inline">request.cookies.get('session')</span></li>
+                </ul>
+
+                <h3>Response Helpers</h3>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>// Success response
+return NextResponse.json({ data: 'success' })
+
+// Error response
+return NextResponse.json(
+  { error: 'Not found' },
+  { status: 404 }
+)
+
+// Redirect
+return NextResponse.redirect(new URL('/login', request.url))
+
+// Set headers
+return NextResponse.json({ data }, {
+  headers: {
+    'Cache-Control': 'no-store',
+  }
+})</code></pre>
+                </div>
+
+                <h3>Authentication in API Routes</h3>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+
+export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions)
+  
+  if (!session) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    )
+  }
+  
+  // Access session.user.id, session.user.email, etc.
+  return NextResponse.json({ user: session.user })
+}</code></pre>
+                </div>
+
+                <h3>Rate Limiting</h3>
+                <p>The application includes rate limiting utilities. See <a href="#troubleshooting">Security</a> section for details.</p>
+
+                <h3>Error Handling</h3>
+                <p>Always wrap API routes in try-catch blocks:</p>
+                <div class="code-block" data-lang="typescript">
+                    <div class="code-block-header">
+                        <span class="lang-label">typescript</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>export async function GET(request: NextRequest) {
+  try {
+    // Your logic here
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    )
+  }
+}</code></pre>
+                </div>
+
+                <h3>API Route Examples in This Project</h3>
+                <ul>
+                    <li><span class="code-inline">/api/products</span> - Product listing and creation</li>
+                    <li><span class="code-inline">/api/auth/[...nextauth]</span> - NextAuth.js authentication</li>
+                    <li><span class="code-inline">/api/admin/*</span> - Admin-only API routes</li>
+                    <li><span class="code-inline">/api/contact</span> - Contact form submission</li>
+                    <li><span class="code-inline">/api/messages/*</span> - Messaging API</li>
+                </ul>
+            </section>
+
+            <!-- Customization -->
+            <section id="customization" class="doc-section">
+                <h2>Customization</h2>
+                
+                <h3>Changing Colors</h3>
+                <p>Primary colors are defined in <span class="code-inline">styles/globals.css</span>. Search for color variables and update them:</p>
+                <div class="code-block" data-lang="css">
+                    <div class="code-block-header">
+                        <span class="lang-label">css</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+}</code></pre>
+                </div>
+
+                <h3>Modifying Header/Footer</h3>
+                <p>Edit the following files:</p>
+                <ul>
+                    <li><span class="code-inline">components/Header.tsx</span> - Site header and navigation</li>
+                    <li><span class="code-inline">components/Footer.tsx</span> - Site footer</li>
+                </ul>
+
+                <h3>Adding New Pages</h3>
+                <p>Create a new file in the <span class="code-inline">app/</span> directory:</p>
+                <div class="code-block" data-lang="tsx">
+                    <div class="code-block-header">
+                        <span class="lang-label">tsx</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import Preloader from "@/components/Preloader"
+
+export default function NewPage() {
+  return (
+    &lt;div className="preload new-page"&gt;
+      &lt;Preloader /&gt;
+      &lt;Header /&gt;
+      &lt;section className="section--padding"&gt;
+        &lt;div className="container"&gt;
+          &lt;div className="row"&gt;
+            &lt;div className="col-md-12"&gt;
+              &lt;h1&gt;New Page&lt;/h1&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3>Customizing API Routes</h3>
+                <p>API routes are located in <span class="code-inline">app/api/</span>. Each route file exports HTTP methods (GET, POST, etc.).</p>
+            </section>
+
+            <!-- Admin Dashboard -->
+            <section id="admin-dashboard" class="doc-section">
+                <h2>Admin Dashboard</h2>
+                
+                <p>The MartPlace Next.js application includes a comprehensive admin dashboard built with Ant Design components, providing a modern and intuitive interface for managing your marketplace.</p>
+
+                <div class="alert alert-info">
+                    <strong>Access:</strong> Navigate to <span class="code-inline">/admin</span> after logging in with an admin account (SUPERADMIN, ADMIN, MODERATOR, or SUPPORT role).
+                </div>
+
+                <h3>Admin Dashboard Features</h3>
+                
+                <h4>1. Platform Overview</h4>
+                <p>The main dashboard (<span class="code-inline">/admin</span>) provides real-time metrics and insights:</p>
+                <ul>
+                    <li><strong>Statistics Cards:</strong> Pending reviews, seller approvals, flagged items, and revenue metrics</li>
+                    <li><strong>Revenue Chart:</strong> 30-day revenue visualization with line chart</li>
+                    <li><strong>New Sellers Chart:</strong> Bar chart showing seller growth over time</li>
+                    <li><strong>Moderation Outcomes:</strong> Stacked bar chart of moderation decisions</li>
+                    <li><strong>Newsletter Subscribers:</strong> Table of recent newsletter subscribers</li>
+                </ul>
+
+                <h4>2. Products Management</h4>
+                <p>Access at <span class="code-inline">/admin/products</span> to manage all marketplace products:</p>
+                <ul>
+                    <li>Filter by status (Draft, Pending Review, Approved, Published, etc.)</li>
+                    <li>Filter by moderation status</li>
+                    <li>Filter by featured status</li>
+                    <li>Filter by category</li>
+                    <li>Search products by title, seller, or description</li>
+                    <li>Sort by newest, oldest, price, downloads, views, or rating</li>
+                    <li>Bulk actions: Feature/Unfeature, Publish, Archive, Suspend, Restore</li>
+                    <li>View product details, seller information, and performance metrics</li>
+                </ul>
+
+                <h4>3. Sellers Management</h4>
+                <p>Access at <span class="code-inline">/admin/sellers</span> to review and manage seller accounts:</p>
+                <ul>
+                    <li>Filter by status (Pending Review, Approved, Rejected, Suspended)</li>
+                    <li>Search by name, email, or username</li>
+                    <li>View seller profile information and verification status</li>
+                    <li>Approve, reject, or suspend seller accounts</li>
+                    <li>Add verification notes</li>
+                    <li>View seller metrics and activity</li>
+                </ul>
+
+                <h4>4. Customers Management</h4>
+                <p>Access at <span class="code-inline">/admin/customers</span> to track customer activity:</p>
+                <ul>
+                    <li>Filter by activity (All, Active 30d, New 30d, Dormant)</li>
+                    <li>Sort by newest, oldest, name, or order count</li>
+                    <li>Search by name, email, or username</li>
+                    <li>View order count and lifetime spend</li>
+                    <li>See last purchase information</li>
+                    <li>Quick actions: Email customer, View profile</li>
+                    <li>Summary metrics: Total customers, active customers, new customers, average lifetime value</li>
+                </ul>
+
+                <h4>5. Product Moderation</h4>
+                <p>Access at <span class="code-inline">/admin/moderation</span> to review product submissions:</p>
+                <ul>
+                    <li>Filter by moderation status (Pending, In Review, Needs Revision, Approved, Rejected)</li>
+                    <li>Search by product title or seller information</li>
+                    <li>View product details, seller status, and submission date</li>
+                    <li>Approve products for publication</li>
+                    <li>Request revisions with notes</li>
+                    <li>Reject products with reasons</li>
+                </ul>
+
+                <h4>6. Audit Logs</h4>
+                <p>Access at <span class="code-inline">/admin/logs</span> to review all moderation actions:</p>
+                <ul>
+                    <li>Filter by action type (Approved, Rejected, Flagged, Suspended)</li>
+                    <li>Filter by entity type (Products, Seller Profiles, Users)</li>
+                    <li>Filter by date range</li>
+                    <li>Search by notes, entity, or moderator</li>
+                    <li>View action history with timestamps</li>
+                    <li>See who performed each action</li>
+                    <li>Summary statistics by action and entity type</li>
+                </ul>
+
+                <h4>7. Support Desk</h4>
+                <p>Access at <span class="code-inline">/admin/support</span> to manage customer support tickets:</p>
+                <ul>
+                    <li>Filter by status (Open, In Progress, Waiting Customer, Waiting Support, Resolved, Closed)</li>
+                    <li>Filter by priority (Low, Medium, High, Critical)</li>
+                    <li>Filter by category (General, Billing, Technical, Account, Sales)</li>
+                    <li>Filter by assignment (All, Assigned, Unassigned)</li>
+                    <li>Sort by newest, oldest, priority, updated, or last activity</li>
+                    <li>Search by reference, subject, or customer</li>
+                    <li>View ticket details and customer information</li>
+                    <li>Update ticket status (Start, Resolve)</li>
+                    <li>View customer profile from ticket</li>
+                    <li>Summary metrics by status and priority</li>
+                </ul>
+
+                <h4>8. Settings</h4>
+                <p>Access at <span class="code-inline">/admin/settings</span> to configure platform settings:</p>
+                <ul>
+                    <li><strong>General Settings:</strong> Core marketplace identity and defaults</li>
+                    <li><strong>Marketplace Settings:</strong> Seller program, commission, and payout cadence</li>
+                    <li><strong>Billing Settings:</strong> Financial policy and taxation thresholds</li>
+                    <li><strong>Notification Settings:</strong> Email and messaging preferences</li>
+                    <li><strong>Support Settings:</strong> Customer support routing and contact points</li>
+                    <li>Real-time updates with save/reset functionality</li>
+                    <li>Settings grouped by category for easy navigation</li>
+                    <li>Support for different data types: String, Text, Number, Boolean, JSON</li>
+                </ul>
+
+                <h3>Admin Roles and Permissions</h3>
+                <p>The admin dashboard supports role-based access control:</p>
+                <ul>
+                    <li><strong>SUPERADMIN:</strong> Full access to all features and settings</li>
+                    <li><strong>ADMIN:</strong> Access to most features except system settings</li>
+                    <li><strong>MODERATOR:</strong> Access to moderation, products, sellers, and audit logs</li>
+                    <li><strong>SUPPORT:</strong> Access to support desk and customer management</li>
+                </ul>
+
+                <h3>Creating Admin Users</h3>
+                <p>To create an admin user, you can either:</p>
+                <ol>
+                    <li><strong>Via Database:</strong> Update the user's role in the database:
+                        <div class="code-block" data-lang="sql">
+                    <div class="code-block-header">
+                        <span class="lang-label">sql</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>UPDATE "User" SET role = 'SUPERADMIN' WHERE email = 'admin@example.com';</code></pre>
+                </div>
+                    </li>
+                    <li><strong>Via Seed Script:</strong> The seed script creates a default admin user:
+                        <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm run seed</code></pre>
+                </div>
+                        <p>Default admin credentials (change after first login):</p>
+                        <ul>
+                            <li>Email: <span class="code-inline">admin@martplace.com</span></li>
+                            <li>Password: <span class="code-inline">admin123</span></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Admin Dashboard UI</h3>
+                <p>The admin dashboard uses Ant Design components for a modern, consistent UI:</p>
+                <ul>
+                    <li>Responsive layout with collapsible sidebar</li>
+                    <li>Fixed header with user menu and notifications</li>
+                    <li>Breadcrumb navigation</li>
+                    <li>Data tables with sorting, filtering, and pagination</li>
+                    <li>Charts and visualizations for analytics</li>
+                    <li>Modal dialogs for confirmations</li>
+                    <li>Toast notifications for actions</li>
+                    <li>Loading states and error handling</li>
+                </ul>
+
+                <h3>API Endpoints</h3>
+                <p>All admin features are backed by secure API endpoints:</p>
+                <ul>
+                    <li><span class="code-inline">/api/admin/dashboard/summary</span> - Dashboard metrics</li>
+                    <li><span class="code-inline">/api/admin/products</span> - Products management</li>
+                    <li><span class="code-inline">/api/admin/sellers</span> - Sellers management</li>
+                    <li><span class="code-inline">/api/admin/customers</span> - Customers management</li>
+                    <li><span class="code-inline">/api/admin/moderation/products</span> - Product moderation</li>
+                    <li><span class="code-inline">/api/admin/audit-logs</span> - Audit logs</li>
+                    <li><span class="code-inline">/api/admin/support/tickets</span> - Support tickets</li>
+                    <li><span class="code-inline">/api/admin/settings</span> - Platform settings</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <strong>Security Note:</strong> All admin API endpoints require authentication and proper role permissions. Ensure your <span class="code-inline">NEXTAUTH_SECRET</span> is set and secure in production.
+                </div>
+            </section>
+
+            <!-- Deployment -->
+            <section id="deployment" class="doc-section">
+                <h2>Deployment</h2>
+                
+                <h3>Pre-Build Checklist</h3>
+                <p>Before building for production, ensure you have:</p>
+                <ol>
+                    <li>Set all required environment variables in <span class="code-inline">.env</span> file</li>
+                    <li>Set <span class="code-inline">NODE_ENV=production</span></li>
+                    <li>Configured your production database URL</li>
+                    <li>Set secure <span class="code-inline">NEXTAUTH_SECRET</span> (generate with: <span class="code-inline">openssl rand -base64 32</span>)</li>
+                    <li>Updated <span class="code-inline">NEXTAUTH_URL</span> and <span class="code-inline">NEXT_PUBLIC_SITE_URL</span> to your production domain</li>
+                    <li>Run database migrations: <span class="code-inline">npm run db:migrate</span></li>
+                </ol>
+
+                <h3>Build for Production</h3>
+                <p>Build the application for production with optimizations:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Set production environment
+export NODE_ENV=production
+
+# Install dependencies (if not already done)
+npm install
+
+# Generate Prisma Client
+npm run db:generate
+
+# Build the application
+npm run build</code></pre>
+                </div>
+                
+                <div class="alert alert-info">
+                    <strong>Note:</strong> The build process will:
+                    <ul>
+                        <li>Optimize all JavaScript and CSS bundles</li>
+                        <li>Remove console.log statements (keeps console.error and console.warn)</li>
+                        <li>Minify and compress assets</li>
+                        <li>Generate static pages where possible</li>
+                        <li>Optimize images</li>
+                        <li>Create a standalone output for Docker deployments</li>
+                    </ul>
+                </div>
+
+                <h3>Verify Build</h3>
+                <p>After building, check for any errors or warnings. The build output will show:</p>
+                <ul>
+                    <li>Route information (static vs dynamic)</li>
+                    <li>Bundle sizes</li>
+                    <li>First Load JS size</li>
+                    <li>Any build warnings or errors</li>
+                </ul>
+
+                <h3>Start Production Server</h3>
+                <p>Start the production server:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>npm start</code></pre>
+                </div>
+                
+                <p>The server will start on port 3000 by default (or the port specified in <span class="code-inline">PORT</span> environment variable).</p>
+
+                <h3>Deploying to Vercel</h3>
+                <ol>
+                    <li>Push your code to GitHub</li>
+                    <li>Import project in <a href="https://vercel.com" target="_blank">Vercel</a></li>
+                    <li>Add environment variables in Vercel dashboard</li>
+                    <li>Deploy automatically on push</li>
+                </ol>
+
+                <h3>Deploying to VPS</h3>
+                <ol>
+                    <li>Install Node.js and PostgreSQL on your server</li>
+                    <li>Clone your repository</li>
+                    <li>Install dependencies: <span class="code-inline">npm install</span></li>
+                    <li>Set up environment variables</li>
+                    <li>Run migrations: <span class="code-inline">npm run db:migrate</span></li>
+                    <li>Build: <span class="code-inline">npm run build</span></li>
+                    <li>Use PM2 to run: <span class="code-inline">pm2 start npm --name "martplace" -- start</span></li>
+                </ol>
+
+                <h3>Production Optimizations</h3>
+                <p>The application includes several production optimizations enabled in <span class="code-inline">next.config.ts</span>:</p>
+                <ul>
+                    <li><strong>Code Compression:</strong> All assets are compressed (gzip/brotli)</li>
+                    <li><strong>Image Optimization:</strong> Automatic image optimization with WebP and AVIF formats</li>
+                    <li><strong>Console Removal:</strong> console.log statements are automatically removed in production builds</li>
+                    <li><strong>CSS Optimization:</strong> CSS is optimized and minified</li>
+                    <li><strong>Standalone Output:</strong> Build creates standalone output for Docker deployments</li>
+                    <li><strong>Error Boundaries:</strong> React error boundaries prevent app crashes</li>
+                    <li><strong>Loading States:</strong> Consistent loading indicators throughout the app</li>
+                </ul>
+
+                <h3>Environment Variables for Production</h3>
+                <p>The project includes a <span class="code-inline">.env.example</span> file with all required environment variables. Copy it to create your <span class="code-inline">.env</span> file:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>cp .env.example .env</code></pre>
+                </div>
+                <p>Then update the following required variables for production:</p>
+                <div class="code-block" data-lang="env">
+                    <div class="code-block-header">
+                        <span class="lang-label">env</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>NODE_ENV=production
+DATABASE_URL=your-production-database-url
+NEXTAUTH_URL=https://yourdomain.com
+NEXTAUTH_SECRET=your-production-secret
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+DEFAULT_ADMIN_PASSWORD=your-secure-admin-password</code></pre>
+                </div>
+                
+                <div class="alert alert-warning">
+                    <strong>Security:</strong> Never commit the <span class="code-inline">.env</span> file to version control. Always use strong, unique values for secrets in production. Generate <span class="code-inline">NEXTAUTH_SECRET</span> using: <span class="code-inline">openssl rand -base64 32</span>
+                </div>
+
+                <h3>Using PM2 for Process Management</h3>
+                <p>For production deployments on VPS, use PM2 to manage the Node.js process:</p>
+                <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Install PM2 globally
+npm install -g pm2
+
+# Start the application
+pm2 start npm --name "martplace" -- start
+
+# Save PM2 configuration
+pm2 save
+
+# Setup PM2 to start on system boot
+pm2 startup</code></pre>
+                </div>
+
+                <h3>Docker Deployment</h3>
+                <p>The build creates a standalone output that can be used with Docker. Create a <span class="code-inline">Dockerfile</span>:</p>
+                <div class="code-block" data-lang="dockerfile">
+                    <div class="code-block-header">
+                        <span class="lang-label">dockerfile</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>FROM node:18-alpine AS base
+
+# Install dependencies
+FROM base AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+# Build application
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+# Production image
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+ENV PORT=3000
+
+CMD ["node", "server.js"]</code></pre>
+                </div>
+            </section>
+
+                <h3>Next.js Deployment Considerations</h3>
+                <p>When deploying a Next.js application, consider the following:</p>
+
+                <h4>1. Static vs Dynamic Rendering</h4>
+                <p>Next.js automatically determines the best rendering strategy:</p>
+                <ul>
+                    <li><strong>Static Generation:</strong> Pages are pre-rendered at build time (fastest)</li>
+                    <li><strong>Server-Side Rendering (SSR):</strong> Pages are rendered on each request</li>
+                    <li><strong>Incremental Static Regeneration (ISR):</strong> Static pages are regenerated periodically</li>
+                </ul>
+                <p>Use <span class="code-inline">export const dynamic = 'force-dynamic'</span> to force SSR, or <span class="code-inline">export const revalidate = 60</span> for ISR.</p>
+
+                <h4>2. Environment Variables</h4>
+                <p>Next.js has two types of environment variables:</p>
+                <ul>
+                    <li><strong>Server-side:</strong> <span class="code-inline">DATABASE_URL</span>, <span class="code-inline">NEXTAUTH_SECRET</span> (not exposed to browser)</li>
+                    <li><strong>Client-side:</strong> <span class="code-inline">NEXT_PUBLIC_*</span> (exposed to browser, must be prefixed)</li>
+                </ul>
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> Never expose sensitive data in <span class="code-inline">NEXT_PUBLIC_*</span> variables. They are included in the client bundle.
+                </div>
+
+                <h4>3. Build Output</h4>
+                <p>The <span class="code-inline">standalone</span> output in <span class="code-inline">next.config.ts</span> creates a minimal server:</p>
+                <ul>
+                    <li>Includes only necessary files</li>
+                    <li>Optimized for Docker deployments</li>
+                    <li>Smaller deployment size</li>
+                </ul>
+
+                <h4>4. Image Optimization</h4>
+                <p>Next.js Image Optimization requires a Node.js server in production. For static exports, use <span class="code-inline">unoptimized: true</span>.</p>
+
+                <h4>5. API Routes</h4>
+                <p>API routes require a Node.js server. They cannot be statically exported. Ensure your hosting provider supports Node.js.</p>
+
+                <h4>6. Database Connections</h4>
+                <p>In production, use connection pooling for your database:</p>
+                <ul>
+                    <li>Configure Prisma connection pool size</li>
+                    <li>Use environment variables for connection strings</li>
+                    <li>Monitor connection limits</li>
+                </ul>
+
+                <h4>7. Caching Strategy</h4>
+                <p>Next.js provides multiple caching layers:</p>
+                <ul>
+                    <li><strong>Request Memoization:</strong> Automatic deduplication of requests</li>
+                    <li><strong>Data Cache:</strong> Caching of fetch requests</li>
+                    <li><strong>Full Route Cache:</strong> Caching of rendered pages</li>
+                    <li><strong>Router Cache:</strong> Client-side route caching</li>
+                </ul>
+                <p>Use <span class="code-inline">cache: 'no-store'</span> or <span class="code-inline">revalidate</span> to control caching behavior.</p>
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="doc-section">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Common Issues</h3>
+                
+                <h4>1. Database Connection Error</h4>
+                <p><strong>Problem:</strong> Cannot connect to PostgreSQL database</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify <span class="code-inline">DATABASE_URL</span> in <span class="code-inline">.env</span></li>
+                    <li>Ensure PostgreSQL is running</li>
+                    <li>Check database credentials</li>
+                    <li>Run <span class="code-inline">npm run db:generate</span></li>
+                </ul>
+
+                <h4>2. Images Not Loading</h4>
+                <p><strong>Problem:</strong> Product images show broken links</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Check <span class="code-inline">public/images/</span> directory exists</li>
+                    <li>Verify image paths in database</li>
+                    <li>Ensure <span class="code-inline">NEXT_PUBLIC_BASE_PATH</span> is set correctly if using subdirectory</li>
+                </ul>
+
+                <h4>3. Authentication Not Working</h4>
+                <p><strong>Problem:</strong> Users cannot login</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify <span class="code-inline">NEXTAUTH_URL</span> and <span class="code-inline">NEXTAUTH_SECRET</span></li>
+                    <li>Check database has user records</li>
+                    <li>Clear browser cookies</li>
+                    <li>Check browser console for errors</li>
+                </ul>
+
+                <h4>4. Build Errors</h4>
+                <p><strong>Problem:</strong> <span class="code-inline">npm run build</span> fails</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Check TypeScript errors: <span class="code-inline">npm run lint</span></li>
+                    <li>Ensure all environment variables are set</li>
+                    <li>Delete <span class="code-inline">.next</span> folder and rebuild</li>
+                    <li>Check for missing dependencies</li>
+                </ul>
+
+                <h4>5. Socket.io Connection Failed</h4>
+                <p><strong>Problem:</strong> Real-time chat not working</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify Socket.io server is running</li>
+                    <li>Check <span class="code-inline">NEXT_PUBLIC_BASE_PATH</span> configuration</li>
+                    <li>Ensure firewall allows WebSocket connections</li>
+                    <li>Check browser console for connection errors</li>
+                    <li>Verify WebSocket support is enabled on your server</li>
+                </ul>
+
+                <h4>6. Port Already in Use</h4>
+                <p><strong>Problem:</strong> Error: Port 3000 is already in use</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Stop the process using port 3000:
+                        <div class="code-block" data-lang="bash">
+                    <div class="code-block-header">
+                        <span class="lang-label">bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># On Linux/Mac
+lsof -ti:3000 | xargs kill -9
+
+# On Windows
+netstat -ano | findstr :3000
+taskkill /PID [PID] /F</code></pre>
+                </div>
+                    </li>
+                    <li>Use a different port: <span class="code-inline">PORT=3001 npm run dev</span></li>
+                </ul>
+
+                <h4>7. Module Not Found Errors</h4>
+                <p><strong>Problem:</strong> Cannot find module errors during build or runtime</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Delete <span class="code-inline">node_modules</span> and <span class="code-inline">package-lock.json</span></li>
+                    <li>Run <span class="code-inline">npm install</span> again</li>
+                    <li>Clear Next.js cache: <span class="code-inline">rm -rf .next</span> (or delete <span class="code-inline">.next</span> folder on Windows)</li>
+                    <li>Ensure all dependencies are listed in <span class="code-inline">package.json</span></li>
+                </ul>
+
+                <h4>8. Prisma Client Not Generated</h4>
+                <p><strong>Problem:</strong> Prisma Client errors or "Cannot find module @prisma/client"</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Run <span class="code-inline">npm run db:generate</span> to generate Prisma Client</li>
+                    <li>Ensure <span class="code-inline">prisma/schema.prisma</span> is valid</li>
+                    <li>Check that Prisma is installed: <span class="code-inline">npm list prisma</span></li>
+                </ul>
+
+                <h4>9. Environment Variables Not Loading</h4>
+                <p><strong>Problem:</strong> Environment variables are undefined or not working</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Ensure <span class="code-inline">.env</span> file exists in the root directory</li>
+                    <li>Restart the development server after changing <span class="code-inline">.env</span></li>
+                    <li>Check variable names match exactly (case-sensitive)</li>
+                    <li>For <span class="code-inline">NEXT_PUBLIC_*</span> variables, ensure they're prefixed correctly</li>
+                    <li>Verify no extra spaces or quotes in <span class="code-inline">.env</span> file</li>
+                </ul>
+
+                <h4>10. OAuth Login Not Working</h4>
+                <p><strong>Problem:</strong> Google/Facebook login fails or redirects incorrectly</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify OAuth credentials in <span class="code-inline">.env</span> file</li>
+                    <li>Check redirect URIs match in OAuth provider settings</li>
+                    <li>Ensure <span class="code-inline">NEXTAUTH_URL</span> includes basePath if configured</li>
+                    <li>Check OAuth provider console for error logs</li>
+                    <li>Verify callback URL format: <span class="code-inline">[NEXTAUTH_URL]/api/auth/callback/[provider]</span></li>
+                </ul>
+
+                <h4>11. Email Not Sending</h4>
+                <p><strong>Problem:</strong> Emails are not being sent</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify SMTP credentials in <span class="code-inline">.env</span> file</li>
+                    <li>For Gmail, use App Password (not regular password)</li>
+                    <li>Check SMTP port (587 for TLS, 465 for SSL)</li>
+                    <li>Verify firewall allows outbound SMTP connections</li>
+                    <li>Check server logs for email errors</li>
+                    <li>Test SMTP connection with a simple script</li>
+                </ul>
+
+                <h4>12. Build Fails with TypeScript Errors</h4>
+                <p><strong>Problem:</strong> TypeScript compilation errors during build</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Run <span class="code-inline">npm run lint</span> to see all errors</li>
+                    <li>Fix type errors in the reported files</li>
+                    <li>Ensure all imports are correct</li>
+                    <li>Check <span class="code-inline">tsconfig.json</span> configuration</li>
+                    <li>Update TypeScript types if needed: <span class="code-inline">npm install --save-dev @types/[package]</span></li>
+                </ul>
+
+                <h4>13. Images Not Optimizing</h4>
+                <p><strong>Problem:</strong> Next.js Image optimization not working</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Ensure images are in <span class="code-inline">public/</span> directory</li>
+                    <li>Check <span class="code-inline">next.config.ts</span> image configuration</li>
+                    <li>Verify image domains are allowed in <span class="code-inline">remotePatterns</span></li>
+                    <li>Clear <span class="code-inline">.next/cache</span> directory</li>
+                </ul>
+
+                <h4>14. Slow Performance</h4>
+                <p><strong>Problem:</strong> Application is slow or unresponsive</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Enable production mode: <span class="code-inline">NODE_ENV=production</span></li>
+                    <li>Optimize database queries (add indexes)</li>
+                    <li>Enable Next.js caching</li>
+                    <li>Use CDN for static assets</li>
+                    <li>Optimize images before uploading</li>
+                    <li>Check server resources (CPU, RAM, disk)</li>
+                </ul>
+
+                <h3>Getting Help</h3>
+                <p>If you're still experiencing issues after trying the solutions above:</p>
+                <ol>
+                    <li>Check the browser console for JavaScript errors</li>
+                    <li>Check server logs for backend errors</li>
+                    <li>Verify all prerequisites are installed correctly</li>
+                    <li>Ensure you're using the recommended versions (see <a href="#system-requirements">System Requirements</a>)</li>
+                    <li>Review the <a href="#configuration">Configuration</a> section</li>
+                    <li>Check the <a href="#support">Support</a> section for contact information</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>Tip:</strong> When reporting issues, include: error messages, browser/OS version, Node.js version, and steps to reproduce the problem.
+                </div>
+            </section>
+
+            <!-- Support -->
+            <section id="support" class="doc-section">
+                <h2>Support</h2>
+                
+                <h3>Getting Help</h3>
+                <p>If you encounter any issues or have questions:</p>
+                <ol>
+                    <li>Check this documentation thoroughly</li>
+                    <li>Review the Troubleshooting section</li>
+                    <li>Check the code comments in the source files</li>
+                    <li>Search for similar issues online</li>
+                    <li>Contact support through ThemeForest</li>
+                </ol>
+
+                <h3>Useful Resources</h3>
+                <ul>
+                    <li><a href="https://nextjs.org/docs" target="_blank">Next.js Documentation</a></li>
+                    <li><a href="https://react.dev" target="_blank">React Documentation</a></li>
+                    <li><a href="https://www.prisma.io/docs" target="_blank">Prisma Documentation</a></li>
+                    <li><a href="https://next-auth.js.org" target="_blank">NextAuth.js Documentation</a></li>
+                    <li><a href="https://getbootstrap.com/docs/5.3" target="_blank">Bootstrap 5 Documentation</a></li>
+                </ul>
+
+                <h3>Version Information</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MartPlace Next.js</td>
+                            <td>1.0.0</td>
+                        </tr>
+                        <tr>
+                            <td>Next.js</td>
+                            <td>16.0.1</td>
+                        </tr>
+                        <tr>
+                            <td>React</td>
+                            <td>19.2.0</td>
+                        </tr>
+                        <tr>
+                            <td>TypeScript</td>
+                            <td>5.x</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info">
+                    <strong>Thank you for purchasing MartPlace Next.js!</strong> We hope you enjoy building with it. If you find this template useful, please consider leaving a positive review.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ↑
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Update active link
+                    document.querySelectorAll('.doc-sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Copy code button functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const codeElement = codeBlock.querySelector('code');
+            const text = codeElement ? codeElement.textContent : codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Update active link on scroll
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('.doc-sidebar a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
