@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 
 import { withBasePath } from "@/utils/paths"
 
-export type AuthorSidebarTab = "profile" | "items" | "reviews" | "followers" | "following"
+export type AuthorSidebarTab = "profile" | "items" | "reviews"
 
 export interface AuthorSidebarAuthor {
   id: string
@@ -39,7 +39,7 @@ interface AuthorSidebarProps {
 export function AuthorSidebar({ author, activeTab, followButton, children }: AuthorSidebarProps) {
   const usernameOrId = author?.username || author?.id || ""
 
-  const buildLink = (path: "profile" | "items" | "reviews" | "followers" | "following") => {
+  const buildLink = (path: "profile" | "items" | "reviews") => {
     const encoded = usernameOrId ? encodeURIComponent(usernameOrId) : null
     switch (path) {
       case "profile":
@@ -48,10 +48,6 @@ export function AuthorSidebar({ author, activeTab, followButton, children }: Aut
         return encoded ? `/author/items?username=${encoded}` : "/author/items"
       case "reviews":
         return encoded ? `/author/reviews?username=${encoded}` : "/author/reviews"
-      case "followers":
-        return encoded ? `/author/followers?username=${encoded}` : "/author/followers"
-      case "following":
-        return encoded ? `/author/following?username=${encoded}` : "/author/following"
       default:
         return "/author"
     }
@@ -142,16 +138,6 @@ export function AuthorSidebar({ author, activeTab, followButton, children }: Aut
           <li>
             <Link href={buildLink("reviews")} className={activeTab === "reviews" ? "active" : undefined}>
               Customer Reviews
-            </Link>
-          </li>
-          <li>
-            <Link href={buildLink("followers")} className={activeTab === "followers" ? "active" : undefined}>
-              Followers ({author?.followers ?? 0})
-            </Link>
-          </li>
-          <li>
-            <Link href={buildLink("following")} className={activeTab === "following" ? "active" : undefined}>
-              Following ({author?.following ?? 0})
             </Link>
           </li>
         </ul>

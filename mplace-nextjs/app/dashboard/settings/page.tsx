@@ -26,7 +26,6 @@ interface UserSettings {
   coverImage?: string | null;
   facebookUrl?: string | null;
   twitterUrl?: string | null;
-  googlePlusUrl?: string | null;
   behanceUrl?: string | null;
   dribbbleUrl?: string | null;
   billingFirstName?: string | null;
@@ -86,7 +85,6 @@ export default function DashboardSettingsPage() {
     confirmPassword: "",
     facebookUrl: "",
     twitterUrl: "",
-    googlePlusUrl: "",
     behanceUrl: "",
     dribbbleUrl: "",
     billingFirstName: "",
@@ -886,23 +884,6 @@ export default function DashboardSettingsPage() {
                                 className="text_field"
                                 placeholder="ex: www.twitter.com/backtheme"
                                 value={formData.twitterUrl || ""}
-                                onChange={handleInputChange}
-                              />
-                            </div>
-                          </div>
-
-                          <div className="social__single">
-                            <div className="social_icon">
-                              <span className="fa fa-google-plus"></span>
-                            </div>
-
-                            <div className="link_field">
-                              <input
-                                type="url"
-                                name="googlePlusUrl"
-                                className="text_field"
-                                placeholder="ex: www.google.com/backtheme"
-                                value={formData.googlePlusUrl || ""}
                                 onChange={handleInputChange}
                               />
                             </div>

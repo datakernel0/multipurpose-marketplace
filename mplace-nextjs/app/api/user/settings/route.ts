@@ -30,7 +30,6 @@ export async function GET(request: NextRequest) {
         coverImage: true,
         facebookUrl: true,
         twitterUrl: true,
-        googlePlusUrl: true,
         behanceUrl: true,
         dribbbleUrl: true,
         billingFirstName: true,
@@ -92,7 +91,6 @@ export async function PUT(request: NextRequest) {
       // Social Links
       facebookUrl,
       twitterUrl,
-      googlePlusUrl,
       behanceUrl,
       dribbbleUrl,
       
@@ -155,7 +153,6 @@ export async function PUT(request: NextRequest) {
     if (coverImage !== undefined) updateData.coverImage = coverImage || null
     if (facebookUrl !== undefined) updateData.facebookUrl = facebookUrl || null
     if (twitterUrl !== undefined) updateData.twitterUrl = twitterUrl || null
-    if (googlePlusUrl !== undefined) updateData.googlePlusUrl = googlePlusUrl || null
     if (behanceUrl !== undefined) updateData.behanceUrl = behanceUrl || null
     if (dribbbleUrl !== undefined) updateData.dribbbleUrl = dribbbleUrl || null
     if (billingFirstName !== undefined) updateData.billingFirstName = billingFirstName || null

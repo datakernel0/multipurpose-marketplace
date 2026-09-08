@@ -203,7 +203,7 @@ export default function SignupPage() {
                           className="btn btn--sm btn--round btn--google"
                           onClick={() => signIn("google", { callbackUrl: withBasePath("/dashboard") })}
                         >
-                          <span className="fa fa-google-plus"></span>
+                          <span className="fa fa-google"></span>
                           <span>Google</span>
                         </button>
                         <button

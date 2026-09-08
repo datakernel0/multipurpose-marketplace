@@ -2,31 +2,34 @@ import { PrismaClient, SystemSettingGroup, SystemSettingType, SellerStatus } fro
 import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
+const seedDemoData = process.env.SEED_DEMO_DATA === 'true'
 
 async function main() {
   const adminRoleIds: Record<string, string> = {}
 
-  // Clear existing data (optional - comment out if you want to keep existing data)
-  await prisma.moderationAction.deleteMany()
-  await prisma.adminRoleAssignment.deleteMany()
-  await prisma.adminRolePermission.deleteMany()
-  await prisma.adminRole.deleteMany()
-  await prisma.adminPermission.deleteMany()
-  await prisma.forumReply.deleteMany()
-  await prisma.forumThread.deleteMany()
-  await prisma.blogComment.deleteMany()
-  await prisma.blog.deleteMany()
-  await prisma.eventSpeaker.deleteMany()
-  await prisma.event.deleteMany()
-  await prisma.job.deleteMany()
-  await prisma.fAQ.deleteMany()
-  await prisma.testimonial.deleteMany()
-  await prisma.termCondition.deleteMany()
-  await prisma.badge.deleteMany()
-  await prisma.careerFeature.deleteMany()
-  await prisma.product.deleteMany()
-  await prisma.category.deleteMany()
-  await prisma.user.deleteMany({ where: { email: { not: 'admin@martplace.com' } } })
+  // Demo cleanup is opt-in. Production bootstrap must never wipe marketplace data.
+  if (seedDemoData) {
+    await prisma.moderationAction.deleteMany()
+    await prisma.adminRoleAssignment.deleteMany()
+    await prisma.adminRolePermission.deleteMany()
+    await prisma.adminRole.deleteMany()
+    await prisma.adminPermission.deleteMany()
+    await prisma.forumReply.deleteMany()
+    await prisma.forumThread.deleteMany()
+    await prisma.blogComment.deleteMany()
+    await prisma.blog.deleteMany()
+    await prisma.eventSpeaker.deleteMany()
+    await prisma.event.deleteMany()
+    await prisma.job.deleteMany()
+    await prisma.fAQ.deleteMany()
+    await prisma.testimonial.deleteMany()
+    await prisma.termCondition.deleteMany()
+    await prisma.badge.deleteMany()
+    await prisma.careerFeature.deleteMany()
+    await prisma.product.deleteMany()
+    await prisma.category.deleteMany()
+    await prisma.user.deleteMany({ where: { email: { not: 'admin@martplace.com' } } })
+  }
 
   // Create default admin user
   // IMPORTANT: Change the default password after first login!
@@ -52,6 +55,11 @@ async function main() {
       image: '/images/usr_avatar.png',
     },
   })
+
+  if (!seedDemoData) {
+    console.log('Production bootstrap complete. Demo users and marketplace content were skipped.')
+    return
+  }
 
   // Create test users
   const user1 = await prisma.user.upsert({
@@ -1424,8 +1432,8 @@ async function main() {
     ],
   })
 
-  // Create testimonials
-  await prisma.testimonial.createMany({
+  // Testimonials are intentionally not seeded; the model remains for later schema review.
+  if (false) await prisma.testimonial.createMany({
     data: [
       {
         name: 'Tubeda Pagla',

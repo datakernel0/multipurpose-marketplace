@@ -28,7 +28,6 @@ export async function GET(
       createdAt: true,
       facebookUrl: true,
       twitterUrl: true,
-      googlePlusUrl: true,
       behanceUrl: true,
       dribbbleUrl: true,
     } as const

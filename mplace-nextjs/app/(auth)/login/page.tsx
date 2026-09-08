@@ -226,7 +226,7 @@ function LoginForm() {
                           className="btn btn--sm btn--round btn--google"
                           onClick={(e) => { e.preventDefault(); handleGoogleSignIn(); }}
                         >
-                          <span className="fa fa-google-plus"></span>
+                          <span className="fa fa-google"></span>
                           <span>Google</span>
                         </button>
                         <button

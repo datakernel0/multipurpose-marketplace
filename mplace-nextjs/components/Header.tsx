@@ -1257,7 +1257,7 @@ function HeaderContent() {
                 <div className={`collapse navbar-collapse ${mobileMenuOpen ? "show" : ""}`} id="navbarNav">
                   <ul className="navbar-nav">
                     <li
-                      className={`nav-item has_dropdown ${isMenuDropdownOpen('home') || isMenuItemActive('/', ['/', '/index-single', '/index3']) ? 'active' : ''}`}
+                      className={`nav-item has_dropdown ${isMenuDropdownOpen('home') || isMenuItemActive('/') ? 'active' : ''}`}
                       onMouseEnter={() => {
                         if (isMounted && !isMobile) {
                           const dropdown = menuDropdownRefs.current.home
@@ -1289,17 +1289,11 @@ function HeaderContent() {
                           <li>
                             <Link href="/" className={isMenuItemActive('/') ? 'active' : ''}>Home Multi Vendor</Link>
                           </li>
-                          <li>
-                            <Link href="/index-single" className={isMenuItemActive('/index-single') ? 'active' : ''}>Home Two Single User</Link>
-                          </li>
-                          <li>
-                            <Link href="/index3" className={isMenuItemActive('/index3') ? 'active' : ''}>Home Three Product</Link>
-                          </li>
                         </ul>
                       </div>
                     </li>
                     <li
-                      className={`nav-item has_dropdown ${isMenuDropdownOpen('allProduct') || isMenuItemActive('/all-products', ['/all-products', '/all-products-list', '/follow-feed', '/top-authors']) ? 'active' : ''}`}
+                      className={`nav-item has_dropdown ${isMenuDropdownOpen('allProduct') || isMenuItemActive('/all-products', ['/all-products', '/all-products-list', '/top-authors']) ? 'active' : ''}`}
                       onMouseEnter={() => {
                         if (isMounted && !isMobile) {
                           const dropdown = menuDropdownRefs.current.allProduct
@@ -1336,9 +1330,6 @@ function HeaderContent() {
                           </li>
                           <li>
                             <Link href="/all-products?minPrice=0&maxPrice=0" className={pathname === '/all-products' && searchParams?.get('minPrice') === '0' && searchParams?.get('maxPrice') === '0' ? 'active' : ''}>Free Templates</Link>
-                          </li>
-                          <li>
-                            <Link href="/follow-feed" className={isMenuItemActive('/follow-feed') ? 'active' : ''}>Follow Feed</Link>
                           </li>
                           <li>
                             <Link href="/top-authors" className={isMenuItemActive('/top-authors') ? 'active' : ''}>Top Authors</Link>
@@ -1407,7 +1398,7 @@ function HeaderContent() {
                       </div>
                     </li>
                     <li
-                      className={`nav-item has_megamenu ${isMenuDropdownOpen('elements') || isMenuItemActive('#', ['/accordion', '/alert', '/brands', '/buttons', '/cards', '/charts', '/content-block', '/dropdowns', '/features', '/footer', '/info-box', '/menu', '/modal', '/pagination', '/peoples', '/products', '/progressbar', '/social', '/tab', '/table', '/testimonials', '/timeline', '/typography']) ? 'active' : ''}`}
+                      className={`nav-item has_megamenu ${isMenuDropdownOpen('elements') || isMenuItemActive('#', ['/brands', '/products']) ? 'active' : ''}`}
                       onMouseEnter={() => {
                         if (isMounted && !isMobile) {
                           const dropdown = menuDropdownRefs.current.elements
@@ -1440,92 +1431,25 @@ function HeaderContent() {
                             <div className="menu_column">
                               <ul>
                                 <li>
-                                  <Link href="/accordion" className={isMenuItemActive('/accordion') ? 'active' : ''}>Accordion</Link>
-                                </li>
-                                <li>
-                                  <Link href="/alert" className={isMenuItemActive('/alert') ? 'active' : ''}>Alert</Link>
-                                </li>
-                                <li>
                                   <Link href="/brands" className={isMenuItemActive('/brands') ? 'active' : ''}>Brands</Link>
-                                </li>
-                                <li>
-                                  <Link href="/buttons" className={isMenuItemActive('/buttons') ? 'active' : ''}>Buttons</Link>
-                                </li>
-                                <li>
-                                  <Link href="/cards" className={isMenuItemActive('/cards') ? 'active' : ''}>Cards</Link>
-                                </li>
-                                <li>
-                                  <Link href="/charts" className={isMenuItemActive('/charts') ? 'active' : ''}>Charts</Link>
-                                </li>
-                                <li>
-                                  <Link href="/content-block" className={isMenuItemActive('/content-block') ? 'active' : ''}>Content Block</Link>
-                                </li>
-                                <li>
-                                  <Link href="/dropdowns" className={isMenuItemActive('/dropdowns') ? 'active' : ''}>Drpdowns</Link>
                                 </li>
                               </ul>
                             </div>
 
                             <div className="menu_column">
                               <ul>
-                                <li>
-                                  <Link href="/features" className={isMenuItemActive('/features') ? 'active' : ''}>Features</Link>
-                                </li>
-                                <li>
-                                  <Link href="/footer" className={isMenuItemActive('/footer') ? 'active' : ''}>Footer</Link>
-                                </li>
-                                <li>
-                                  <Link href="/info-box" className={isMenuItemActive('/info-box') ? 'active' : ''}>Info Box</Link>
-                                </li>
-                                <li>
-                                  <Link href="/menu" className={isMenuItemActive('/menu') ? 'active' : ''}>Menu</Link>
-                                </li>
-                                <li>
-                                  <Link href="/modal" className={isMenuItemActive('/modal') ? 'active' : ''}>Modal</Link>
-                                </li>
-                                <li>
-                                  <Link href="/pagination" className={isMenuItemActive('/pagination') ? 'active' : ''}>Pagination</Link>
-                                </li>
-                                <li>
-                                  <Link href="/peoples" className={isMenuItemActive('/peoples') ? 'active' : ''}>Peoples</Link>
-                                </li>
                                 <li>
                                   <Link href="/products" className={isMenuItemActive('/products') ? 'active' : ''}>Products</Link>
                                 </li>
                               </ul>
                             </div>
 
-                            <div className="menu_column">
-                              <ul>
-                                <li>
-                                  <Link href="/progressbar" className={isMenuItemActive('/progressbar') ? 'active' : ''}>Progressbar</Link>
-                                </li>
-                                <li>
-                                  <Link href="/social" className={isMenuItemActive('/social') ? 'active' : ''}>Social</Link>
-                                </li>
-                                <li>
-                                  <Link href="/tab" className={isMenuItemActive('/tab') ? 'active' : ''}>Tabs</Link>
-                                </li>
-                                <li>
-                                  <Link href="/table" className={isMenuItemActive('/table') ? 'active' : ''}>Table</Link>
-                                </li>
-                                <li>
-                                  <Link href="/testimonials" className={isMenuItemActive('/testimonials') ? 'active' : ''}>Testimonials</Link>
-                                </li>
-                                <li>
-                                  <Link href="/timeline" className={isMenuItemActive('/timeline') ? 'active' : ''}>Timeline</Link>
-                                </li>
-                                <li>
-                                  <Link href="/typography" className={isMenuItemActive('/typography') ? 'active' : ''}>Typography</Link>
-                                </li>
-                              </ul>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </li>
                     <li
-                      className={`nav-item has_megamenu ${isMenuDropdownOpen('pages') || isMenuItemActive('#', ['/all-products', '/all-products-list', '/category-grid', '/category-list', '/search-product', '/products/single-product', '/products/single-product-v2', '/products/single-product-v3', '/cart', '/checkout', '/author', '/author/items', '/author/reviews', '/author/followers', '/author/following', '/notification', '/message', '/message-compose', '/favourites', '/dashboard', '/dashboard/settings', '/dashboard/purchase', '/dashboard/add-credit', '/dashboard/statement', '/dashboard/invoice', '/dashboard/upload', '/dashboard/manage-item', '/dashboard/withdrawal', '/dashboard/add-payment-method', '/support-forum', '/login', '/signup', '/recover-pass', '/dashboard/customer', '/customer/downloads', '/dashboard/customer/info', '/blog', '/blog-v2', '/how-it-works', '/about', '/pricing', '/testimonials', '/faq', '/affiliate', '/term-condition', '/event', '/badges', '/404', '/career']) ? 'active' : ''}`}
+                      className={`nav-item has_megamenu ${isMenuDropdownOpen('pages') || isMenuItemActive('#', ['/all-products', '/all-products-list', '/category-grid', '/category-list', '/search-product', '/cart', '/checkout', '/author', '/author/items', '/author/reviews', '/notification', '/message', '/message-compose', '/favourites', '/dashboard', '/dashboard/settings', '/dashboard/purchase', '/dashboard/add-credit', '/dashboard/statement', '/dashboard/invoice', '/dashboard/upload', '/dashboard/manage-item', '/dashboard/withdrawal', '/dashboard/add-payment-method', '/login', '/signup', '/recover-pass', '/dashboard/customer', '/customer/downloads', '/dashboard/customer/info', '/how-it-works', '/about', '/faq', '/term-condition', '/badges', '/404']) ? 'active' : ''}`}
                       onMouseEnter={() => {
                         if (isMounted && !isMobile) {
                           const dropdown = menuDropdownRefs.current.pages
@@ -1574,15 +1498,6 @@ function HeaderContent() {
                                   <Link href={withBasePath("/search-product")} className={isMenuItemActive('/search-product') ? 'active' : ''}>Search Product</Link>
                                 </li>
                                 <li>
-                                  <Link href="/products/single-product" className={isMenuItemActive('/products/single-product') ? 'active' : ''}>Single Product V1</Link>
-                                </li>
-                                <li>
-                                  <Link href="/products/single-product-v2" className={isMenuItemActive('/products/single-product-v2') ? 'active' : ''}>Single Product V2</Link>
-                                </li>
-                                <li>
-                                  <Link href="/products/single-product-v3" className={isMenuItemActive('/products/single-product-v3') ? 'active' : ''}>Single Product V3</Link>
-                                </li>
-                                <li>
                                   <Link href="/cart" className={isMenuItemActive('/cart') ? 'active' : ''}>Shopping Cart</Link>
                                 </li>
                                 <li>
@@ -1602,12 +1517,6 @@ function HeaderContent() {
                                 </li>
                                 <li>
                                   <Link href="/author/reviews" className={isMenuItemActive('/author/reviews') ? 'active' : ''}>Customer Reviews</Link>
-                                </li>
-                                <li>
-                                  <Link href="/author/followers" className={isMenuItemActive('/author/followers') ? 'active' : ''}>Followers</Link>
-                                </li>
-                                <li>
-                                  <Link href="/author/following" className={isMenuItemActive('/author/following') ? 'active' : ''}>Following</Link>
                                 </li>
                                 <li>
                                   <Link href="/notification" className={isMenuItemActive('/notification') ? 'active' : ''}>Notifications</Link>
@@ -1667,12 +1576,6 @@ function HeaderContent() {
                               <ul>
                                 <li className="title">Customers</li>
                                 <li>
-                                  <Link href="/support-forum" className={isMenuItemActive('/support-forum') ? 'active' : ''}>Support Forum</Link>
-                                </li>
-                                <li>
-                                  <Link href="/support-forum" className={isMenuItemActive('/support-forum') ? 'active' : ''}>Support Forum</Link>
-                                </li>
-                                <li>
                                   <Link href="/login" className={isMenuItemActive('/login') ? 'active' : ''}>Login</Link>
                                 </li>
                                 <li>
@@ -1692,18 +1595,6 @@ function HeaderContent() {
                                 </li>
                               </ul>
 
-                              <ul>
-                                <li className="title">Blog</li>
-                                <li>
-                                  <Link href="/blog" className={isMenuItemActive('/blog') ? 'active' : ''}>Blog V-1</Link>
-                                </li>
-                                <li>
-                                  <Link href="/blog-v2" className={isMenuItemActive('/blog-v2') ? 'active' : ''}>Blog V-2</Link>
-                                </li>
-                                <li>
-                                  <Link href="/blog" className={isMenuItemActive('/blog') ? 'active' : ''}>Blog</Link>
-                                </li>
-                              </ul>
                             </div>
 
                             <div className="menu_column">
@@ -1716,25 +1607,10 @@ function HeaderContent() {
                                   <Link href="/about" className={isMenuItemActive('/about') ? 'active' : ''}>About Us</Link>
                                 </li>
                                 <li>
-                                  <Link href="/pricing" className={isMenuItemActive('/pricing') ? 'active' : ''}>Pricing Plan</Link>
-                                </li>
-                                <li>
-                                  <Link href="/testimonials" className={isMenuItemActive('/testimonials') ? 'active' : ''}>Testimonials</Link>
-                                </li>
-                                <li>
                                   <Link href="/faq" className={isMenuItemActive('/faq') ? 'active' : ''}>FAQs</Link>
                                 </li>
                                 <li>
-                                  <Link href="/affiliate" className={isMenuItemActive('/affiliate') ? 'active' : ''}>Affiliates</Link>
-                                </li>
-                                <li>
                                   <Link href="/term-condition" className={isMenuItemActive('/term-condition') ? 'active' : ''}>Terms & Conditions</Link>
-                                </li>
-                                <li>
-                                  <Link href="/event" className={isMenuItemActive('/event') ? 'active' : ''}>Event</Link>
-                                </li>
-                                <li>
-                                  <Link href="/event" className={isMenuItemActive('/event') ? 'active' : ''}>Event</Link>
                                 </li>
                                 <li className="has_badge">
                                   <Link href="/badges" className={isMenuItemActive('/badges') ? 'active' : ''}>Badges</Link>
@@ -1743,58 +1619,10 @@ function HeaderContent() {
                                 <li>
                                   <Link href="/404" className={isMenuItemActive('/404') ? 'active' : ''}>404 Error page</Link>
                                 </li>
-                                <li>
-                                  <Link href="/career" className={isMenuItemActive('/career') ? 'active' : ''}>Job Posts</Link>
-                                </li>
-                                <li>
-                                  <Link href="/career" className={isMenuItemActive('/career') ? 'active' : ''}>Job Posts</Link>
-                                </li>
                               </ul>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      className={`nav-item has_dropdown ${isMenuDropdownOpen('blogs') || isMenuItemActive('/blog', ['/blog', '/blog-v2']) ? 'active' : ''}`}
-                      onMouseEnter={() => {
-                        if (isMounted && !isMobile) {
-                          const dropdown = menuDropdownRefs.current.blogs
-                          if (dropdown) dropdown.classList.add('show')
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (isMounted && !isMobile) {
-                          const dropdown = menuDropdownRefs.current.blogs
-                          if (dropdown) dropdown.classList.remove('show')
-                        }
-                      }}
-                    >
-                      <Link 
-                        className="nav-link" 
-                        href="/blog"
-                        onClick={(e) => {
-                          if (isMounted && isMobile) {
-                            e.preventDefault()
-                            toggleMenuDropdown('blogs')
-                          }
-                        }}
-                      >
-                        BLOGS
-                        {isMounted && isMobile && <span className="lnr lnr-plus-circle"></span>}
-                      </Link>
-                      <div className={`dropdowns dropdown--menu ${isMenuDropdownOpen('blogs') ? 'show' : ''}`} ref={(el) => { menuDropdownRefs.current.blogs = el }}>
-                        <ul>
-                          <li>
-                            <Link href="/blog" className={isMenuItemActive('/blog') ? 'active' : ''}>Blog V-1</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog-v2" className={isMenuItemActive('/blog-v2') ? 'active' : ''}>Blog V-2</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog" className={isMenuItemActive('/blog') ? 'active' : ''}>Blog</Link>
-                          </li>
-                        </ul>
                       </div>
                     </li>
                     <li className={`nav-item ${isMenuItemActive('/contact') ? 'active' : ''}`}>

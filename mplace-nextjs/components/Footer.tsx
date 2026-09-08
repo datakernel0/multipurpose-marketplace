@@ -97,16 +97,10 @@ export default function Footer() {
                     <Link href="/all-products">Buying and Selling</Link>
                   </li>
                   <li>
-                    <Link href="/testimonials">Testimonials</Link>
-                  </li>
-                  <li>
                     <Link href="/term-condition">Copyright Notice</Link>
                   </li>
                   <li>
                     <Link href="/term-condition">Refund Policy</Link>
-                  </li>
-                  <li>
-                    <Link href="/affiliate">Affiliates</Link>
                   </li>
                 </ul>
               </div>
@@ -126,16 +120,10 @@ export default function Footer() {
                     <Link href="/all-products">Buying and Selling</Link>
                   </li>
                   <li>
-                    <Link href="/testimonials">Testimonials</Link>
-                  </li>
-                  <li>
                     <Link href="/term-condition">Copyright Notice</Link>
                   </li>
                   <li>
                     <Link href="/term-condition">Refund Policy</Link>
-                  </li>
-                  <li>
-                    <Link href="/affiliate">Affiliates</Link>
                   </li>
                 </ul>
               </div>
@@ -203,11 +191,6 @@ export default function Footer() {
                     <li>
                       <Link href="#">
                         <span className="fa fa-twitter"></span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <span className="fa fa-google-plus"></span>
                       </Link>
                     </li>
                     <li>

@@ -1,0 +1,392 @@
+Based on the audit you just completed, begin PHASE 1: SAFE PROJECT CLEANUP.
+
+IMPORTANT:
+Do NOT redesign the marketplace.
+Do NOT change the database financial logic.
+Do NOT implement payments, commissions, withdrawals, or secure downloads yet.
+Do NOT change authentication.
+Do NOT remove anything from the KEEP list.
+Do NOT make speculative deletions.
+
+The goal of this phase is ONLY to remove confirmed demo/template clutter and simplify the project while preserving the working marketplace foundation.
+
+========================
+1. PRESERVE THESE SYSTEMS
+========================
+
+Do not remove or break:
+
+- Authentication
+- User accounts
+- Buyer accounts
+- Seller accounts
+- Seller approval/status
+- Admin roles and permissions
+- Products
+- Product creation/edit/delete
+- Product moderation
+- Categories
+- Search/filtering
+- Dynamic product detail route
+- Cart
+- Checkout foundation
+- Orders
+- Order history
+- Customer downloads foundation
+- Reviews
+- Favorites/wishlist
+- Seller dashboard foundation
+- Seller earnings foundation
+- Withdrawal database model/page foundation
+- Admin dashboard
+- Customers management
+- Sellers management
+- Products management
+- Moderation
+- Support/contact system
+- Notifications
+- Email infrastructure
+- Prisma
+- Database migrations
+
+Also preserve all shared components, utilities, APIs, models,
+styles, and assets required by these systems.
+
+========================
+2. REMOVE CONFIRMED UI DEMO ROUTES
+========================
+
+Safely remove these theme/component showcase routes:
+
+/accordion
+/alert
+/buttons
+/cards
+/charts
+/content-block
+/dropdowns
+/features
+/footer
+/form-elements
+/info-box
+/menu
+/modal
+/pagination
+/progressbar
+/social
+/table
+/tab
+/timeline
+/typography
+
+Before deleting each route:
+- verify imports
+- verify navigation references
+- verify shared component dependencies
+
+Do NOT delete shared components simply because their demo page
+is being removed.
+
+========================
+3. REMOVE DUPLICATE HOMEPAGES
+========================
+
+Remove:
+
+/index3
+/index-single
+
+Keep the main production homepage:
+
+/
+
+Do not redesign the homepage yet.
+
+========================
+4. REMOVE DUPLICATE PRODUCT DETAIL PAGES
+========================
+
+Remove the duplicate/template product pages:
+
+/products/single-product
+/products/single-product-v2
+/products/single-product-v3
+
+Preserve:
+
+/single-product/[id]
+
+This dynamic route should remain the canonical product detail page.
+
+Update internal links if any removed route is still referenced.
+
+========================
+5. REMOVE UNRELATED SYSTEMS
+========================
+
+Remove the V1 routes/features related specifically to:
+
+Events
+Jobs
+Careers
+
+Candidates identified in the audit include:
+
+/event
+/event/detail/[id]
+/job/detail/[id]
+/career
+
+Before removing Prisma models such as:
+
+Event
+EventSpeaker
+Job
+CareerFeature
+
+first confirm that they are not referenced by retained marketplace functionality.
+
+If database removal would require a risky migration,
+remove/disable the frontend/API functionality first and report
+the database models for later schema cleanup instead of forcing
+a destructive migration now.
+
+========================
+6. REMOVE AFFILIATE AND PRICING FEATURES
+========================
+
+Remove:
+
+/affiliate
+/pricing
+
+We are NOT implementing:
+- affiliate referrals
+- membership plans
+- seller subscriptions
+- premium seller tiers
+
+in V1.
+
+Check header/footer/navigation references and remove those links.
+
+========================
+7. REMOVE COMMUNITY FEATURES
+========================
+
+Remove the following V1 community pages:
+
+/follow-feed
+/author/followers
+/author/following
+/peoples
+/support-forum
+/support-forum/detail/[id]
+
+Do NOT automatically delete Chat/Message functionality.
+
+Messaging is being evaluated separately.
+
+If Follow, ForumThread, or ForumReply database models can be
+safely removed without affecting retained functionality,
+report them first instead of performing a risky database migration.
+
+========================
+8. REMOVE TESTIMONIAL DEMO CONTENT
+========================
+
+Remove:
+
+- Static/fake testimonial sections
+- Seeded testimonial display content
+- /testimonials page
+- Homepage testimonial sections that only show demo data
+
+Do not replace them with fake testimonials.
+
+========================
+9. REMOVE DEMO STATISTICS
+========================
+
+Remove or clearly neutralize:
+
+- fake user counters
+- fake sales counters
+- fake product counters
+- random chart values
+- static seller earnings
+- static recent sales
+- template statistics
+- hardcoded marketplace performance numbers
+
+IMPORTANT:
+
+Do NOT invent replacement statistics.
+
+If real database data is available, use it.
+
+Otherwise show:
+0
+empty state
+or "No data yet"
+
+as appropriate.
+
+========================
+10. DEMO DATA
+========================
+
+Separate development demo seed data from production bootstrap data.
+
+Do not allow production initialization to automatically create:
+
+- demo buyers
+- demo sellers
+- demo products
+- demo blogs
+- demo events
+- demo testimonials
+- demo support tickets
+- fake marketplace activity
+
+Keep only the minimum production bootstrap mechanism required
+for application setup.
+
+Do not expose default demo credentials in production UI.
+
+========================
+11. BLOG
+========================
+
+Remove the BLOG system from V1.
+
+This includes duplicate blog pages and blog-specific navigation.
+
+Candidates include:
+
+/blog
+/blog1
+/blog2
+/blog-v2
+/blog/single/[id]
+/single-blog/[id]
+
+Also remove blog-specific homepage/footer/header links.
+
+Before deleting Blog and BlogComment Prisma models or APIs,
+verify all dependencies.
+
+If schema removal creates migration risk, leave the database
+models temporarily and report them as orphaned models for the
+later database-cleanup phase.
+
+========================
+12. SOCIAL FIELDS
+========================
+
+Remove obsolete Google Plus UI/references.
+
+Do NOT aggressively remove all seller social links yet.
+
+Preserve useful seller-profile social fields until the seller
+profile redesign phase.
+
+========================
+13. ASSET CLEANUP
+========================
+
+After routes are removed:
+
+Analyze assets under:
+
+public/images
+public/css
+public/fonts
+
+Remove ONLY assets that can be confidently proven unused.
+
+Do not remove:
+- marketplace images
+- product placeholders
+- icons used by retained pages
+- fonts used by retained CSS
+- shared CSS
+- admin assets
+- authentication assets
+- dashboard assets
+
+If uncertain, keep the asset.
+
+========================
+14. DEPENDENCIES
+========================
+
+After cleanup, analyze npm dependencies.
+
+Remove a dependency ONLY when there are zero remaining imports
+or runtime requirements.
+
+Do not remove packages based only on assumptions.
+
+========================
+15. NAVIGATION CLEANUP
+========================
+
+Update:
+
+- Header
+- Footer
+- menus
+- mobile navigation
+- dashboard navigation
+- internal links
+
+so they do not link to removed routes.
+
+Do NOT redesign navigation yet.
+
+========================
+16. VALIDATION
+========================
+
+After cleanup:
+
+1. Install dependencies if needed.
+2. Run Prisma generation if required.
+3. Run TypeScript checks.
+4. Run lint if configured.
+5. Run production build.
+6. Fix errors caused specifically by this cleanup.
+7. Check for imports pointing to deleted files.
+8. Check for navigation links pointing to deleted routes.
+9. Check retained APIs for dependencies on deleted modules.
+
+Do not make unrelated architectural changes just to silence errors.
+
+========================
+FINAL REPORT
+========================
+
+When finished, give me:
+
+1. Files deleted
+2. Files modified
+3. Routes removed
+4. Features removed
+5. Assets removed
+6. Dependencies removed
+7. Navigation links changed
+8. Database models left intentionally for later cleanup
+9. Anything you decided NOT to remove because of dependency risk
+10. TypeScript result
+11. Build result
+12. Any errors remaining
+13. Approximate project size before vs after cleanup
+
+Most importantly:
+
+The marketplace core must continue to work after this cleanup.
+
+Do not start Phase 2.
+
+Stop after cleanup, validation, and the final report.

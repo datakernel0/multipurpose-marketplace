@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import Link from "next/link"
 import ProductImageSlider from "./ProductImageSlider"
 import ProductFavoriteButton from "./ProductFavoriteButton"
 import ProductTabs from "./ProductTabs"
@@ -93,23 +92,23 @@ export default function SingleProductContent({ product }: SingleProductContentPr
         <div className="row">
           <div className="col-lg-8">
             <ProductImageSlider images={product.images} />
-            
+
             <div className="item__preview-thumb">
               <div className="prev-thumb">
                 <div className="item-action">
                   <div className="action-btns">
                     {product.livePreviewUrl ? (
-                      <a 
-                        href={product.livePreviewUrl} 
-                        target="_blank" 
+                      <a
+                        href={product.livePreviewUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn--round btn--lg"
                       >
                         Live Preview
                       </a>
                     ) : (
-                      <a 
-                        href="#" 
+                      <a
+                        href="#"
                         className="btn btn--round btn--lg product-disabled-button"
                         onClick={(e) => e.preventDefault()}
                       >
@@ -121,7 +120,7 @@ export default function SingleProductContent({ product }: SingleProductContentPr
                     productId={product.id}
                     initialFavoriteCount={product.metadata.favorites}
                     initialIsFavorited={Boolean(product.isFavorited)}
-                    onFavoriteChange={(count, isFavorited) => {
+                    onFavoriteChange={(count) => {
                       setFavoriteCount(count)
                     }}
                   />
@@ -155,4 +154,3 @@ export default function SingleProductContent({ product }: SingleProductContentPr
     </section>
   )
 }
-

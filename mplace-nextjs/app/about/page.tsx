@@ -275,11 +275,6 @@ export default function AboutPage() {
                           </li>
                           <li>
                             <Link href="#">
-                              <span className="fa fa-google-plus"></span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link href="#">
                               <span className="fa fa-dribbble"></span>
                             </Link>
                           </li>
@@ -321,56 +316,6 @@ export default function AboutPage() {
                     <Image src={withBasePath(img)} alt="partner image" width={150} height={80} />
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="testimonial-area testimonial--2 section--padding">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="section-title">
-                <h1>
-                  Our Clients
-                  <span className="highlighted">Feedback</span>
-                </h1>
-                <p>
-                  Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid est laborum
-                  dolo rumes fugats untras.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              <div className="testimonial-slider">
-                {[
-                  { name: "Tubeda Pagla", role: "Product Designer", image: "/images/test1.jpg", text: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is the laoreet elit metus. Nunc placerat mi is id nisi interdum is mollis. Praesent the pharetra, justo ut scelerisque." },
-                  { name: "Tarashi Hamada", role: "Quality Ninja", image: "/images/test2.jpg", text: "Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis, leo quam aliquet diam congue is the laoreet elit metus. Nunc placerat mi is id nisi interdum is mollis. Praesent the pharetra, justo ut scelerisque." },
-                ].map((testimonial, index) => (
-                  <div key={index} className="testimonial">
-                    <div className="testimonial__about">
-                      <div className="avatar v_middle">
-                        <Image src={withBasePath(testimonial.image)} alt="Testimonial Avatar" width={80} height={80} />
-                      </div>
-                      <div className="name-designation v_middle">
-                        <h4 className="name">{testimonial.name}</h4>
-                        <span className="desig">{testimonial.role}</span>
-                      </div>
-                      <span className="lnr lnr-bubble quote-icon"></span>
-                    </div>
-                    <div className="testimonial__text">
-                      <p>{testimonial.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="all-testimonial">
-                <Link href="/testimonials" className="btn btn--lg btn--round">
-                  View All Reviews
-                </Link>
               </div>
             </div>
           </div>
