@@ -1,0 +1,294 @@
+Start PHASE 3A: DATABASE AND AUTHENTICATION INSPECTION ONLY.
+
+The current MarketNest UI state is already committed to GitHub.
+
+IMPORTANT:
+Do NOT redesign the UI.
+Do NOT remove features.
+Do NOT implement payments.
+Do NOT modify commission logic.
+Do NOT implement withdrawals.
+Do NOT change production data.
+Do NOT run destructive Prisma commands.
+Do NOT run prisma migrate reset.
+Do NOT run prisma db push yet.
+Do NOT create fake database credentials.
+
+The purpose of this phase is ONLY to inspect the current PostgreSQL, Prisma, migration, and NextAuth setup before we connect or modify anything.
+
+====================================
+1. DATABASE CONFIGURATION
+====================================
+
+Inspect:
+
+- prisma/schema.prisma
+- prisma/migrations/
+- migration_lock.toml
+- package.json Prisma scripts
+- lib/db or equivalent Prisma client setup
+- .env.example
+- any environment validation code
+- seed scripts
+- startup scripts
+
+Report:
+
+- database provider
+- Prisma version
+- Prisma schema location
+- number of Prisma models
+- number of migration directories
+- migration names
+- whether migrations appear consistent with schema.prisma
+
+Do not modify anything.
+
+====================================
+2. MISSING TABLE INVESTIGATION
+====================================
+
+The current build logs have reported missing PostgreSQL tables:
+
+- badges
+- term_conditions
+
+Investigate exactly why.
+
+Determine:
+
+A. Are Badge and TermCondition models present in schema.prisma?
+B. Is there a migration that creates each table?
+C. If yes, identify the exact migration.
+D. If not, clearly report that schema and migrations are out of sync.
+E. Search code for all reads/writes to these models/tables.
+
+Do NOT create migrations yet.
+
+====================================
+3. DATABASE_URL STATE
+====================================
+
+Check whether DATABASE_URL exists in the Replit environment.
+
+Do NOT print the full secret/database password.
+
+Report only:
+
+- configured: yes/no
+- database type/provider
+- hostname/provider if safely identifiable
+- whether Prisma can connect
+
+If DATABASE_URL is absent, stop database connection testing and report it.
+
+If present, use SAFE READ-ONLY checks only.
+
+====================================
+4. SAFE PRISMA STATUS
+====================================
+
+If DATABASE_URL is configured:
+
+Run only safe inspection commands such as:
+
+npx prisma validate
+npx prisma migrate status
+
+Do NOT run:
+
+prisma migrate reset
+prisma db push
+prisma migrate dev
+prisma migrate deploy
+
+yet.
+
+Report whether:
+
+- database is reachable
+- migrations are pending
+- migrations are applied
+- migration history differs from local files
+- Prisma detects drift, if determinable safely
+
+====================================
+5. DATABASE CONTENT SAFETY
+====================================
+
+Determine whether the connected database appears:
+
+- empty
+- development/demo
+- or contains meaningful existing marketplace data
+
+Do not dump private user information.
+
+Report only approximate counts where safely possible, such as:
+
+Users: X
+Products: X
+Orders: X
+Categories: X
+
+Only perform these reads if the existing app/database setup safely permits it.
+
+Do not insert/update/delete anything.
+
+====================================
+6. MONEY FIELD AUDIT
+====================================
+
+Inspect Prisma models related to money:
+
+- Product price
+- Order totals
+- OrderItem values
+- Credits
+- Withdrawals
+- seller balances
+- any commission-related values
+
+Report which fields use:
+
+- Float
+- Decimal
+- Int
+- String
+
+Do NOT change types yet.
+
+This is preparation for a later financial-integrity phase.
+
+====================================
+7. AUTHENTICATION INSPECTION
+====================================
+
+Inspect the NextAuth configuration.
+
+Report:
+
+- NextAuth route/file location
+- authentication providers configured
+- credentials login setup
+- Google/Facebook OAuth setup if present
+- session strategy
+- JWT/session handling
+- role information stored in session/JWT
+- password hashing library
+- signup API
+- login flow
+- admin protection
+- seller/customer role handling
+
+Do not change authentication yet.
+
+====================================
+8. AUTH ENVIRONMENT VARIABLES
+====================================
+
+Inspect expected auth variables.
+
+Especially:
+
+NEXTAUTH_URL
+NEXTAUTH_SECRET
+SESSION_SECRET
+Google OAuth variables
+Facebook OAuth variables
+
+Determine whether SESSION_SECRET is actually used anywhere.
+
+Do NOT expose secret values.
+
+Only report configured/not configured and where each variable is referenced.
+
+====================================
+9. ADMIN ACCOUNT / SEEDING
+====================================
+
+Inspect how admin accounts are created.
+
+Determine:
+
+- seed file location
+- default admin creation logic
+- whether DEFAULT_ADMIN_PASSWORD is used
+- whether first user can become admin
+- whether demo seeding is still protected by SEED_DEMO_DATA=true
+- whether running the seed could delete/overwrite existing data
+
+Do NOT run the seed.
+
+====================================
+10. EMAIL / ACCOUNT VERIFICATION
+====================================
+
+Inspect whether the application currently supports:
+
+- email verification
+- password reset
+- forgot password
+- account activation
+- SMTP emails
+
+Report what is functional versus only UI/demo.
+
+Do not configure SMTP yet.
+
+====================================
+11. SECURITY CHECK
+====================================
+
+Inspect auth/database code for obvious high-risk issues only, such as:
+
+- plaintext passwords
+- hardcoded secrets
+- admin bypass
+- unauthenticated admin APIs
+- role checks missing from sensitive endpoints
+- secrets committed into source
+- unsafe database reset logic
+
+Do not perform a broad unrelated lint/security refactor.
+
+====================================
+12. NO MODIFICATIONS
+====================================
+
+This phase must remain READ-ONLY.
+
+Do not:
+- edit Prisma schema
+- create migration
+- run migration
+- modify environment variables
+- seed database
+- change NextAuth code
+- add admin user
+- fix lint
+- redesign UI
+
+====================================
+FINAL REPORT
+====================================
+
+Give me:
+
+A. Database provider/configuration
+B. DATABASE_URL status
+C. Prisma schema health
+D. Migration status
+E. Explanation for badges warning
+F. Explanation for term_conditions warning
+G. Existing DB data summary
+H. Money field types
+I. NextAuth architecture
+J. Auth environment status
+K. Admin creation method
+L. Email verification/password recovery status
+M. Security issues found
+N. Exact recommended next step
+
+STOP after inspection.
+Do not perform Phase 3B.
