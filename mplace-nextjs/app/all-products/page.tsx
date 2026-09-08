@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import { headers } from "next/headers"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Preloader from "@/components/Preloader"
@@ -66,12 +67,20 @@ export async function getProducts(searchParams: { [key: string]: string | string
   if (searchParams.sortBy) params.append("sortBy", searchParams.sortBy as string)
 
   try {
-    // For server-side rendering, construct the URL properly
-    // In production, we need to use the full URL with basePath
+    // Server components need an absolute URL when calling the existing API.
+    // Prefer the current request origin so previews and deployments work without
+    // assuming a local port.
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
-    
-    // Get base URL without basePath (it will be added separately)
-    let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL?.replace(/\/api\/auth$/, "") || "http://localhost:3000"
+
+    const requestHeaders = await headers()
+    const forwardedHost = requestHeaders.get("x-forwarded-host") || requestHeaders.get("host")
+    const forwardedProto = requestHeaders.get("x-forwarded-proto") || "http"
+    let baseUrl =
+      forwardedHost
+        ? `${forwardedProto.split(",")[0].trim()}://${forwardedHost}`
+        : process.env.NEXT_PUBLIC_SITE_URL ||
+          process.env.NEXTAUTH_URL?.replace(/\/api\/auth$/, "") ||
+          "http://localhost:3000"
     
     // Remove basePath from baseUrl if it's already included
     if (basePath && baseUrl.includes(basePath)) {

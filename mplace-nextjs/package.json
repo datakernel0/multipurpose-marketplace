@@ -20,6 +20,7 @@
     "start": "next start",
     "lint": "eslint",
     "db:seed": "tsx prisma/seed.ts",
+    "db:bootstrap-admin": "tsx prisma/bootstrap-admin.ts",
     "db:migrate": "dotenv -e .env -- prisma migrate dev",
     "db:generate": "prisma generate"
   },
