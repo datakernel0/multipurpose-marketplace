@@ -1,0 +1,78 @@
+I imported this cleaned MartPlace marketplace project from GitHub into a fresh Replit account.
+
+Do NOT redesign anything yet.
+Do NOT remove any more features yet.
+Do NOT implement payments, commission, withdrawals, or secure downloads yet.
+
+First, verify that the imported cleaned project is healthy and runnable in this new environment.
+
+Please do the following:
+
+1. Inspect the repository structure and identify the actual Next.js app root.
+
+2. Check:
+- package.json
+- package-lock.json or other lockfile
+- Next.js version
+- React version
+- TypeScript
+- Prisma
+- PostgreSQL configuration
+- .env.example
+- .replit
+- next.config.ts
+
+3. Install dependencies using the project’s existing package manager and lockfile.
+
+4. Do NOT perform major dependency upgrades unless Replit security policy blocks the current version.
+If any version must be changed, report it clearly before making unrelated changes.
+
+5. Generate Prisma Client.
+
+6. Check whether database migrations are present.
+
+7. Identify all required environment variables, but do not invent production credentials.
+
+8. Run:
+- TypeScript check
+- lint if configured
+- production build
+
+9. Start the app and verify:
+- homepage loads
+- login page loads
+- signup page loads
+- product browsing route loads
+- canonical product route exists
+- cart route loads
+- seller dashboard route loads
+- admin route exists
+
+10. Check that the Phase 1 cleanup is still intact:
+- blog routes removed
+- component showcase routes removed
+- event/job/career routes removed
+- affiliate/pricing removed
+- community/forum routes removed
+- duplicate product pages removed
+- duplicate homepages removed
+- fake homepage counters/testimonials/news sections removed
+
+11. Do NOT delete or modify additional marketplace features.
+
+At the end give me a concise report with:
+
+A. App root
+B. Dependency install result
+C. Prisma result
+D. Required environment variables
+E. TypeScript result
+F. Build result
+G. Runtime result
+H. Routes successfully checked
+I. Any missing/broken files
+J. Any dependency/version conflicts
+K. Any environment configuration still required
+
+Stop after verification.
+Do not start redesign or Phase 2 work yet.
