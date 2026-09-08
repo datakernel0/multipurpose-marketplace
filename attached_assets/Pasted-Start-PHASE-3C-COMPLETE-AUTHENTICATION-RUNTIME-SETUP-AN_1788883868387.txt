@@ -1,0 +1,313 @@
+Start PHASE 3C: COMPLETE AUTHENTICATION RUNTIME SETUP AND ADMIN BOOTSTRAP.
+
+Phase 3B is complete.
+
+Confirmed state:
+
+- PostgreSQL is initialized.
+- All 17 Prisma migrations are applied.
+- Database schema is up to date.
+- badges and term_conditions errors are resolved.
+- Signup successfully creates users in PostgreSQL.
+- Passwords are hashed.
+- Default signup role is USER.
+- No admin exists yet.
+- No demo seed was run.
+- NEXTAUTH_URL and NEXTAUTH_SECRET are not currently available to the running workflow.
+- /all-products incorrectly attempts an internal server-side fetch to localhost:3000 while Replit runs on port 5000.
+
+IMPORTANT:
+Do NOT redesign the UI.
+Do NOT enable SEED_DEMO_DATA.
+Do NOT create fake marketplace data.
+Do NOT implement payments, commissions, withdrawals, email verification, password reset, or secure downloads.
+Do NOT use prisma db push or prisma migrate reset.
+
+====================================
+1. NEXTAUTH ENVIRONMENT SETUP
+====================================
+
+Inspect how the running Replit workflow receives secrets/environment variables.
+
+Configure the runtime so the application can access:
+
+NEXTAUTH_URL
+NEXTAUTH_SECRET
+
+Do not print the secret value.
+
+NEXTAUTH_URL must match the actual development application URL/environment used by Replit.
+
+Use a strong secret for NEXTAUTH_SECRET.
+
+Do not use SESSION_SECRET as a replacement unless the existing code explicitly supports it.
+
+After configuring, restart the application workflow.
+
+====================================
+2. VERIFY NEXTAUTH PROVIDER CONFIG
+====================================
+
+Ensure normal credentials authentication works even if Google or Facebook OAuth credentials are absent.
+
+If OAuth providers are currently initialized with empty credentials and this causes runtime problems:
+
+make the smallest safe change so each OAuth provider is only enabled when its required credentials exist.
+
+Do not remove OAuth support permanently.
+
+Do not create placeholder OAuth credentials.
+
+====================================
+3. CREDENTIALS LOGIN TEST
+====================================
+
+Use the existing Phase 3B temporary USER account or create one clearly labeled development account if necessary.
+
+Verify:
+
+- login succeeds
+- NextAuth credentials provider authenticates against PostgreSQL
+- JWT session is created
+- session cookie is issued
+- /api/auth/session returns authenticated user data
+- user role remains USER
+- logout invalidates the session
+
+Do not expose password hashes or secret values.
+
+====================================
+4. DASHBOARD PROTECTION
+====================================
+
+Inspect /dashboard protection.
+
+Currently the page shell returns HTTP 200 unauthenticated and appears to rely on client-side session logic.
+
+Determine whether sensitive buyer dashboard data is actually protected server-side/API-side.
+
+Do not redesign it.
+
+If unauthenticated users can access sensitive data:
+apply the minimum safe authentication guard.
+
+If only the page shell is public but all sensitive APIs/data are properly protected:
+report this and leave the architecture unchanged.
+
+====================================
+5. ADMIN BOOTSTRAP
+====================================
+
+The current seed file uses:
+
+admin@martplace.com
+
+and has an unsafe development fallback password.
+
+Do NOT enable demo seeding.
+
+Do NOT use admin123.
+
+Create a safe ADMIN/SUPERADMIN bootstrap path.
+
+Preferred approach:
+
+- reuse existing Prisma/admin role models
+- create or upsert ONE admin account only
+- use DEFAULT_ADMIN_PASSWORD from the Replit secret/runtime
+- do not delete any records
+- do not create demo content
+
+Update the visible/default admin email identity away from MartPlace.
+
+Use:
+
+admin@marketnest.local
+
+for the development admin unless there is a better existing MarketNest-specific convention.
+
+This is a DEVELOPMENT admin account.
+
+If .local causes validation problems in the existing code, use:
+
+admin@marketnest.test
+
+Do not use a real external person's email address.
+
+Ensure:
+
+- password is bcrypt hashed
+- SUPERADMIN role is correctly assigned according to the existing authorization model
+- no demo records are created
+- script is safe to run repeatedly
+- no destructive deletes occur
+
+If the existing seed script is risky, create a separate minimal admin-bootstrap script rather than modifying the whole demo seed flow.
+
+====================================
+6. ADMIN LOGIN TEST
+====================================
+
+After creating the development admin:
+
+Verify credentials login.
+
+Then verify:
+
+- admin session contains correct role/permissions
+- /admin becomes accessible
+- regular USER account cannot access /admin
+- unauthenticated request still redirects to login
+- admin API authorization still works
+
+Do not weaken role checks.
+
+====================================
+7. FIX /all-products INTERNAL FETCH
+====================================
+
+Investigate why /all-products server-side rendering attempts to fetch:
+
+localhost:3000
+
+The Replit application is currently served on port 5000.
+
+Do NOT hardcode port 5000 as the permanent solution.
+
+Replace brittle hardcoded localhost behavior with an environment-safe approach.
+
+Preferred options:
+
+A. directly call shared server/database logic when rendering server-side
+
+or
+
+B. derive the correct application base URL from an existing centralized APP_BASE_URL / NEXT_PUBLIC_SITE_URL / runtime host configuration.
+
+Avoid server components calling their own app through a hardcoded localhost URL when a direct server-side data query is practical.
+
+Preserve the existing products API for client/external use.
+
+After the fix:
+
+- /all-products should return 200
+- no ECONNREFUSED localhost:3000 error
+- real database-backed empty state should render correctly
+- future products should be able to display normally
+
+====================================
+8. CLEAN TEMPORARY TEST ACCOUNT
+====================================
+
+The database currently contains:
+
+phase3b-test-1788878357@example.invalid
+
+After successful authentication testing, remove this temporary development user ONLY if:
+
+- it has no orders
+- no purchases
+- no products
+- no related marketplace data
+
+Use a targeted delete.
+
+Do not run a broad cleanup/reset.
+
+If relational constraints make deletion unsafe, leave it and report it.
+
+====================================
+9. VALIDATION
+====================================
+
+Run:
+
+npx prisma validate
+npx prisma migrate status
+npx tsc --noEmit
+npm run build
+
+Do not fix unrelated historical lint warnings.
+
+====================================
+10. RUNTIME TEST
+====================================
+
+Verify:
+
+/
+ /login
+ /signup
+ /all-products
+ /cart
+ /dashboard
+ /admin
+ /api/auth/session
+ /api/badges
+ /api/terms
+
+Test three states where relevant:
+
+Unauthenticated
+Regular USER
+SUPERADMIN
+
+Expected:
+
+- public marketplace works
+- credentials login works
+- logout works
+- USER session works
+- USER cannot access admin
+- SUPERADMIN can access admin
+- no localhost:3000 internal-fetch error
+- no missing-table errors
+
+====================================
+11. DO NOT START YET
+====================================
+
+Do NOT implement:
+
+email verification
+forgot password
+password reset
+payment gateway
+commission calculation
+seller ledger
+withdrawal API
+payouts
+secure product downloads
+refund system
+tax system
+
+====================================
+FINAL REPORT
+====================================
+
+Report:
+
+A. NEXTAUTH_URL status
+B. NEXTAUTH_SECRET status
+C. OAuth conditional-provider result
+D. Regular USER login result
+E. Session/JWT result
+F. Logout result
+G. Dashboard protection result
+H. Admin bootstrap method
+I. Admin account created yes/no
+J. Admin login result
+K. USER vs ADMIN authorization result
+L. /all-products fetch issue root cause
+M. /all-products fix
+N. Temporary test user cleanup result
+O. Prisma validation result
+P. Migration status
+Q. TypeScript result
+R. Production build result
+S. Runtime route results
+T. Remaining auth/database issues
+U. Exact recommended next phase
+
+STOP after Phase 3C.
+Do not begin email verification or financial implementation.
