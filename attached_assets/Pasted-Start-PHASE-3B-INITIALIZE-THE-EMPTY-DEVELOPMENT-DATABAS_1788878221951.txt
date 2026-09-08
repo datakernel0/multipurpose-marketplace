@@ -1,0 +1,331 @@
+Start PHASE 3B: INITIALIZE THE EMPTY DEVELOPMENT DATABASE AND VERIFY CORE AUTH.
+
+Phase 3A inspection is complete.
+
+Confirmed state:
+
+- PostgreSQL database is reachable.
+- The connected database is empty/fresh.
+- There are no public application tables.
+- There is no _prisma_migrations history.
+- 17 existing Prisma migrations are present locally.
+- All 17 migrations are currently unapplied.
+- prisma validate passes.
+- Badge and TermCondition models already exist.
+- Their missing-table warnings are caused by unapplied migrations.
+- This database is intended to be the DEVELOPMENT database.
+- There is no existing marketplace data that needs preservation.
+
+IMPORTANT:
+Do NOT use prisma db push.
+Do NOT use prisma migrate reset.
+Do NOT create replacement migrations.
+Do NOT edit schema.prisma unless an existing migration genuinely fails and you first report the problem.
+Do NOT enable SEED_DEMO_DATA.
+Do NOT implement payments or financial features.
+Do NOT redesign UI.
+
+====================================
+1. PRE-MIGRATION SAFETY CHECK
+====================================
+
+Before modifying the database:
+
+Run:
+
+npx prisma validate
+npx prisma migrate status
+
+Confirm again that:
+
+- DATABASE_URL connects successfully
+- database is empty
+- all 17 migrations are pending
+
+Do not expose DATABASE_URL credentials.
+
+If the database unexpectedly contains user/product/order data,
+STOP and report it instead of migrating.
+
+====================================
+2. APPLY EXISTING MIGRATIONS
+====================================
+
+Because this is an empty development database and the migration
+history already exists in the repository, apply the EXISTING
+migrations using the appropriate non-destructive Prisma migration
+deployment workflow.
+
+Prefer:
+
+npx prisma migrate deploy
+
+Do NOT use:
+
+prisma db push
+prisma migrate reset
+
+Do NOT generate a new initial migration.
+
+If any existing migration fails:
+
+STOP.
+
+Report:
+- migration name
+- database error
+- likely cause
+
+Do not improvise a destructive repair.
+
+====================================
+3. VERIFY MIGRATION STATE
+====================================
+
+After successful deployment run:
+
+npx prisma migrate status
+
+Confirm:
+
+- all 17 migrations applied
+- database schema is up to date
+- _prisma_migrations exists
+
+Also safely confirm that core tables now exist.
+
+Especially:
+
+users
+products
+categories
+orders
+badges
+term_conditions
+
+Use schema/table inspection only.
+
+====================================
+4. VERIFY PREVIOUS BUILD WARNINGS
+====================================
+
+Test the real endpoints responsible for the previous warnings:
+
+/api/badges
+/api/terms
+
+They must no longer fail because of missing database tables.
+
+Empty responses are acceptable because the database is fresh.
+
+Also check:
+
+/badges
+/term-condition
+
+Do not insert fake records just to populate them.
+
+====================================
+5. DO NOT RUN FULL DEMO SEED
+====================================
+
+Inspect SEED_DEMO_DATA.
+
+Ensure it is NOT true.
+
+Do not run any destructive demo seeding.
+
+Do not populate:
+
+fake products
+fake sellers
+fake orders
+fake reviews
+fake transactions
+fake marketplace statistics
+
+====================================
+6. ADMIN CREATION SAFETY
+====================================
+
+The existing seed script currently uses:
+
+admin@martplace.com
+
+and may fall back to:
+
+admin123
+
+in development.
+
+DO NOT use that insecure fallback.
+
+DO NOT create an admin account yet if DEFAULT_ADMIN_PASSWORD is
+not securely configured.
+
+First report whether DEFAULT_ADMIN_PASSWORD is configured.
+
+Do not print its value.
+
+If it is configured securely, you may create ONLY the required
+base/admin records if this can be done without enabling demo
+seeding or deleting marketplace data.
+
+If the current seed script cannot safely create only the admin
+without risky side effects:
+
+DO NOT RUN IT.
+
+Report this instead.
+
+====================================
+7. SIGNUP TEST
+====================================
+
+After migrations are applied, verify the signup system can access
+the real database.
+
+Do not create large amounts of test data.
+
+If practical, create ONE clearly identified temporary development
+test account through the normal signup flow.
+
+Verify:
+
+- user is created
+- password is hashed
+- default role is USER
+- login works
+- session is created
+
+If a test user is created, report its existence.
+
+Do NOT expose password hashes.
+
+====================================
+8. LOGIN / NEXTAUTH TEST
+====================================
+
+Verify credentials authentication against PostgreSQL.
+
+Check:
+
+- login page
+- Credentials provider
+- JWT session
+- protected dashboard behavior
+- logout if practical
+
+If NEXTAUTH_SECRET or NEXTAUTH_URL prevents authentication,
+report the exact missing configuration without exposing secrets.
+
+Do not weaken authentication to make the test pass.
+
+====================================
+9. OAUTH
+====================================
+
+Do NOT configure Google or Facebook OAuth in this phase.
+
+Only ensure missing/placeholder OAuth credentials do not crash
+normal credentials login.
+
+If provider initialization causes problems when credentials are
+missing, report it.
+
+Do not implement the fix unless required for credentials auth.
+
+====================================
+10. BUILD VALIDATION
+====================================
+
+After database initialization run:
+
+npx tsc --noEmit
+npm run build
+
+The previous missing-table build warnings for:
+
+badges
+term_conditions
+
+should now be gone.
+
+Report any remaining database-related warnings separately.
+
+Do not fix unrelated historical lint issues.
+
+====================================
+11. RUNTIME CHECK
+====================================
+
+Start the application and verify:
+
+/
+ /login
+ /signup
+ /all-products
+ /cart
+ /dashboard
+ /api/badges
+ /api/terms
+ /badges
+ /term-condition
+ /admin
+
+Expected behavior:
+
+- public pages load
+- empty marketplace states are acceptable
+- signup/login can communicate with PostgreSQL
+- protected pages remain protected
+- admin remains protected for ordinary USER accounts
+- no missing-table Prisma errors occur
+
+====================================
+12. DO NOT IMPLEMENT YET
+====================================
+
+Do NOT implement:
+
+email verification
+forgot-password backend
+password reset
+payment gateway
+commission engine
+withdrawal API
+financial ledger
+secure downloads
+refund system
+tax engine
+
+These are later phases.
+
+====================================
+FINAL REPORT
+====================================
+
+Report:
+
+A. Pre-migration database status
+B. Migration deployment result
+C. Number of migrations applied
+D. Final prisma migrate status
+E. Core tables verified
+F. badges endpoint result
+G. terms endpoint result
+H. DEFAULT_ADMIN_PASSWORD configured yes/no
+I. Whether seed was run
+J. Whether admin was created
+K. Signup test result
+L. Login/session result
+M. TypeScript result
+N. Production build result
+O. Runtime route results
+P. Remaining database/auth issues
+Q. Exact recommended next step
+
+STOP after Phase 3B.
+
+Do not begin email verification, payment, commission,
+withdrawal, or secure-download implementation.
