@@ -1,0 +1,148 @@
+Analyze the complete uploaded MartPlace project without modifying, deleting, renaming, or creating any files.
+
+Our goal is to convert this project into a clean, production-ready multi-vendor DIGITAL PRODUCTS marketplace.
+
+For now, DO NOT write code and DO NOT make any changes.
+
+Audit the entire project including:
+- all routes/pages
+- components
+- API routes
+- database/Prisma models
+- authentication
+- buyer dashboard
+- seller dashboard
+- admin panel
+- product system
+- categories
+- cart and checkout
+- orders
+- downloads
+- reviews and ratings
+- favorites/wishlist
+- seller earnings
+- commission logic
+- withdrawals/payouts
+- chat/messages
+- support system
+- blog
+- demo/sample content
+- assets/images
+- CSS/JS files
+- npm packages/dependencies
+- environment variables
+- seed/sample data
+
+Classify every major feature/module into these 4 groups:
+
+1. KEEP
+Required for the final digital-products marketplace.
+
+2. MODIFY
+Useful, but needs simplification, rebranding, redesign, or business-logic changes.
+
+3. REMOVE
+Demo, duplicate, unnecessary, placeholder, irrelevant, or not needed for V1.
+
+4. UNSURE / DEPENDENCY RISK
+Anything that may be connected to other important features and should not be removed before checking dependencies.
+
+The core marketplace features that MUST be preserved are:
+
+- User registration/login
+- Buyer accounts
+- Seller accounts
+- Seller approval
+- Product upload/edit/delete
+- Product moderation/approval
+- Categories
+- Product detail pages
+- Search and filters
+- Cart
+- Checkout
+- Orders
+- Digital product downloads
+- Buyer order history
+- Seller sales dashboard
+- Seller earnings
+- Platform commission
+- Withdrawal requests
+- Admin approval/rejection of withdrawals
+- Reviews and ratings
+- Favorites/wishlist
+- Admin dashboard
+- Customers management
+- Sellers management
+- Products management
+- Orders management
+- Basic support/contact
+- Email notifications
+
+Features that are likely candidates for removal or simplification include:
+
+- Blog system
+- demo pages
+- duplicate layouts/pages
+- fake testimonials
+- placeholder statistics
+- demo products
+- demo users
+- unnecessary homepage sections
+- unused social widgets
+- unused OAuth providers
+- unused payment placeholders
+- duplicate seller/buyer pages
+- unused assets/images
+- unused CSS/JS
+- unused npm dependencies
+- unnecessary animations/preloaders
+- features unrelated to a digital-products marketplace
+
+Important:
+Do not assume something is safe to remove just because it looks unused.
+
+Before recommending removal, check:
+- imports
+- route references
+- database relationships
+- API dependencies
+- component usage
+- shared utilities
+- authentication dependencies
+- admin dependencies
+- build dependencies
+
+At the end, provide:
+
+A. Current project architecture summary
+
+B. KEEP list
+
+C. MODIFY list
+
+D. REMOVE list
+
+E. UNSURE / dependency-risk list
+
+F. Database models that should remain
+
+G. Database models that may be removable
+
+H. API routes that should remain
+
+I. API routes that may be removable
+
+J. npm packages that appear unused
+
+K. Safe cleanup order, step by step
+
+L. Any production-critical missing features you discover, especially:
+- real payment gateway integration
+- commission calculation
+- seller balance handling
+- withdrawal processing
+- secure digital file delivery
+
+Do not make any changes yet.
+
+Only analyze and return the audit report.
